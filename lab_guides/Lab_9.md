@@ -1,8 +1,8 @@
 
-*[]{#_idTextAnchor156}Chapter 9*: The Road Ahead {#_idParaDest-147}
+*Chapter 9*: The Road Ahead
 ================================================
 
-::: {#_idContainer280}
+
 The field of machine learning is rapidly expanding, with new revelations
 being made almost yearly. The field of machine learning for NLP is no
 exception, with advancements being made rapidly and the performance of
@@ -36,10 +36,10 @@ In this chapter, we will cover the following topics:
 -   Machine comprehension
 
 
-Exploring state-of-the-art NLP machine learning {#_idParaDest-148}
+Exploring state-of-the-art NLP machine learning
 ===============================================
 
-::: {#_idContainer280}
+
 While the techniques we have learned in this book so far are highly
 useful methodologies for training our own machine learning model from
 scratch, they are far from the most sophisticated models being developed
@@ -52,9 +52,9 @@ could be considered state-of-the-art: **BERT** and **GPT-2**. Both
 models are forms of **generalized language models**. We will discuss
 these in more detail in the upcoming sections.
 
-[]{#_idTextAnchor158}
 
-BERT {#_idParaDest-149}
+
+BERT
 ----
 
 **BERT**, which stands for **Bidirectional Encoder Representations from
@@ -102,13 +102,8 @@ representations of words is what truly makes BERT stand out as a
 state-of-the-art model. For any given token, we obtain its input
 representation by combining the token, position, and segment embeddings:
 
-<div>
 
-::: {#_idContainer231 .IMG---Figure}
-![Figure 9.1 -- BERT architecture ](2_files/B12365_09_1.jpg)
-:::
-
-</div>
+![](./images/B12365_09_1.jpg)
 
 Figure 9.1 -- BERT architecture
 
@@ -168,9 +163,9 @@ language representation is sufficiently robust and learns how sentences
 are formed and structured, as well as how different sentences relate to
 one another.
 
-[]{#_idTextAnchor159}
 
-BERT--Architecture {#_idParaDest-150}
+
+BERT--Architecture
 ------------------
 
 The model architecture builds upon many of the principles we have seen
@@ -199,13 +194,8 @@ representation of an input sentence, and then learns a decoder to decode
 this representation into a final output, whether this be a
 classification or translation task:
 
-<div>
 
-::: {#_idContainer232 .IMG---Figure}
-![Figure 9.2 -- Transformer workflow ](2_files/B12365_09_2.jpg)
-:::
-
-</div>
+![](./images/B12365_09_2.jpg)
 
 Figure 9.2 -- Transformer workflow
 
@@ -214,14 +204,9 @@ approach, where a transformer actually has a stack of encoders and a
 stack of decoders, with each decoder receiving the output of the final
 encoder as its input:
 
-<div>
 
-::: {#_idContainer233 .IMG---Figure}
 ![Figure 9.3 -- Transformer workflow for multiple encoders
-](2_files/B12365_09_3.jpg)
-:::
-
-</div>
+](./images/B12365_09_3.jpg)
 
 Figure 9.3 -- Transformer workflow for multiple encoders
 
@@ -234,13 +219,8 @@ from the self-attention layer is passed forward to a feed-forward layer,
 which is applied independently to each position. This can be illustrated
 diagrammatically like so:
 
-<div>
 
-::: {#_idContainer234 .IMG---Figure}
-![Figure 9.4 -- Feedforward layer ](2_files/B12365_09_4.jpg)
-:::
-
-</div>
+![](./images/B12365_09_4.jpg)
 
 Figure 9.4 -- Feedforward layer
 
@@ -250,26 +230,16 @@ helps the decoder focus on the relevant part of the encoded
 representation, similar to how we saw attention working within our
 sequence-to-sequence models:
 
-<div>
 
-::: {#_idContainer235 .IMG---Figure}
-![Figure 9.5 -- Attention methodology ](2_files/B12365_09_5.jpg)
-:::
-
-</div>
+![](./images/B12365_09_5.jpg)
 
 Figure 9.5 -- Attention methodology
 
 We know that our decoders take input from our final encoder, so one
 linked encoder/decoder might look something like this:
 
-<div>
 
-::: {#_idContainer236 .IMG---Figure}
-![Figure 9.6 -- Linked encoder/decoder array ](2_files/B12365_09_6.jpg)
-:::
-
-</div>
+![](./images/B12365_09_6.jpg)
 
 Figure 9.6 -- Linked encoder/decoder array
 
@@ -287,13 +257,8 @@ individual words are obtained from an embedding layer and then fed
 through a self-attention layer before being fed through a feed-forward
 network:
 
-<div>
 
-::: {#_idContainer237 .IMG---Figure}
-![Figure 9.7 -- Encoder layout ](2_files/B12365_09_7.jpg)
-:::
-
-</div>
+![](./images/B12365_09_7.jpg)
 
 Figure 9.7 -- Encoder layout
 
@@ -313,33 +278,33 @@ vectors like so:
 
 **Query vectors**:
 
-![](2_files/Formula_09_001.png)
+![](./images/Formula_09_001.png)
 
-![](2_files/Formula_09_002.png)
+![](./images/Formula_09_002.png)
 
-![](2_files/Formula_09_003.png)
+![](./images/Formula_09_003.png)
 
-![](2_files/Formula_09_004.png)
+![](./images/Formula_09_004.png)
 
 **Key vectors**:
 
-![](2_files/Formula_09_005.png)
+![](./images/Formula_09_005.png)
 
-![](2_files/Formula_09_006.png)
+![](./images/Formula_09_006.png)
 
-![](2_files/Formula_09_007.png)
+![](./images/Formula_09_007.png)
 
-![](2_files/Formula_09_008.png)
+![](./images/Formula_09_008.png)
 
 **Value vectors**:
 
-![](2_files/Formula_09_009.png)
+![](./images/Formula_09_009.png)
 
-![](2_files/Formula_09_010.png)
+![](./images/Formula_09_010.png)
 
-![](2_files/Formula_09_011.png)
+![](./images/Formula_09_011.png)
 
-![](2_files/Formula_09_012.png)
+![](./images/Formula_09_012.png)
 
 Now that we know how to calculate each of these vectors, it is important
 to understand what each of them represents. Essentially, each of these
@@ -359,11 +324,11 @@ sentence, where *n* is the length of the sentence:
 
 **Scores (\"this\")**:
 
-![](2_files/Formula_09_013.png)
+![](./images/Formula_09_013.png)
 
-![](2_files/Formula_09_014.png)
+![](./images/Formula_09_014.png)
 
-![](2_files/Formula_09_015.png)
+![](./images/Formula_09_015.png)
 
 Next, we apply a softmax function to each of these scores so that the
 value of each is now between 0 and 1 (as this helps prevent exploding
@@ -374,26 +339,26 @@ forward within the encoder:
 
 **Final vector (\"this\")**:
 
-![](2_files/Formula_09_016.png)
+![](./images/Formula_09_016.png)
 
-![](2_files/Formula_09_017.png)
+![](./images/Formula_09_017.png)
 
-![](2_files/Formula_09_018.png)
+![](./images/Formula_09_018.png)
 
-![](2_files/Formula_09_019.png)
+![](./images/Formula_09_019.png)
 
 We then repeat this procedure for all the words within the input
 sentence so that we obtain a final vector for each word, incorporating
 an element of self-attention, which is then passed along the encoder to
 the feed-forward network. This self-attention process means
-that[]{#_idIndexMarker489} our encoder knows where to look within the
+that our encoder knows where to look within the
 input sentence to obtain the information it needs for the task.
 
 In this example, we only learned a single matrix of weights for our
 query, key, and value vectors. However, we can actually learn multiple
 different matrices for each of these elements and apply these
 simultaneously across our input sentence to obtain our final outputs.
-This is []{#_idIndexMarker490}what\'s known as **multi-headed
+This is what\'s known as **multi-headed
 attention** and allows us to perform more complex attention
 calculations, relying on multiple different learned patterns rather than
 just a single attention mechanism.
@@ -405,7 +370,7 @@ Finally, we need a way for our encoders to account for the order of
 words in the input sequence. Currently, our model treats each word in
 our input sequence independently, but in reality, the order of the words
 in the input sequence will make a huge difference to the overall
-meaning[]{#_idIndexMarker491} of the sentence. To account for this, we
+meaning of the sentence. To account for this, we
 use **positional encoding**.
 
 To apply this, our model takes each input embedding and adds a
@@ -426,26 +391,21 @@ are projected into the individual query, key, and value vectors:
 
 Our model learns different positional encoding vectors for each position
 (*t*[0]{.subscript}, *t*[1]{.subscript}, and so on), which
-we[]{#_idIndexMarker492} then apply to each word in our input sentence
+we then apply to each word in our input sentence
 before these even enter our encoder:
 
-<div>
 
-::: {#_idContainer257 .IMG---Figure}
-![Figure 9.8 -- Adding input to the encoder ](2_files/B12365_09_8.jpg)
-:::
-
-</div>
+![](./images/B12365_09_8.jpg)
 
 Figure 9.8 -- Adding input to the encoder
 
-Now that we have []{#_idIndexMarker493}covered the main components of
+Now that we have covered the main components of
 the encoder, it\'s time to look at the other side of the model and see
 how the decoder is constructed.
 
 ### Decoders
 
-The components in []{#_idIndexMarker494}decoders are much the same of
+The components in decoders are much the same of
 those in encoders. However, rather than receiving the raw input sentence
 like encoders do, the decoders in our transformer receive their inputs
 from the outputs of our encoders.
@@ -455,37 +415,27 @@ set of attention vectors, *K* and *V*, which are used within the
 encoder-decoder attention layer of our decoder. This allows it to focus
 only on the relevant parts of the input sequence:
 
-<div>
 
-::: {#_idContainer258 .IMG---Figure}
-![Figure 9.9 -- Stacked decoders ](2_files/B12365_09_9.jpg)
-:::
-
-</div>
+![](./images/B12365_09_9.jpg)
 
 Figure 9.9 -- Stacked decoders
 
-At each time step, our[]{#_idIndexMarker495} decoders use a combination
+At each time step, our decoders use a combination
 of the previously generated words in the sentence and the *K,V*
 attention vectors to generate the next word in the sentence. This
 process is repeated iteratively until the decoder generates an \<END\>
 token, indicating that it has completed generating the final output. One
 given time step on the transformer decoder may look like this:
 
-<div>
 
-::: {#_idContainer259 .IMG---Figure}
-![Figure 9.10 -- Transformer decoder ](2_files/B12365_09_10.jpg)
-:::
-
-</div>
+![](./images/B12365_09_10.jpg)
 
 Figure 9.10 -- Transformer decoder
 
 It is worth noting here that the self-attention layers within the
 decoders operate in a slightly different way to those found in our
 encoders. Within our decoder, the self-attention layer
-[]{#_idIndexMarker496}only focuses on earlier positions within the
+only focuses on earlier positions within the
 output sequence. This is done by masking any future positions of the
 sequence by setting them to minus infinity. This means that when the
 classification happens, the softmax calculation always results in a
@@ -501,13 +451,13 @@ the basis for BERT. Next, we will look at some of the applications of
 BERT and examine a few variations that have shown increased performance
 at specific tasks.
 
-[]{#_idTextAnchor160}
 
-Applications of BERT {#_idParaDest-151}
+
+Applications of BERT
 --------------------
 
 Being state-of-the-art, BERT obviously has a number of practical
-applications. Currently, it is being[]{#_idIndexMarker497} used in a
+applications. Currently, it is being used in a
 number of Google products that you probably use on a daily basis;
 namely, suggested replies and smart compose in Gmail (where Gmail
 predicts your expected sentence based on what you are currently typing)
@@ -535,19 +485,19 @@ due to the way it is trained. However, there are many variations of BERT
 that have been changed in subtle ways to achieve increased performance
 at specific tasks. These include, but are not limited to, the following:
 
--   **roBERTa**: A variation []{#_idIndexMarker498}of BERT, built by
+-   **roBERTa**: A variation of BERT, built by
     Facebook. Removes the next sentence prediction element of BERT, but
     enhances the word masking strategy by implementing dynamic masking.
--   **xlm**/**BERT**: Also built []{#_idIndexMarker499}by Facebook, this
+-   **xlm**/**BERT**: Also built by Facebook, this
     model applies a dual-language training mechanism to BERT that allows
     it to learn relationships between words in different languages. This
     allows BERT to be used effectively for machine translation tasks,
     showing improved performance over basic sequence-to-sequence models.
--   **distilBERT**: A more compact []{#_idIndexMarker500}version of
+-   **distilBERT**: A more compact version of
     BERT, retaining 95% of the original but halving the number of
     learned parameters, reducing the model's total size and training
     time.
--   **ALBERT**: This Google[]{#_idIndexMarker501} trained model uses its
+-   **ALBERT**: This Google trained model uses its
     own unique training method called sentence order prediction. This
     variation of BERT has been shown to outperform the standard BERT
     across a number of tasks and is now considered state-of-the-art
@@ -557,13 +507,13 @@ While BERT is perhaps the most well known, there are also other
 transformer-based models that are considered state-of-the-art. The major
 one that is often considered a rival to BERT is GPT-2.
 
-[]{#_idTextAnchor161}
 
-GPT-2 {#_idParaDest-152}
+
+GPT-2
 -----
 
 GPT-2, while similar to BERT, differs in some subtle ways. While both
-models are based upon the[]{#_idIndexMarker502} transformer architecture
+models are based upon the transformer architecture
 previously outlined, BERT uses a form of attention known as
 self-attention, while GPT-2 uses masked self-attention. Another subtle
 difference between the two is that GPT-2 is constructed in such a way
@@ -606,56 +556,46 @@ We repeat this process until we have generated the entire sentence:
 **Output**: *blue*
 
 This is one of the key trade-offs in terms of performance between BERT
-and GPT-2. The fact that BERT[]{#_idIndexMarker503} is trained
+and GPT-2. The fact that BERT is trained
 bidirectionally means this single-token generation is not possible;
 however, GPT-2 is not bidirectional, so it only considers previous words
 in the sentence when making predictions, which is why BERT outperforms
 GPT-2 when predicting missing words within a sentence.
 
-[]{#_idTextAnchor162}
 
-Comparing self-attention and masked self-attention {#_idParaDest-153}
+
+Comparing self-attention and masked self-attention
 --------------------------------------------------
 
-This difference[]{#_idIndexMarker504} is also apparent in the way the
-two[]{#_idIndexMarker505} different models implement attention. Since
+This difference is also apparent in the way the
+two different models implement attention. Since
 BERT is bidirectional, its attention mechanism is able to consider the
 context of the whole input sentence and determine where exactly in the
 input sentence to look:
 
-<div>
 
-::: {#_idContainer260 .IMG---Figure}
-![Figure 9.11 -- Self-Attention mechanism ](2_files/B12365_09_11.jpg)
-:::
-
-</div>
+![](./images/B12365_09_11.jpg)
 
 Figure 9.11 -- Self-Attention mechanism
 
-On the other []{#_idIndexMarker506}hand, GPT-2 is not bidirectional,
-so[]{#_idIndexMarker507} the masked self-attention mechanism is only
+On the other hand, GPT-2 is not bidirectional,
+so the masked self-attention mechanism is only
 able to look at tokens it has already seen and is not able to \"look
 ahead\":
 
-<div>
 
-::: {#_idContainer261 .IMG---Figure}
 ![Figure 9.12 -- Masked self-attention mechanism
-](2_files/B12365_09_12.jpg)
-:::
-
-</div>
+](./images/B12365_09_12.jpg)
 
 Figure 9.12 -- Masked self-attention mechanism
 
-[]{#_idTextAnchor163}
 
-GPT-2 -- Ethics {#_idParaDest-154}
+
+GPT-2 -- Ethics
 ---------------
 
 One very interesting consideration of GPT-2 was the author\'s
-consideration of ethics when considering[]{#_idIndexMarker508} whether
+consideration of ethics when considering whether
 to release the model to the public or not.
 
 The language generation capabilities of GPT-2 mean that it is capable of
@@ -713,7 +653,7 @@ of the smaller models.
 
 This may become a key focus of NLP deep learning moving forward. As we
 approach chatbots and text generators such as GPT-2 that can approach
-human levels of sophistication, the []{#_idIndexMarker509}uses and
+human levels of sophistication, the uses and
 misuses of these models need to be fully understood. Studies have shown
 that GPT-2 generated text was deemed to be almost as credible (72%) as
 real human-written articles from the New York Times (83%). As we
@@ -737,12 +677,12 @@ that were unintended. Always consider the potential applications of any
 model that you use.
 
 
-Future NLP tasks {#_idParaDest-155}
+Future NLP tasks
 ================
 
-::: {#_idContainer280}
+
 While the majority of this book has been focused on text classification
-and sequence generation, there are []{#_idIndexMarker510}a number of
+and sequence generation, there are a number of
 other NLP tasks that we haven\'t really touched on. While many of these
 are more interesting from an academic perspective rather than a
 practical perspective, it\'s important to understand these tasks as they
@@ -757,14 +697,14 @@ of future development in NLP:
 -   Textual entailment
 -   Machine comprehension
 
-[]{#_idTextAnchor165}
 
-Constituency parsing {#_idParaDest-156}
+
+Constituency parsing
 --------------------
 
 Constituency parsing (also known as syntactic parsing) is the act of
-identifying parts of a sentence and []{#_idIndexMarker511}assigning a
-syntactic structure to it. This []{#_idIndexMarker512}syntactic
+identifying parts of a sentence and assigning a
+syntactic structure to it. This syntactic
 structure is largely determined by the use of context-free grammars,
 meaning that using syntactic parsing, we can identify the underlying
 grammatical structure of a given sentence and map it out. Any sentence
@@ -780,7 +720,7 @@ multiple \"groups\" of words, each one of which is a constituency.
 Grammar, in its basic form, can be said to be an index of all possible
 types of constituencies that can occur within a sentence.
 
-Let\'s first consider the most basic []{#_idIndexMarker513}type of
+Let\'s first consider the most basic type of
 constituent, the **noun phrase**. Nouns within a sentence are fairly
 simple to identify as they are words that define objects or entities. In
 the following sentence, we can identify three nouns:
@@ -798,9 +738,9 @@ refer to one single entity. In the preceding sentence, even though
 *Jeff* and *chef* are both nouns, the phrase *Jeff the chef* refers to
 one single person, so this can be considered a noun phrase. But how can
 we determine syntactically that the noun phrase refers to a single
-entity? One simple[]{#_idIndexMarker514} way is to place the phrase
+entity? One simple way is to place the phrase
 before a verb and see if the sentence makes
-[]{#_idIndexMarker515}syntactic sense. If it does, then chances are, the
+syntactic sense. If it does, then chances are, the
 phrase is a noun phrase:
 
 Jeff the chef cooks...
@@ -814,16 +754,11 @@ as well as a number of complex grammatical rules that help us to
 identify them. We first identify the individual grammatical features
 that each sentence can be broken down into:
 
-<div>
 
-::: {#_idContainer262 .IMG---Figure}
-![](3_files/B12365_09_29.jpg)
-:::
+![](./images/B12365_09_29.jpg)
 
-</div>
-
-Now that we know[]{#_idIndexMarker516} that sentences are composed of
-[]{#_idIndexMarker517}constituents, and that constituents can be made up
+Now that we know that sentences are composed of
+constituents, and that constituents can be made up
 of several individual grammars, we can now start to map out our
 sentences based on their structure. For example, take the following
 example sentence:
@@ -833,60 +768,40 @@ example sentence:
 We can start by breaking this sentence down into two parts: a noun
 phrase and a verb phrase:
 
-<div>
 
-::: {#_idContainer263 .IMG---Figure}
 ![Figure 9.13 Breaking down a sentence into its grammatical components
-](3_files/B12365_09_13.jpg)
-:::
-
-</div>
+](./images/B12365_09_13.jpg)
 
 Figure 9.13 -- Breaking down a sentence into its grammatical components
 
-We then repeat this []{#_idIndexMarker518}process for each of the
-phrases to split them into even[]{#_idIndexMarker519} smaller
+We then repeat this process for each of the
+phrases to split them into even smaller
 grammatical components. We can split this noun phrase into a determiner
 and a noun:
 
-<div>
 
-::: {#_idContainer264 .IMG---Figure}
-![Figure 9.14 Breaking down the noun phrase ](3_files/B12365_09_14.jpg)
-:::
-
-</div>
+![](./images/B12365_09_14.jpg)
 
 Figure 9.14 -- Breaking down the noun phrase
 
 Again, we do this for the verb phrase to break it down into a verb and
 another noun phrase:
 
-<div>
 
-::: {#_idContainer265 .IMG---Figure}
 ![Figure 9.15 -- Breaking down the verb phrase
-](3_files/B12365_09_15.jpg)
-:::
-
-</div>
+](./images/B12365_09_15.jpg)
 
 Figure 9.15 -- Breaking down the verb phrase
 
-We can iterate again and []{#_idIndexMarker520}again, breaking down the
+We can iterate again and again, breaking down the
 various parts of our sentence into smaller and
-[]{#_idIndexMarker521}smaller chunks until we are left with a **parse
-tree**. This parse []{#_idIndexMarker522}tree conveys the entirety of
+smaller chunks until we are left with a **parse
+tree**. This parse tree conveys the entirety of
 the syntactic structure of our sentence. We can see the parse tree of
 our example in its entirety here:
 
-<div>
 
-::: {#_idContainer266 .IMG---Figure}
-![Figure 9.16 -- Parse tree of the sentence ](3_files/B12365_09_16.jpg)
-:::
-
-</div>
+![](./images/B12365_09_16.jpg)
 
 a
 
@@ -895,20 +810,20 @@ Figure 9.16 -- Parse tree of the sentence
 While these parse trees allow us to see the syntactic structure of our
 sentences, they are far from perfect. From this structure, we can
 clearly see that there are two noun phrases with a verb
-[]{#_idIndexMarker523}taking place. However, from the preceding
-[]{#_idIndexMarker524}structure, it is not clear what is actually taking
+taking place. However, from the preceding
+structure, it is not clear what is actually taking
 place. We have an action between two objects, but it is not clear from
 syntax alone what is taking place. Which party is doing the action to
 whom? We will see that some of this ambiguity is captured by semantic
 role labeling.
 
-[]{#_idTextAnchor166}
 
-Semantic role labeling {#_idParaDest-157}
+
+Semantic role labeling
 ----------------------
 
-Semantic role labeling is[]{#_idIndexMarker525} the process of assigning
-labels[]{#_idIndexMarker526} to words or phrases within a sentence that
+Semantic role labeling is the process of assigning
+labels to words or phrases within a sentence that
 indicates their semantic role within a sentence. In broad terms, this
 involves identifying the predicate of the sentence and determining how
 each of the other terms within the sentence are related to this
@@ -918,19 +833,14 @@ determines \"Who did what to whom and where/when?\"
 So, for a given sentence, we can generally break down a sentence into
 its constituent parts, like so:
 
-<div>
 
-::: {#_idContainer267 .IMG---Figure}
 ![Figure 9.17 Breaking down a sentence into its constituent parts
-](3_files/B12365_09_17.jpg)
-:::
-
-</div>
+](./images/B12365_09_17.jpg)
 
 Figure 9.17 Breaking down a sentence into its constituent parts
 
-These parts of a[]{#_idIndexMarker527} sentence have specific
-semantic[]{#_idIndexMarker528} roles. The **predicate** of any given
+These parts of a sentence have specific
+semantic roles. The **predicate** of any given
 sentence represents the event occurring within the sentence, while all
 the other parts of the sentence relate back to a given predicate. In
 this sentence, we can label our \"Who\" as the agent of the predicate.
@@ -938,33 +848,23 @@ The **agent** is the thing that causes the event. We can also label our
 \"Whom\" as the theme of our predicate. The **theme** is the element of
 our sentence most affected by the event in question:
 
-<div>
 
-::: {#_idContainer268 .IMG---Figure}
-![Figure 9.18 -- Breaking down the roles ](3_files/B12365_09_18.jpg)
-:::
-
-</div>
+![](./images/B12365_09_18.jpg)
 
 Figure 9.18 -- Breaking down the roles
 
-In theory, each[]{#_idIndexMarker529} word or phrase in a sentence can
+In theory, each word or phrase in a sentence can
 be labeled with its specific semantic component. An almost comprehensive
 table for this is as follows:
 
-<div>
 
-::: {#_idContainer269 .IMG---Figure}
-![](3_files/B12365_09_Table_01.jpg)
-:::
-
-</div>
+![](./images/B12365_09_Table_01.jpg)
 
 By performing semantic role labeling, we can assign a specific role to
 every part of a sentence. This is very useful in NLP as it allows a
 model to \"understand\" a sentence better so that rather
-[]{#_idIndexMarker530}than a sentence just being an assortment
-of[]{#_idIndexMarker531} roles, it is understood as a combination of
+than a sentence just being an assortment
+of roles, it is understood as a combination of
 semantic roles that better convey what is actually happening in the
 event being described by the sentence.
 
@@ -999,18 +899,13 @@ semantic role labeling to these sentences, we can determine that the
 predicate/agent/theme are all the same.
 
 We previously saw how constituency parsing/syntactic parsing can be used
-to identify the syntactic []{#_idIndexMarker532}structure of a sentence.
-Here, we[]{#_idIndexMarker533} can see how we can break down the simple
+to identify the syntactic structure of a sentence.
+Here, we can see how we can break down the simple
 sentence \"I bought a cat\" into its constituent parts -- pronoun, verb,
 determinant, and noun:
 
-<div>
 
-::: {#_idContainer270 .IMG---Figure}
-![Figure 9.19 -- Constituency parsing ](3_files/B12365_09_19.jpg)
-:::
-
-</div>
+![](./images/B12365_09_19.jpg)
 
 Figure 9.19 -- Constituency parsing
 
@@ -1033,8 +928,8 @@ predicate of our sentence and the related semantic components, we could
 train a model to identify the components that contribute essential
 information to the sentence and drop those that do not.
 
-Therefore, being able[]{#_idIndexMarker534} to train models to perform
-accurate and[]{#_idIndexMarker535} efficient semantic role labeling
+Therefore, being able to train models to perform
+accurate and efficient semantic role labeling
 would have useful applications for the rest of NLP. The earliest
 semantic role labeling systems were purely rule-based, consisting of
 basic sets of rules derived from grammar. These have since evolved to
@@ -1076,40 +971,35 @@ and the edges represent the relationships between parent and child
 parts.
 
 A number of open source models for semantic role labeling are also
-available. The SLING parser[]{#_idIndexMarker536} from Google is trained
-to perform semantic []{#_idIndexMarker537}annotations of data. This
+available. The SLING parser from Google is trained
+to perform semantic annotations of data. This
 model uses a bidirectional LSTM to encode sentences and a
 transition-based recurrent unit for decoding. The model simply takes
 text tokens as input and outputs roles without any further symbolic
 representation:
 
-<div>
 
-::: {#_idContainer271 .IMG---Figure}
-![Figure 9.20 -- Bi-directional LSTM (SLING) ](3_files/B12365_09_20.jpg)
-:::
-
-</div>
+![](./images/B12365_09_20.jpg)
 
 Figure 9.20 -- Bi-directional LSTM (SLING)
 
 It is worth noting that SLING is still a work in progress. Currently, it
 is not sophisticated enough to extract facts accurately from arbitrary
-texts. This indicates that there is much []{#_idIndexMarker538}work to
-be done in the field before a true, accurate[]{#_idIndexMarker539}
+texts. This indicates that there is much work to
+be done in the field before a true, accurate
 semantic role parser can be created. When this is done, a semantic role
 parser could easily be used as part of an ensemble machine learning
 model to label semantic roles within a sentence, which is then used
 within a wider machine learning model to enhance the model\'s
 \"understanding\" of text.
 
-[]{#_idTextAnchor167}
 
-Textual entailment {#_idParaDest-158}
+
+Textual entailment
 ------------------
 
-Textual entailment[]{#_idIndexMarker540} is another methodology by which
-we can train []{#_idIndexMarker541}models in an attempt to better
+Textual entailment is another methodology by which
+we can train models in an attempt to better
 understand the meaning of a sentence. In textual entailment, we attempt
 to identify a directional relationship between two pieces of text. This
 relationship exists whenever the truth from one piece of text follows
@@ -1125,12 +1015,12 @@ labeled as text and our second text labeled as our hypothesis:
 
 **Hypothesis**: *Giving money to charity has good consequences*
 
-This is an []{#_idIndexMarker542}example of **positive textual
-entailment**. If the []{#_idIndexMarker543}hypothesis follows from the
+This is an example of **positive textual
+entailment**. If the hypothesis follows from the
 text, then there can be said to be a directional relationship between
 the two texts. It is important to set up the example with a
 text/hypothesis as this defines the direction of the
-[]{#_idIndexMarker544}relationship. The majority of the time, this
+relationship. The majority of the time, this
 relationship is not symmetrical. For example, in this example, sentence
 one entails sentence two (we can infer sentence two to be true based on
 the information in sentence one). However, we cannot infer that sentence
@@ -1139,7 +1029,7 @@ possible that both statements are indeed true, if we cannot deduce that
 there is a directional relationship between the two, we cannot infer one
 from the other.
 
-There also[]{#_idIndexMarker545} exists a **negative textual
+There also exists a **negative textual
 entailment**. This is when the statements are contradictory; such as the
 following, for example:
 
@@ -1150,7 +1040,7 @@ following, for example:
 In this example, the text does not entail the hypothesis; instead, the
 text contradicts the hypothesis. Finally, it is also possible to
 determine that there is **no textual entailment** between two
-[]{#_idIndexMarker546}sentences if there is no relationship between
+sentences if there is no relationship between
 them. This means that the two statements are not necessarily
 contradictory, but rather that the text does not entail the hypothesis:
 
@@ -1166,8 +1056,8 @@ consist of the same words and entities but have very different meanings.
 
 This is where using models to be able to quantify the meaning of text is
 particularly useful. Textual entailment is also a unique problem in that
-two sentences[]{#_idIndexMarker547} may not have exactly the same
-meaning, yet one []{#_idIndexMarker548}can still be inferred from the
+two sentences may not have exactly the same
+meaning, yet one can still be inferred from the
 other. This requires an element of linguistic deduction that is not
 present in most language models. By incorporating elements of linguistic
 deduction in our models going forward, we can better capture the meaning
@@ -1187,41 +1077,36 @@ two outputs are then compared somehow (using some tensor operation)
 before they\'re fed through a final LSTM layer. Finally, we perform
 classification on the output using a softmax layer:
 
-<div>
 
-::: {#_idContainer272 .IMG---Figure}
-![Figure 9.21 -- Siamese LSTM network ](3_files/B12365_09_21.jpg)
-:::
-
-</div>
+![](./images/B12365_09_21.jpg)
 
 Figure 9.21 -- Siamese LSTM network
 
 While these models are far from perfect, they represent the first steps
-toward creating a fully[]{#_idIndexMarker549} accurate textual
-entailment model and open up the []{#_idIndexMarker550}possibilities
+toward creating a fully accurate textual
+entailment model and open up the possibilities
 toward integrating this into language models moving forward.
 
-[]{#_idTextAnchor168}
 
-Machine comprehension {#_idParaDest-159}
+
+Machine comprehension
 ---------------------
 
-So far in this book, we []{#_idIndexMarker551}have referred mostly to
-NLP, but[]{#_idIndexMarker552} being able to process language is just
+So far in this book, we have referred mostly to
+NLP, but being able to process language is just
 part of the picture. When you or I read a sentence, we not only read,
 observe, and process the individual words, but we also build an inherent
 understanding of what the sentence actually means. Being able to train
 models that not only comprehend a sentence but can also form an
 understanding of the ideas being expressed within it is arguably the
 next step in NLP. The true definition of this field is very loosely
-defined, but it is often referred to as machine[]{#_idIndexMarker553}
+defined, but it is often referred to as machine
 comprehension or **natural language understanding** (**NLU**).
 
 At school, we are taught reading comprehension from a young age. You
-probably learned this skill a long time[]{#_idIndexMarker554} ago and is
+probably learned this skill a long time ago and is
 something you now take for granted. Often, you probably don\'t
-[]{#_idIndexMarker555}even realize you are doing it; in fact, you are
+even realize you are doing it; in fact, you are
 doing it right now! Reading comprehension is simply the act of reading a
 text, understanding this text, and being able to answer questions about
 the text. For example, take a look at the following text:
@@ -1256,18 +1141,13 @@ be to build a system that acts as a knowledge base. Currently, the way
 search engines work is that we run a search (in Google or a similar
 search engine) and the search engine returns a selection of documents.
 However, to find a particular piece of information, we must still infer
-the correct []{#_idIndexMarker556}information from our returned
-document. The entire process might []{#_idIndexMarker557}look something
+the correct information from our returned
+document. The entire process might look something
 like this:
 
-<div>
 
-::: {#_idContainer273 .IMG---Figure}
 ![Figure 9.22 -- Process of finding information
-](3_files/B12365_09_22.jpg)
-:::
-
-</div>
+](./images/B12365_09_22.jpg)
 
 Figure 9.22 -- Process of finding information
 
@@ -1287,17 +1167,12 @@ source of data such as a large text scrape of the internet or Wikipedia
 and form a model that acts as a large knowledge base. By doing this, we
 would then be able to query the knowledge base with real questions and
 the answers would be returned automatically. This removes the
-knowledge[]{#_idIndexMarker558} inference step of our diagram as
-the[]{#_idIndexMarker559} inference is taken care of by the model as the
+knowledge inference step of our diagram as
+the inference is taken care of by the model as the
 model already has an understanding of the subject matter:
 
-<div>
 
-::: {#_idContainer274 .IMG---Figure}
-![Figure 9.23 -- New process using a model ](3_files/B12365_09_23.jpg)
-:::
-
-</div>
+![](./images/B12365_09_23.jpg)
 
 Figure 9.23 -- New process using a model
 
@@ -1314,16 +1189,11 @@ incorporating the elements of a full language model, would be to simply
 return the passage of the Wikipedia page that contains the answer to our
 question.
 
-An architecture that[]{#_idIndexMarker560} we could train to achieve
-this task[]{#_idIndexMarker561} might look something like this:
+An architecture that we could train to achieve
+this task might look something like this:
 
-<div>
 
-::: {#_idContainer275 .IMG---Figure}
-![Figure 9.24 -- Architecture of the model ](3_files/B12365_09_24.jpg)
-:::
-
-</div>
+![](./images/B12365_09_24.jpg)
 
 Figure 9.24 -- Architecture of the model
 
@@ -1344,8 +1214,8 @@ dependencies of our matching layer, combine all the received information
 from our matching layer, and perform a decoding step to obtain our final
 answers. This layer takes the form of a bidirectional RNN that decodes
 our matching layer output into final predictions. We predict two
-values[]{#_idIndexMarker562} here -- a start point and an endpoint --
-using a []{#_idIndexMarker563}multiclass classification. This represents
+values here -- a start point and an endpoint --
+using a multiclass classification. This represents
 the start and end points within our document that contain the answer to
 our initial question. If our document contained 100 words and the
 sentence between word 40 and word 50 contained the answer to our
@@ -1370,78 +1240,58 @@ asked; for example, Monday, Tuesday, March the 6th, Christmas Day.
 
 We must also note that the relationship between the question and answer
 is bidirectional. When given a knowledge base, it is possible for us to
-generate an answer given a question, but []{#_idIndexMarker564}it also
-follows that we are[]{#_idIndexMarker565} able to generate a question
+generate an answer given a question, but it also
+follows that we are able to generate a question
 given an answer:
 
-<div>
 
-::: {#_idContainer276 .IMG---Figure}
 ![Figure 9.25 -- Relationship between the question and answer
-](3_files/B12365_09_25.jpg)
-:::
-
-</div>
+](./images/B12365_09_25.jpg)
 
 Figure 9.25 -- Relationship between the question and answer
 
-A true machine []{#_idIndexMarker566}comprehension may be able to
+A true machine comprehension may be able to
 perform **question generation** (**QG**), as well as
 **question-answering** (**QA**). The most obvious solution
-to[]{#_idIndexMarker567} this is to train two separate models, one for
+to this is to train two separate models, one for
 each task, and compare their results. In theory, the output of our QG
 model should equal the input of our QA model, so by comparing the two,
 we can provide simultaneous evaluation:
 
-<div>
 
-::: {#_idContainer277 .IMG---Figure}
 ![Figure 9.26 -- Comparison between QG and QA models
-](3_files/B12365_09_26.jpg)
-:::
-
-</div>
+](./images/B12365_09_26.jpg)
 
 Figure 9.26 -- Comparison between QG and QA models
 
-However, a more comprehensive[]{#_idIndexMarker568} model would be able
-to perform[]{#_idIndexMarker569} these two tasks simultaneously, thereby
+However, a more comprehensive model would be able
+to perform these two tasks simultaneously, thereby
 generating a question from an answer and answering a question, much like
 humans are able to do:
 
-<div>
 
-::: {#_idContainer278 .IMG---Figure}
-![Figure 9.27 Dual model representation ](3_files/B12365_09_27.jpg)
-:::
-
-</div>
+![](./images/B12365_09_27.jpg)
 
 Figure 9.27 -- Dual model representation
 
-In fact, recent []{#_idIndexMarker570}advances in NLU have meant that
-such []{#_idIndexMarker571}models are now a reality. By combining many
+In fact, recent advances in NLU have meant that
+such models are now a reality. By combining many
 elements, we are able to create a neural network structure that is able
 to perform the function of the dual model, as illustrated
-[]{#_idIndexMarker572}previously. This is known as the **dual ask-answer
+previously. This is known as the **dual ask-answer
 network**. In fact, our model contains most of the components of neural
 networks that we have seen in this book so far, that is, embedding
 layers, convolutional layers, encoders, decoders, and attention layers.
 The full architecture of the ask-answer network looks similar to the
 following:
 
-<div>
 
-::: {#_idContainer279 .IMG---Figure}
 ![Figure 9.28 -- Architecture of ask-answer network
-](3_files/B12365_09_28.jpg)
-:::
-
-</div>
+](./images/B12365_09_28.jpg)
 
 Figure 9.28 -- Architecture of ask-answer network
 
-We can[]{#_idIndexMarker573} make []{#_idIndexMarker574}the following
+We canthe following
 observations here:
 
 -   The model's **inputs** are the question, answer, and context, as
@@ -1458,15 +1308,15 @@ implementing your newly acquired PyTorch skills and try building and
 training a model like this yourself.
 
 Language comprehension models like these are likely to be one of the
-major focuses of study within NLP[]{#_idIndexMarker575} over the coming
-years, and new papers are []{#_idIndexMarker576}likely to be published
+major focuses of study within NLP over the coming
+years, and new papers are likely to be published
 with great frequency moving forward.
 
 
-Summary {#_idParaDest-160}
+Summary
 =======
 
-::: {#_idContainer280}
+
 In this chapter, we first examined several state-of-the-art NLP language
 models. BERT, in particular, seems to have been widely accepted as the
 industry standard state-of-the-art language model, and BERT and its
