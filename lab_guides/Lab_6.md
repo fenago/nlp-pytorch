@@ -1,5 +1,7 @@
+<img align="right" src="../logo.png">
 
-*Chapter 6*: Convolutional Neural Networks for Text Classification
+
+*Lab 6*: Convolutional Neural Networks for Text Classification
 =======================================================================================
 
 

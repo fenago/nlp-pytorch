@@ -1,6 +1,8 @@
+<img align="right" src="../logo.png">
 
-*Chapter 7*: Text Translation Using Sequence-to-Sequence Neural Networks
-=============================================================================================
+
+*Lab 7*: Text Translation Using Sequence-to-Sequence Neural Networks
+=====================================================================
 
 
 In the previous two chapters, we used neural networks to classify text

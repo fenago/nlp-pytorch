@@ -1,5 +1,7 @@
+<img align="right" src="../logo.png">
 
-*Chapter 8*: Building a Chatbot Using Attention-Based Neural Networks
+
+*Lab 8*: Building a Chatbot Using Attention-Based Neural Networks
 =====================================================================
 
 

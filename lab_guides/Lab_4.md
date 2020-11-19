@@ -1,6 +1,8 @@
+<img align="right" src="../logo.png">
 
-*Chapter 4*: Text Preprocessing, Stemming, and Lemmatization
-=================================================================================
+
+*Lab 4*: Text Preprocessing, Stemming, and Lemmatization
+=========================================================
 
 
 Textual data can be gathered from a number of different sources and

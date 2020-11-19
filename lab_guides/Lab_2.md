@@ -1,5 +1,7 @@
+<img align="right" src="../logo.png">
 
-*Chapter 2*: Getting Started with PyTorch 1.x for NLP
+
+*Lab 2*: Getting Started with PyTorch 1.x for NLP
 ==========================================================================
 
 
@@ -25,15 +27,6 @@ following topics:
 -   Comparing PyTorch to other deep learning frameworks
 -   NLP functionality of PyTorch
 
-
-Technical requirements
-======================
-
-
-For this chapter, Python needs to be installed. It is recommended to use
-the latest version of Python (3.6 or higher). It is also recommended to
-use the Anaconda package manager to install PyTorch. A CUDA-compatible
-GPU is required to run tensor operations on a GPU.
 
 
 Installing and using PyTorch 1.x

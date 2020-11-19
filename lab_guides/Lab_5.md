@@ -1,5 +1,7 @@
+<img align="right" src="../logo.png">
 
-*Chapter 5*: Recurrent Neural Networks and Sentiment Analysis
+
+*Lab 5*: Recurrent Neural Networks and Sentiment Analysis
 ==================================================================================
 
 

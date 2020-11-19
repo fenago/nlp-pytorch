@@ -1,5 +1,7 @@
+<img align="right" src="../logo.png">
 
-*Chapter 3*: NLP and Text Embeddings
+
+*Lab 3*: NLP and Text Embeddings
 =========================================================
 
 

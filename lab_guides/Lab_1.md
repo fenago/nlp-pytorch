@@ -1,6 +1,8 @@
+<img align="right" src="../logo.png">
+
 
 Lab 1: Fundamentals of Machine Learning and Deep Learning
-====================================================================================
+==========================================================
 
 
 Our world is rich with natural language data. Over the past several
