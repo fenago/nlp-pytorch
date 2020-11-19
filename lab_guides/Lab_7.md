@@ -5,31 +5,6 @@
 =====================================================================
 
 
-In the previous two chapters, we used neural networks to classify text
-and perform sentiment analysis. Both tasks involve taking an NLP input
-and predicting some value. In the case of our sentiment analysis, this
-was a number between 0 and 1 representing the sentiment of our sentence.
-In the case of our sentence classification model, our output was a
-multi-class prediction, of which there were several categories our
-sentence belonged to. But what if we wish to make not just a single
-prediction, but predict a whole sentence? In this chapter, we will build
-a sequence-to-sequence model that takes a sentence in one language as
-input and outputs the translation of this sentence in another language.
-
-We have already explored several types of neural network architecture
-used for NLP learning, namely recurrent neural networks in [*Chapter
-5*](https://subscription.packtpub.com/book/data/9781789802740/8)*,
-Recurrent Neural Networks and Sentiment Analysis*, and convolutional
-neural networks in [*Chapter
-6*](https://subscription.packtpub.com/book/data/9781789802740/9)*, Text
-Classification Using CNNs*. In this chapter, we will again be using
-these familiar RNNs, but instead of just building a simple RNN model, we
-will use RNNs as part of a larger, more complex model in order to
-perform sequence-to-sequence translation. By using the underpinnings of
-RNNs that we learned about in the previous chapters, we can show how
-these concepts can be extended in order to create a variety of models
-that can be fit for purpose.
-
 In this chapter, we will cover the following topics:
 
 -   Theory of sequence-to-sequence models
@@ -53,8 +28,7 @@ In the following example, we can see that our English-to-Spanish
 translation maps word to word:
 
 
-![Figure 7.1 -- English to Spanish
-translation](./images/B12365_07_01.jpg)
+![](./images/B12365_07_01.jpg)
 
 Figure 7.1 -- English to Spanish translation
 
@@ -65,8 +39,7 @@ model to get an output sentence, and there would be no need for any
 sequence-to-sequence modeling, as shown here:
 
 
-![Figure 7.2 -- English-to-Spanish translation of words
-](./images/B12365_07_02.jpg)
+![](./images/B12365_07_02.jpg)
 
 Figure 7.2 -- English-to-Spanish translation of words
 
@@ -80,8 +53,7 @@ directly translate individual words. This is where sequence-to-sequence
 modeling becomes essential, as seen here:
 
 
-![Figure 7.3 -- Sequence-to-sequence modeling for translation
-](./images/B12365_07_03.jpg)
+![](./images/B12365_07_03.jpg)
 
 Figure 7.3 -- Sequence-to-sequence modeling for translation
 
@@ -100,8 +72,7 @@ So, in reality, our full sequence-to-sequence translation model will
 actually look something like this:
 
 
-![Figure 7.4 -- Full sequence-to-sequence model
-](./images/B12365_07_04.jpg)
+![](./images/B12365_07_04.jpg)
 
 Figure 7.4 -- Full sequence-to-sequence model
 
@@ -346,8 +317,7 @@ vocabulary that we can use to tokenize our data:
     where we reverse our input sentence:
 
     
-    ![Figure 7.11 -- Reversing the input sentence
-    ](./images/B12365_07_101.jpg)
+![](./images/B12365_07_101.jpg)
     
 
     Figure 7.11 -- Reversing the input sentence
@@ -468,8 +438,7 @@ vocabulary that we can use to tokenize our data:
     This gives the following output:
 
     
-    ![Figure 7.14 -- Vocabulary size of the dataset
-    ](./images/B12365_07_14.jpg)
+![](./images/B12365_07_14.jpg)
     
 
     Figure 7.14 -- Vocabulary size of the dataset

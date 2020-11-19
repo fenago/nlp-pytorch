@@ -5,29 +5,6 @@
 ==================================================================================
 
 
-In this chapter, we will look at **Recurrent Neural Networks**
-(**RNNs**), a variation of the basic feed forward neural networks in
-PyTorch that we learned how to build in [*Chapter
-1*](https://subscription.packtpub.com/book/data/9781789802740/2)*,
-Fundamentals of Machine Learning*. Generally, RNNs can be used for any
-task where data can be represented as a sequence. This includes things
-such as stock price prediction, using a time series of historic data
-represented as a sequence. We commonly use RNNs in NLP as text can be
-thought of as a sequence of individual words and can be modeled as such.
-While a conventional neural network takes a single vector as input to
-the model, an RNN can take a whole sequence of vectors. If we represent
-each word in a document as a vector embedding, we can represent a whole
-document as a sequence of vectors (or an order 3 tensor). We can then
-use RNNs (and a more sophisticated form of RNN known as **Long
-Short-Term Memory** (**LSTM**) to learn from our data.
-
-In this chapter, we will cover the basics of RNNs and the more advanced
-LSTM. We will then look at sentiment analysis and work through a
-practical example of how to build an LSTM to classify documents using
-PyTorch. Finally, we will host our simple model on Heroku, a simple
-cloud application platform, which will allow us to make predictions
-using our model.
-
 This chapter covers the following topics:
 
 -   Building RNNs
@@ -172,8 +149,7 @@ clipped gradient, as follows:
 The following graph shows the relationship between the two variables:
 
 
-![Figure 5.4 -- Comparison of gradient clipping
-](./images/B12365_05_4.jpg)
+![](./images/B12365_05_4.jpg)
 
 Figure 5.4 -- Comparison of gradient clipping
 
@@ -294,8 +270,7 @@ some learned parameters, the inner workings of an LSTM cell are
 significantly more complicated:
 
 
-![Figure 5.6 -- Inner workings of an LSTM cell
-](./images/B12365_05_6.jpg)
+![](./images/B12365_05_6.jpg)
 
 Figure 5.6 -- Inner workings of an LSTM cell
 

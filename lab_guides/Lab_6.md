@@ -4,29 +4,6 @@
 *Lab 6*: Convolutional Neural Networks for Text Classification
 =======================================================================================
 
-
-In the previous chapter, we showed how RNNs can be used to provide
-sentiment classifications for text. However, RNNs are not the only
-neural network architecture that can be used for NLP classification
-tasks. **Convolutional neural networks** (**CNNs**) are another such
-architecture.
-
-RNNs rely on sequential modeling, maintain a hidden state, and then step
-sequentially through the text word by word, updating the state at each
-iteration. CNNs do not rely on the sequential element of language, but
-instead try and learn from the text by perceiving each word in the
-sentence individually and learning its relationship to the words
-surrounding it within the sentence.
-
-While CNNs are more commonly used for classifying images for the reasons
-mentioned here, they have been shown to be effective at classifying text
-as well. While we do perceive text as a sequence, we also know that the
-meaning of individual words in the sentence depends on their context and
-the words they appear next to. Although CNNs and RNNs learn from text in
-different ways, they have both shown to be effective in text
-classification, and which one to use in any given situation depends on
-the nature of the task.
-
 In this chapter, we will explore the basic theory behind CNNs, as well
 as construct a CNN from scratch that will be used to classify text. We
 will cover the following topics:
@@ -62,8 +39,7 @@ vector representation, where the color of each pixel is denoted by a 0
 or a 1:
 
 
-![Figure 6.1 -- Vector representation of an
-image](./images/B12365_06_01.jpg)
+![](./images/B12365_06_01.jpg)
 
 Figure 6.1 -- Vector representation of an image
 
@@ -218,16 +194,14 @@ four outputs. You will notice that this is similar to a bi-gram model,
 where there are four possible bi-grams within a five-word sentence:
 
 
-![Figure 6.5 -- Convolving word vectors into bi-grams
-](./images/B12365_06_05.jpg)
+![](./images/B12365_06_05.jpg)
 
 Figure 6.5 -- Convolving word vectors into bi-grams
 
 Similarly, we can do this for any number of n-grams; for example, *n*=3:
 
 
-![Figure 6.6 -- Convolving word vectors into n-grams
-](./images/B12365_06_06.jpg)
+![](./images/B12365_06_06.jpg)
 
 Figure 6.6 -- Convolving word vectors into n-grams
 
@@ -238,8 +212,7 @@ different n-grams simultaneously. So, to capture both bi-grams and
 trigrams, we could set our model up like so:
 
 
-![Figure 6.7 -- Convolving word vectors into bi-grams and trigrams
-](./images/B12365_06_07.jpg)
+![](./images/B12365_06_07.jpg)
 
 Figure 6.7 -- Convolving word vectors into bi-grams and trigrams
 
@@ -311,8 +284,7 @@ that our trained model will learn to classify. These six categories are
 as follows:
 
 
-![Figure 6.8 -- Semantic categories in the TREC dataset
-](./images/B12365_06_08.jpg)
+![](./images/B12365_06_08.jpg)
 
 Figure 6.8 -- Semantic categories in the TREC dataset
 
@@ -439,8 +411,7 @@ object, rather than a dataset loaded into pandas, as we might be used to
 seeing. This means that our output from the preceding code is as
 follows:
 
-![Figure 6.10 -- Output of the TorchText object
-](./images/B12365_06_10.png)
+![](./images/B12365_06_10.png)
 
 Figure 6.10 -- Output of the TorchText object
 
@@ -470,8 +441,7 @@ train_data.examples[0].label
 
 This gives us the following output:
 
-![Figure 6.12 -- Label of the dataset object
-](./images/B12365_06_012.png)
+![](./images/B12365_06_012.png)
 
 Figure 6.12 -- Label of the dataset object
 
@@ -488,8 +458,7 @@ print(len(valid_data))
 
 This results in the following output:
 
-![Figure 6.13 -- Sizes of the training and validation sets
-](./images/B12365_06_013.png)
+![](./images/B12365_06_013.png)
 
 Figure 6.13 -- Sizes of the training and validation sets
 
@@ -502,8 +471,7 @@ Now that we know that our neural network will not take raw text as an
 input, we have to find some way of turning this into some form of
 embedding representation. While it is possible for us to train our own
 embedding layer, we can instead transform our data using the
-pre-computed `glove` vectors that we discussed in [*Chapter
-3*](https://subscription.packtpub.com/book/data/9781789802740/5)*,
+pre-computed `glove` vectors,
 Performing Text Embeddings*. This also has the added benefit of making
 our model faster to train as we won\'t manually need to train our
 embedding layer from scratch:
@@ -644,8 +612,7 @@ convolutional layers. An example of how this convolution layer might
 look for a given set of variables is as follows:
 
 
-![Figure 6.15 -- Convolution layer looking for variables
-](./images/B12365_06_015.jpg)
+![](./images/B12365_06_015.jpg)
 
 Figure 6.15 -- Convolution layer looking for variables
 
@@ -745,8 +712,7 @@ model.embedding.weight.data.copy_(glove_embeddings)
 This results in the following output:
 
 
-![Figure 6.16 -- Tensor output after lowering the dropout
-](./images/B12365_06_016.jpg)
+![](./images/B12365_06_016.jpg)
 
 Figure 6.16 -- Tensor output after lowering the dropout
 

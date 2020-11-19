@@ -51,8 +51,7 @@ decoder then used this hidden state to perform the translation steps. A
 basic graphical illustration of this is as follows:
 
 
-![Figure 8.1 -- Graphical representation of sequence-to-sequence models
-](./images/B12365_08_1.jpg)
+![](./images/B12365_08_1.jpg)
 
 Figure 8.1 -- Graphical representation of sequence-to-sequence models
 
@@ -492,8 +491,7 @@ following steps:
     64,000 pairs consisting of 18,000 distinct words:
 
     
-    ![Figure 8.7 -- Value of sentences in the dataset
-    ](./images/B12365_08_07.jpg)
+![](./images/B12365_08_07.jpg)
     
 
     Figure 8.7 -- Value of sentences in the dataset
@@ -555,8 +553,7 @@ We will use the following steps to remove the words:
     This results in the following output:
 
     
-    ![Figure 8.9 -- Percentage of words to be kept
-    ](./images/B12365_08_09.jpg)
+![](./images/B12365_08_09.jpg)
     
 
     Figure 8.9 -- Percentage of words to be kept
@@ -595,8 +592,7 @@ We will use the following steps to remove the words:
 
     This results in the following output:
 
-![Figure 8.10 -- Final value after building our dataset
-](./images/B12365_08_10.png)
+![](./images/B12365_08_10.png)
 
 Figure 8.10 -- Final value after building our dataset
 
@@ -1605,8 +1601,7 @@ lower than when you started training, showing that your model has
 learned something useful:
 
 
-![Figure 8.16 -- Average loss after 4,000 iterations
-](./images/B12365_08_16.jpg)
+![](./images/B12365_08_16.jpg)
 
 Figure 8.16 -- Average loss after 4,000 iterations
 
@@ -1647,8 +1642,7 @@ and start using our chatbot.
     Doing so will open up an input prompt for you to enter your text:
 
 
-![Figure 8.17 -- UI element for entering text
-](./images/B12365_08_17.jpg)
+![](./images/B12365_08_17.jpg)
 
 Figure 8.17 -- UI element for entering text
 

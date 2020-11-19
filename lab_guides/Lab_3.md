@@ -5,21 +5,6 @@
 =========================================================
 
 
-There are many different ways of representing text in deep learning.
-While we have covered basic **bag-of-words** (**BoW**) representations,
-unsurprisingly, there is a far more sophisticated way of representing
-text data known as embeddings. While a BoW vector acts only as a count
-of words within a sentence, embeddings help to numerically define the
-actual meaning of certain words.
-
-In this chapter, we will explore text embeddings and learn how to create
-embeddings using a continuous BoW model. We will then move on to discuss
-n-grams and how they can be used within models. We will also cover
-various ways in which tagging, chunking, and tokenization can be used to
-split up NLP into its various constituent parts. Finally, we will look
-at TF-IDF language models and how they can be useful in weighting our
-models toward infrequently occurring words.
-
 The following topics will be covered in the chapter:
 
 -   Word embeddings
@@ -38,9 +23,7 @@ GLoVe vectors can be downloaded from
 <https://nlp.stanford.edu/projects/glove/> . It is recommended to use
 the `glove.6B.50d.txt` file as it is much smaller than the
 other files and will be much faster to process. NLTK will be required
-for later parts of this chapter. All the code for this chapter can be
-found at
-<https://github.com/PacktPublishing/Hands-On-Natural-Language-Processing-with-PyTorch-1.x>.
+for later parts of this chapter.
 
 
 Embeddings for NLP
@@ -167,8 +150,7 @@ vectors:
     This results in the following output:
 
     
-    ![Figure 3.4 -- Cosine similarity output for cat and dog
-    ](./images/B12365_03_4.jpg)
+![](./images/B12365_03_4.jpg)
     
 
     Figure 3.4 -- Cosine similarity output for cat and dog
@@ -184,8 +166,7 @@ vectors:
     This results in the following output:
 
 
-![Figure 3.5 -- Cosine similarity output for cat and piano
-](./images/B12365_03_5.jpg)
+![](./images/B12365_03_5.jpg)
 
 Figure 3.5 -- Cosine similarity output for cat and piano
 
@@ -206,8 +187,7 @@ With this, we can approximate the embedding for
 graphically illustrate this as follows:
 
 
-![Figure 3.6 -- Graphical representation of the example
-](./images/B12365_03_6.jpg)
+![](./images/B12365_03_6.jpg)
 
 Figure 3.6 -- Graphical representation of the example
 
@@ -580,8 +560,7 @@ scratch, thereby demonstrating how our embedding vectors can be learned:
     This results in the following output:
 
 
-![Figure 3.14 -- Tensor value after editing the model
-](./images/B12365_03_14.jpg)
+![](./images/B12365_03_14.jpg)
 
 Figure 3.14 -- Tensor value after editing the model
 
@@ -800,8 +779,7 @@ NLP that can be done fairly simply in Python:
     This results in the following output:
 
     
-    ![Figure 3.21 -- Splitting multiple sentences into words
-    ](./images/B12365_03_21.jpg)
+![](./images/B12365_03_21.jpg)
     
 
     Figure 3.21 -- Splitting multiple sentences into words
@@ -1196,8 +1174,7 @@ sentences:
     This results in the following output:
 
 
-![Figure 3.30 -- TF-IDF score for ago and indistinct
-](./images/B12365_03_30.jpg)
+![](./images/B12365_03_30.jpg)
 
 Figure 3.30 -- TF-IDF score for ago and indistinct
 
@@ -1287,8 +1264,7 @@ be applied to embeddings:
 
     This results in the following output:
 
-![Figure 3.33 -- Cosine similarity between TF-IDF and average embedding
-](./images/B12365_03_33.png)
+![](./images/B12365_03_33.png)
 
 Figure 3.33 -- Cosine similarity between TF-IDF and average embedding
 

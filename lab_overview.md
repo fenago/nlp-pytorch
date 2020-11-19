@@ -25,7 +25,7 @@
 
 Labs for this course are available at endpoints shared below. Update `<host-ip>` with the lab environment DNS.
 
-1. ##### Fundamentals of Machine Learning and Deep Learning
+1. ##### Fundamentals of Machine Learning and Deep Learning (Read-Only)
 		* http://<host-ip>/lab/workspaces/lab1_Fundamentals
 2. ##### Getting Started with PyTorch 1.x for NLP
 		* http://<host-ip>/lab/workspaces/lab2_PyTorch

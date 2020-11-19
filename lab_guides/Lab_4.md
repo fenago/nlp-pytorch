@@ -5,34 +5,6 @@
 =========================================================
 
 
-Textual data can be gathered from a number of different sources and
-takes many different forms. Text can be tidy and readable or raw and
-messy and can also come in many different styles and formats. Being able
-to preprocess this data so that it can be converted into a standard
-format before it reaches our NLP models is what we\'ll be looking at in
-this chapter.
-
-Stemming and lemmatization, similar to tokenization, are other forms of
-NLP preprocessing. However, unlike tokenization, which reduces a
-document into individual words, stemming and lemmatization are attempts
-to reduce these words further to their lexical roots. For example,
-almost any verb in English has many different variations, depending on
-tense:
-
-*He jumped*
-
-*He is jumping*
-
-*He jumps*
-
-While all these words are different, they all relate to the same root
-word -- **jump**. Stemming and lemmatization are both techniques we can
-use to reduce word variations to their common roots.
-
-In this chapter, we will explain how to perform preprocessing on textual
-data, as well as explore both stemming and lemmatization and show how
-these can be implemented in Python.
-
 In this chapter, we will cover the following topics:
 
 -   Text preprocessing
@@ -48,25 +20,7 @@ Technical requirements
 For the text preprocessing in this chapter, we will mostly use inbuilt
 Python functions, but we will also use the external
 `BeautifulSoup` package. For stemming and lemmatization, we
-will use the NLTK Python package. All the code in this chapter can be
-found at
-<https://github.com/PacktPublishing/Hands-On-Natural-Language-Processing-with-PyTorch-1.x/tree/master/Chapter4>.
-
-
-Text preprocessing
-==================
-
-
-Textual data can come in a variety of formats and styles. Text may be in
-a structured, readable format or in a more raw,
-unstructured format. Our text may contain punctuation and symbols that
-we don\'t wish to include in our models or may contain HTML and other
-non-textual formatting. This is of particular concern when scraping text
-from online sources. In order to prepare our text so that it can be
-input into any NLP models, we must perform preprocessing. This will
-clean our data so that it is in a standard format. In this section, we
-will illustrate some of these preprocessing steps in more
-detail.
+will use the NLTK Python package.
 
 
 
@@ -132,8 +86,7 @@ print('Output: ' + str(output_text))
 This returns the following output:
 
 
-![Figure 4.2 -- Converting input into lowercase
-](./images/B12365_04_02.jpg)
+![](./images/B12365_04_02.jpg)
 
 Figure 4.2 -- Converting input into lowercase
 
@@ -190,8 +143,7 @@ print('Output: ' + output_text)
 This returns the following output:
 
 
-![Figure 4.3 -- Removing punctuation from input
-](./images/B12365_04_03.jpg)
+![](./images/B12365_04_03.jpg)
 
 Figure 4.3 -- Removing punctuation from input
 
@@ -217,8 +169,7 @@ print('Output: ' + output_text)
 This returns the following output:
 
 
-![Figure 4.4 -- Removing and replacing punctuation
-](./images/B12365_04_04.jpg)
+![](./images/B12365_04_04.jpg)
 
 Figure 4.4 -- Removing and replacing punctuation
 
@@ -290,8 +241,7 @@ print('Output: ' + str(output_text))
 This returns the following output:
 
 
-![Figure 4.6 -- Converting a phone number into text
-](./images/B12365_04_06.jpg)
+![](./images/B12365_04_06.jpg)
 
 Figure 4.6 -- Converting a phone number into text
 
@@ -384,8 +334,7 @@ using NLTK before moving on and discussing the algorithm in more detail:
     This results in the following output:
 
     
-    ![Figure 4.7 -- Returning the stems of words
-    ](./images/B12365_04_07.jpg)
+![](./images/B12365_04_07.jpg)
     
 
     Figure 4.7 -- Returning the stems of words
@@ -428,8 +377,7 @@ has many detailed steps, here, we will simplify some of the rules for
 ease of understanding:
 
 
-![Figure 4.9 -- Rules of the Porter Stemmer algorithm
-](./images/B12365_04_09.jpg)
+![](./images/B12365_04_09.jpg)
 
 Figure 4.9 -- Rules of the Porter Stemmer algorithm
 
@@ -562,8 +510,7 @@ return_word_pos_tuples(sentence)
 This results in the following output:
 
 
-![Figure 4.14 -- Output of POS tagging on a sentence
-](./images/B12365_04_14.jpg)
+![](./images/B12365_04_14.jpg)
 
 Figure 4.14 -- Output of POS tagging on a sentence
 

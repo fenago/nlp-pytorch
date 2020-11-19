@@ -5,16 +5,6 @@
 ==========================================================================
 
 
-**PyTorch** is a Python-based machine learning library. It consists of
-two main features: its ability to efficiently perform tensor operations
-with hardware acceleration (using GPUs) and its ability to build deep
-neural networks. PyTorch also uses dynamic computational graphs instead
-of static ones, which sets it apart from similar libraries such as
-TensorFlow. By demonstrating how language can be represented using
-tensors and how neural networks can be used to learn from NLP, we will
-show that both these features are particularly useful for natural
-language processing.
-
 In this chapter, we will show you how to get PyTorch up and running on
 your computer, as well as demonstrate some of its key functionalities.
 We will then compare PyTorch to some other deep learning frameworks,
@@ -90,8 +80,7 @@ Notebook and run a few simple commands:
     This results in the following output:
 
     
-    ![Figure 2.2 -- Tensor multiplication output
-    ](./images/B12365_02_2.jpg)
+![](./images/B12365_02_2.jpg)
     
 
     Figure 2.2 -- Tensor multiplication output
@@ -125,8 +114,7 @@ print(x[0][1].item())
 This results in the following output:
 
 
-![Figure 2.4 -- Output of the .item() function
-](./images/B12365_02_4.jpg)
+![](./images/B12365_02_4.jpg)
 
 Figure 2.4 -- Output of the .item() function
 
@@ -348,8 +336,7 @@ between 0 and 9 that we want to attempt to classify. The following is an
 example from the MNIST dataset, consisting of a hand-drawn digit 1:
 
 
-![Figure 2.11 -- Sample image from the MNIST dataset
-](./images/B12365_02_11.jpg)
+![](./images/B12365_02_11.jpg)
 
 Figure 2.11 -- Sample image from the MNIST dataset
 
@@ -530,8 +517,7 @@ means that our loss approaches infinity the further away from the
 correct prediction we are:
 
 
-![Figure 2.13 -- Representation of loss for our network
-](./images/B12365_02_13.jpg)
+![](./images/B12365_02_13.jpg)
 
 Figure 2.13 -- Representation of loss for our network
 
@@ -792,8 +778,7 @@ English:
     This results in the following output:
 
     
-    ![Figure 2.18 -- Setting up the classifier
-    ](./images/B12365_02_18.jpg)
+![](./images/B12365_02_18.jpg)
     
 
     Figure 2.18 -- Setting up the classifier
@@ -1005,8 +990,7 @@ something useful, as follows:
     This results in the following output:
 
 
-![Figure 2.21 -- Predicted output for the updated function
-](./images/B12365_02_21.jpg)
+![](./images/B12365_02_21.jpg)
 
 Figure 2.21 -- Predicted output for the updated function
 
