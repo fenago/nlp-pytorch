@@ -16,25 +16,11 @@ Building RNNs
 =============
 
 
-Our recurrent layer looks something like the following, where *h* is the
-hidden state and *x* is our input at various time steps in our sequence.
-For each iteration, we update our hidden state at each time step, *x*:
-
-
 ![](./images/B12365_05_1.jpg)
-
-
-Alternatively, we can expand this out to the whole
-sequence of time steps, which looks like this:
 
 
 ![](./images/B12365_05_2.jpg)
 
-
-We also apply a *tanh* activation function to the resulting product,
-keeping the values of the hidden state between -1 and 1. The equation
-for calculating any hidden state, *h*[t], becomes the
-following:
 
 ![](./images/Formula_05_001.png)
 
@@ -42,53 +28,14 @@ following:
 Using RNNs for sentiment analysis
 ---------------------------------
 
-In the context of sentiment analysis, our model is
-trained on a sentiment analysis dataset of reviews that consists of a
-number of reviews in text and a label of 0 or 1,
-depending on whether the review is negative or positive. This means that
-our model becomes a classification task (where the two classes are
-negative/positive). Our sentence is passed through a layer of learned
-word embeddings to form a representation of the sentence comprising
-several vectors (one for each word). These vectors are then fed
-sequentially into our RNN layer and the final hidden state is passed
-through another fully connected layer. Our model\'s output is a single
-value between 0 and 1, depending on whether our model predicts a
-negative or positive sentiment from the sentence.
-This means our complete classification model looks like this:
-
 
 ![](./images/B12365_05_3.jpg)
-
-
-Now, we will highlight one of the issues with
-RNNs---exploding and shrinking gradients---and how we can remedy this
-using gradient clipping.
 
 
 
 Exploding and shrinking gradients
 ---------------------------------
 
-One issue that we are often faced with within RNNs is that of
-**exploding or shrinking gradients**. We can think of
-the recursive layer as a very deep network. When
-calculating the gradients, we do so at every iteration of the hidden
-state. If the gradient of the loss relative to the weights at any given
-position becomes very big, this will have a multiplicative effect as it
-feeds forward through all the iterations of the recurrent layer. This
-can cause gradients to explode as they get very large very quickly. If
-we have large gradients, this can cause instability in our network. On
-the other hand, if the gradients within our hidden state are very small,
-this will again have a multiplicative effect and the gradients will be
-close to 0. This means that the gradients can become too small to
-accurately update our parameters via gradient descent, meaning our model
-fails to learn.
-
-One technique we can use to prevent our gradients
-from exploding is to use **gradient clipping**. This technique limits
-our gradients to prevent them from becoming too
-large. We simply choose a hyperparameter, *C*, and can calculate our
-clipped gradient, as follows:
 
 ![](./images/Formula_05_002.png)
 
@@ -143,7 +90,7 @@ Next, we will look at the **input gate**:
 
 
 Finally, we have the last element of the LSTM
-cell---the **output gate**:
+cell the **output gate**:
 
 
 ![](./images/B12365_05_9.jpg)
@@ -152,11 +99,6 @@ cell---the **output gate**:
 
 Bidirectional LSTMs
 -------------------
-
-Bidirectional LSTMs process sequences in regular order and reverse order
-simultaneously, maintaining two hidden states.
-We\'ll call the forward hidden state *f*[t] and use
-*r*[t] for the reverse hidden state:
 
 ![](./images/55.PNG)
 
