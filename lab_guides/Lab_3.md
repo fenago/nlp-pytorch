@@ -20,11 +20,7 @@ Embeddings for NLP
 ==================
 
 
-Words do not have a natural way of representing
-their meaning. In images, we already have
-representations in rich vectors (containing the values of each pixel
-within the image), so it would clearly be beneficial to have a similarly
-rich vector representation of words. When parts of
+When parts of
 language are represented in a high-dimensional vector format, they are
 known as **embeddings**. Through analysis of a corpus of words, and by
 determining which words appear frequently together, we can obtain an
@@ -447,19 +443,6 @@ scratch, thereby demonstrating how our embedding vectors can be learned:
 ![](./images/B12365_03_14.jpg)
 
 
-Here, we have demonstrated how to train a CBOW model for creating word
-embeddings. In reality, to create reliable embeddings for a corpus, we
-would require a very large dataset to be able to truly capture the
-semantic relationship between all the words. Because of this, it may be
-preferable to use pre-trained embeddings such as GLoVe, which have been
-trained on a very large corpus of data, for your
-models, but there may be cases where it would be preferable to train a
-brand new set of embeddings from scratch; for example, when analyzing a
-corpus of data that doesn\'t resemble normal NLP (for example, Twitter
-data where users may speak in short abbreviations and not use full
-sentences).
-
-
 Exploring n-grams
 =================
 
@@ -508,12 +491,6 @@ using raw word counts.
 N-gram language modeling
 ------------------------
 
-One thing that n-grams help us do is understand
-how natural language is formed. If we think of a language as being
-represented by parts of smaller word pairs (bigrams) instead of single
-words, we can begin to model language as a probabilistic model where the
-probability that a word appears in a sentence depends on the words that
-appeared before it.
 
 In a **unigram** model, we assume that all the
 words have a finite probability of appearing based on the distribution
@@ -528,18 +505,6 @@ within the document:
 
 ![](./images/37.PNG)
 
-
-We could then draw words randomly from this distribution in order to
-generate new sentences:
-
-*Name is Name my my*
-
-But as we can see, this sentence doesn\'t make any sense, illustrating
-the problems of using a unigram model. Because the probability of each
-word occurring is independent of all the other words in
-the sentence, there is no consideration given to
-the order or context of the words appearing. This is where n-gram models
-are useful.
 
 We will now consider using a **bigram** language
 model. This calculation takes the probability of a word occurring, given
@@ -560,15 +525,6 @@ probabilities:
 
 ![](./images/39.PNG)
 
-
-With this, we could calculate the probability of Python occurring, given
-the probability of the previous word *is* occurring is only 20%, whereas
-the probability of *English* occurring is only 10%. We could expand this
-model further to use a trigram or any n-gram representation of words
-as we deem appropriate. We have demonstrated that
-n-gram language modeling can be used to introduce further information
-about word\'s relationships to one another into our models, rather than
-naively assuming that words are independently distributed.
 
 
 Tokenization
@@ -1021,12 +977,6 @@ be applied to embeddings:
     This results in the following output:
 
 ![](./images/B12365_03_33.png)
-
-
-Here, we can see that our two different representations are very
-similar. Therefore, while using TF-IDF may not dramatically change our
-representation of a given sentence or document, it may weigh it in favor
-of words of interest, thus providing a more useful representation.
 
 
 #### Summary

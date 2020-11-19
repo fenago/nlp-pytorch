@@ -98,111 +98,20 @@ The following graph shows the relationship between the two variables:
 ![](./images/B12365_05_4.jpg)
 
 
-Another technique we can use to prevent exploding or disappearing
-gradients is to shorten our input sequence length. The effective depth
-of our recurrent layer depends on the length of our input sequence as
-the sequence length determines how many iterative updates we
-need to perform on our hidden state. The fewer
-number of steps in this process, the smaller the multiplicative effects
-of the gradient accumulation between hidden states will be. By
-intelligently picking the maximum sequence length as a hyperparameter in
-our model, we can help prevent exploding and vanishing gradients.
-
-
-Introducing LSTMs
-=================
-
-
-While RNNs allow us to use sequences of words as input to our models,
-they are far from perfect. RNNs suffer from two
-main flaws, which can be partially remedied by using a more
-sophisticated version of the RNN, known as **LSTM**.
-
-The basic structure of RNNs means that it is very difficult for them to
-retain information long term. Consider a sentence that\'s 20 words long.
-From our first word in the sentence affecting the initial hidden state
-to the last word in the sentence, our hidden state is updated 20 times.
-From the beginning of our sentence to our final hidden state, it is very
-difficult for an RNN to retain information about words at the beginning
-of the sentence. This means that RNNs aren\'t very good at capturing
-long-term dependencies within sequences. This also ties in with the
-vanishing gradient problem mentioned earlier, where it is very
-inefficient to backpropagate through long, sparse sequences of vectors.
-
-Consider a long paragraph where we are trying to predict the next word.
-The sentence begins with `I study math…` and ends with
-`my final exam is in…`. Intuitively, we would expect the next
-word to be `math` or some math-related field. However, in an
-RNN model on a long sequence, our hidden state may struggle to retain
-the information for the beginning of the sentence by the time it reaches
-the end of the sentence as it takes multiple update steps.
-
-We should also note that RNNs are poor at capturing the context of words
-within a sentence as a whole. We saw earlier, when looking at n-gram
-models, that the meaning of a word in a sentence is dependent on its
-context within the sentence, which is determined by the words that occur
-before it and the words that occur after it. Within an RNN, our hidden
-state updates in one direction only. In a single forward pass, our
-hidden state is initialized and the first word in the sequence is passed
-into it. This process is then repeated with all the subsequent words in
-the sentence sequentially until we are left with
-our final hidden state. This means that for any given word in a
-sentence, we have only considered the cumulative effect of the words
-that have occurred before it in the sentence up to that point. We do not
-consider any words that follow it, meaning we do not capture the full
-context of each word in the sentence.
-
-In another example, we again want to predict the missing word in a
-sentence, but it now occurs toward the beginning as opposed to at the
-end. We have the sentence
-`I grew up in…so I can speak fluent Dutch`. Here, we can
-intuitively guess that the person grew up in the Netherlands from the
-fact that they speak Dutch. However, because an RNN parses this
-information sequentially, it would only use `I grew up in…` to
-make a prediction, missing the other key context within the sentence.
-
-Both of these issues can be partially addressed using LSTMs.
-
-
 
 Working with LSTMs
 ------------------
 
 LSTMs are more advanced versions of RNNs and
-contain two extra properties---an **update gate** and a **forget gate**.
+contain two extra properties an **update gate** and a **forget gate**.
 These two 
-easier for the network to learn long-term dependencies. Consider the
-following film review:
-
-*The film was amazing. I went to see it with my wife and my daughters on
-Tuesday afternoon. Although I didn\'t expect it to be very entertaining,
-it turned out to be loads of fun. We would definitely go back and see it
-again given the chance.*
-
-In sentiment analysis, it is clear that not all of the words in the
-sentence are relevant in determining whether it is a positive or
-negative review. We will repeat this sentence, but this time
-highlighting the words that are relevant to gauging the sentiment of the
-review:
-
-*The film was amazing. I went to see it with my wife and my daughters on
-Tuesday afternoon. Although I didn\'t expect it to be very entertaining,
-it turned out to be loads of fun. We would definitely go back and see it
-again given the chance.*
-
-LSTMs attempt to do exactly this---remember the relevant words within a
-sentence while forgetting all the irrelevant information. By doing this,
-it stops the irrelevant information from diluting
-the relevant information, meaning long-term
-dependencies can be better learned across long sequences.
+easier for the network to learn long-term dependencies.
 
 LSTMs are very similar in structure to RNNs. While there is a hidden
 state that is carried over between steps within the LSTM, the inner
 workings of the LSTM cell itself are different from that of the RNN:
 
 ![](./images/54.PNG)
-
- Figure 5.5 -- LSTM cell
 
 
 
@@ -261,8 +170,8 @@ We will now look at how to build our own simple
 LSTM to categorize sentences based on their sentiment. We will train our
 model on a dataset of 3,000 reviews that have been categorized as
 positive or negative. These reviews come from
-three different sources---film reviews, product reviews, and location
-reviews---in order to ensure that our sentiment analyzer is robust. The
+three different sources film reviews, product reviews, and location
+reviews in order to ensure that our sentiment analyzer is robust. The
 dataset is balanced so that it consists of 1,500 positive reviews and
 1,500 negative reviews. We will start by importing our dataset and
 examining it:
@@ -280,15 +189,6 @@ data = data.sample(frac=1)
 This returns the following output:
 
 ![](./images/56.PNG)
-
-
-We read in our dataset from the file. Our dataset is tab-separated, so
-we split it up with tabs and the new line
-character. We rename our columns and then use the sample function to
-randomly shuffle our data. Looking at our dataset, the first thing we
-need to be able to do is preprocess our sentences to feed them into our
-LSTM model.
-
 
 
 Preprocessing the data
@@ -1100,9 +1000,7 @@ curl -X GET http://0.0.0.0:8080/predict -H "Content-Type: application/json" -d '
 
 Your application will now return a prediction from the model.
 Congratulations, you have now learned how to train an LSTM model from
-scratch and make predictions using it! Going
-forward, this tutorial will hopefully serve as a basis for you to train
-your own LSTM models and deploy them to the cloud yourself.
+scratch and make predictions using it!
 
 
 #### Summary

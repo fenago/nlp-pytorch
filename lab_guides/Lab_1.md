@@ -19,7 +19,7 @@ shedding light on machine learning and what it is used for, we can begin
 to understand just how these deep learning models *understand* language
 and what fundamentally happens when a model learns from data.
 
-Throughout this book, we will explore this application of artificial
+Throughout this course, we will explore this application of artificial
 intelligence and deep learning to natural language. Through the use of
 PyTorch, we will learn, step by step, how to build models that allow us
 to perform sentiment analysis, text classification, and sequence
@@ -283,7 +283,7 @@ Since each node within the fully connected layer takes all values of *X*
 as input, the neural network is able to learn interaction features
 between the input features. Multiple fully connected
 layers can be chained together to learn even more
-complex features. In this book, we will see that all of the neural
+complex features. In this course, we will see that all of the neural
 networks we build will use this concept; chaining together multiple
 layers of different varieties in order to construct even more complex
 models. However, there is one additional key element to cover before we
@@ -407,7 +407,7 @@ Since each node within the fully connected layer takes all values of *X*
 as input, the neural network is able to learn interaction features
 between the input features. Multiple fully connected
 layers can be chained together to learn even more
-complex features. In this book, we will see that all of the neural
+complex features. In this course, we will see that all of the neural
 networks we build will use this concept; chaining together multiple
 layers of different varieties in order to construct even more complex
 models. However, there is one additional key element to cover before we
@@ -552,7 +552,7 @@ We can represent each of these sentences as a count of words:
 Sequential representation
 -------------------------
 
-We will see later in this book that more complex neural network models,
+We will see later in this course that more complex neural network models,
 including RNNs and LSTMs, do not just take a
 single vector as input, but can take a whole sequence of vectors in the
 form of a matrix. Because of this, in order to better capture the order

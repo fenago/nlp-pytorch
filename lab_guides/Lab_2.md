@@ -93,12 +93,7 @@ This results in the following output:
 Tensors
 -------
 
-Before we continue, it is important that you are fully aware of the
-properties of a tensor. Tensors have a property
-known as an **order**, which essentially
-determines the dimensionality of a tensor. An order one tensor is a
-tensor with a single dimension, which is equivalent to a vector or list
-of numbers. An order 2 tensor is a tensor with two dimensions,
+An order 2 tensor is a tensor with two dimensions,
 equivalent to a matrix, whereas a tensor of order 3 consists of three
 dimensions. There is no limit to the maximum order a tensor can have
 within PyTorch:
@@ -123,17 +118,7 @@ This results in the following output:
 
 This shows that this is a 3x2 tensor (order 2).
 
-
-Enabling PyTorch acceleration using CUDA
-========================================
-
-
-One of the main benefits of PyTorch is its ability to enable
-acceleration through the use of a **graphics processing unit**
-(**GPU**). Deep learning is a computational task that is easily
-parallelizable, meaning that the calculations can be broken down into
-smaller tasks and calculated across many smaller
-processors.
+#### Enabling PyTorch acceleration using CUDA
 
 Traditional CPU, we must wait until batch 1 has completed before we can compute this for batch 2:
 
@@ -145,18 +130,6 @@ the machine learning process:
 
 ![](./images/29.PNG)
 
-
-**Compute Unified Device Architecture** (**CUDA**) is the
-technology specific to Nvidia GPUs that enables
-hardware acceleration on PyTorch. In order to enable CUDA, we
-must first make sure the graphics card on our
-system is CUDA-compatible. A list of
-can be
-found here: <https://developer.nvidia.com/cuda-gpus>. If you have a
-CUDA-compatible GPU, then CUDA can be installed from
-this link:
-<https://developer.nvidia.com/cuda-downloads>. We will activate it using
-the following steps:
 
 1.  Firstly, in order to actually enable CUDA support on PyTorch, you
     will have to build PyTorch from source. Details about how this can
@@ -201,25 +174,6 @@ the following steps:
 
 
 ![](./images/30.PNG)
-
-
-
-Comparing PyTorch to other deep learning frameworks
-===================================================
-
-PyTorch is one of the main frameworks used in deep learning today. There
-are other widely used frameworks available too,
-such as TensorFlow, Theano, and Caffe. While these
-are very similar in many ways, there are some key differences in how
-they operate. These include the following:
-
--   How the models are computed
--   The way in which the computational graphs are compiled
--   The ability to create dynamic computational graphs with variable
-    layers
--   Differences in syntax 
-
-
 
 
 Building a simple neural network in PyTorch

@@ -17,23 +17,8 @@ Let\'s get started!
 Exploring CNNs
 ==============
 
-
-The basis for CNNs comes from the field of
-computer vision but can conceptually be extended to work on NLP as well.
-The way the human brain processes and understands images is not on a
-pixel-by-pixel basis, but as a holistic map of an image and how each
-part of the image relates to the other parts.
-
 A good analogy of CNNs would be how the human mind processes a picture
-versus how it processes a sentence. Consider the sentence, *This is a
-sentence about a cat*. When you read that sentence you read the first
-word, followed by the second word and so forth. Now, consider a picture
-of a cat. It would be foolish to assimilate the information within the
-picture by looking at the first pixel, followed by the second pixel.
-Instead, when we look at something, we perceive the whole image at once,
-rather than as a sequence.
-
-For example, if we take a black and white representation of an image (in
+versus how it processes a sentence. If we take a black and white representation of an image (in
 this case, the digit 1), we can see that we can transform this into a
 vector representation, where the color of each pixel is denoted by a 0
 or a 1:
@@ -54,130 +39,13 @@ Intuitively, we see that individual pixel values do not mean a lot when
 it comes to image classification. However, what we are interested in is
 the pixel\'s relationships to one another.
 
-In our case of digit representation, we know that a long vertical line
-is very likely to be a one and that any photo with a closed loop in it
-is more likely to be a zero, six, eight, or nine. By identifying and
-learning from patterns within our images, rather than just looking at
-individual pixels, we can better understand and identify these images.
-This is exactly what CNNs aim to achieve.
-
-
-
-Convolutions
-------------
-
-The basic concept behind CNNs is that of
-convolutions. A **convolution** is essentially a sliding window function
-that\'s applied to a matrix in order to capture
-information from the surrounding pixels. In the
-following diagram, we can see an example of convolution in action:
-
-
-![](./images/B12365_06_02.jpg)
-
-
-On the left, we have the image that we are
-processing, while at the top, we have the convolution kernel we wish to
-apply. For every 3x3 block within our image, we multiply this by our
-kernel to give us our convolution matrix at the
-bottom. We then sum (or average) the convolved matrix to get our single
-output value for this 3x3 block within our initial image. Note that
-within our 5x5 initial images, there are nine possible 3x3 blocks we can
-overlay onto this. As we apply this convolution process for every 3x3
-block within our initial image, we are left with a final processed
-convolution that is 3x3.
-
-In a large image (or a complex sentence, in the case of NLP), we will
-also need to implement pooling layers. In our preceding example,
-applying a 3x3 convolution to a 5x5 image results in a 3x3 output.
-However, if we applied a 3x3 convolution to a 100x100 pixel image, this
-would only reduce the output to 98x98. This hasn\'t reduced the
-dimensionality of the image enough to perform deep learning effectively
-(as we would have to learn 98x98 parameters per convolutional layer).
-Therefore, we apply a pooling layer to further reduce the dimensionality
-of the layer.
-
-A pooling layer applies a function (typically, a max function) to the
-output of the convolutional layer in order to reduce its dimensionality.
-This function is applied over a sliding window, similar to how
-our convolutions are performed, except now our
-convolutions do not overlap. Let\'s assume our convolutional layer has
-an output of 4x4 and we apply a 2x2 max pooling function to our output.
-This means that for every smaller 2x2 grid within our layer, we apply a
-max function and keep the resulting output. We can
-see this in the following diagram:
-
-
-![](./images/B12365_06_03.jpg)
-
-
-These pooling layers have been shown to effectively reduce the
-dimensionality of our data, while still retaining much of the essential
-information from the convolutional layer.
-
-This combination of convolutions and pooling layers is essentially how
-CNNs learn from images. We can see that by applying many of these
-convolutional processes (also known as
-**convolutional layers**), we are able to capture information about any
-given pixel\'s relationship to its neighboring pixels. Within CNNs, the
-parameters we aim to learn are the values of the convolution kernel
-itself. This means that our model effectively learns how it should
-convolve across an image in order to be able to extract the necessary
-information required to make a classification.
-
-There are two main advantages to using
-convolutions in this context. Firstly, we are able to compose a series
-of low-level features into a higher-level feature; that is, a 3x3 patch
-on our initial image is composed into a single
-value. This effectively acts as a form of feature reduction and allows
-us to only extract the relevant information from our image. The other
-advantage that using convolutions has is that it makes our model
-location invariant. In our digit detector example, we do not
-care if the number occurs on the right-hand side
-of the image or the left-hand side; we just want to be able to detect
-it. As our convolutions will detect specific patterns within our image
-(that is, edges), this makes our model location invariant as the same
-features will theoretically be picked up by the convolutions, no matter
-where they occur within the image.
-
-While these principles are useful for understanding how convolutions
-work in image data, they can also be applied to NLP data. We\'ll look at
-this in the next section.
 
 
 
 Convolutions for NLP
 --------------------
 
-As we have seen many times in this book, we can represent individual
-words numerically as vectors, and represent whole
-sentences and documents as a sequence of vectors.
-When we represent our sentence as a sequence of
-vectors, we can represent this as a matrix. If we have a matrix
-representation of a given sentence, we notice immediately that this is
-similar to the image we convolved over within our image convolutions.
-Therefore, we can apply convolutions to NLP in a similar fashion to
-images, provided we can represent our text as a matrix.
-
-Let\'s first consider the basis for using this methodology. When we
-looked at n-grams previously, we saw that the context of a word in a
-sentence depends on the words preceding it and the words coming after
-it. Therefore, if we can convolve over a sentence in a way that allows
-us to capture the relation of one word to the words around it, we can
-theoretically detect patterns in language and use this to better
-classify our sentences.
-
-It is also worth noting that our method of convolution is slightly
-different to our convolution on images. In our image matrix, we wish to
-capture the context of a single pixel relative to those surrounding it,
-whereas in a sentence, we wish to capture the context of a whole word
-vector, relative to the other vectors around it. Therefore, in NLP, we
-want to perform our convolutions across whole word vectors, rather than
-within word vectors. This is demonstrated in the
-following diagram.
-
-We first represent our sentence as individual word
-vectors:
+We first represent our sentence as individual word vectors:
 
 
 ![](./images/B12365_06_04.jpg)
@@ -211,54 +79,6 @@ trigrams, we could set our model up like so:
 
 Although CNNs for NLP have advantages such as those described in the
 preceding sections, they do have their drawbacks.
-
-In CNNs for images, the assumption that a given
-pixel is likely related to those surrounding it is a reasonable one.
-When applied to NLP, while this assumption is partially correct, words
-can be semantically related, even if they are not
-in direct proximity to one another. A word at the start of a sentence
-can pertain to the word at the end of a sentence.
-
-While our RNN models may be able to detect this relationship through
-longer-term memory dependencies, our CNNs may struggle as CNNs only
-capture the context of the words surrounding the target word.
-
-That being said, CNNs for NLP have been proven to perform very well in
-some tasks, even though our language assumptions do not necessarily
-hold. Arguably, the main advantages of using CNNs for NLP are speed and
-efficiency. Convolutions can be easily implemented on GPUs, allowing for
-fast parallelized computation and training.
-
-The way that relationships between words are captured is also much more
-efficient. In a true n-gram model, the model must learn individual
-representations for every single n-gram, whereas in our CNN models, we
-just learn the convolutional kernels, which will automatically extract
-the relationships between given word vectors.
-
-Now that we have defined how our CNN will learn
-from our data, we can begin to code up a model
-from scratch.
-
-
-Building a CNN for text classification
-======================================
-
-
-Now that we know the basics of CNNs, we can begin to
-build one from scratch. In the previous chapter,
-we built a model for sentiment prediction, where
-sentiment was a binary classifier; `1`
-for positive and `0` for negative. However, in this example,
-we will aim to build a CNN for **multi-class text classification**. In a
-multi-class problem, a particular example can only be classified as one
-of several classes. If an example can be classified as many different
-classes, then this is multi-label classification. Since our model is
-multi-class, this means that our model will aim at predicting which one
-of several classes our input sentence is classified as. While this
-problem is considerably more difficult than our binary classification
-task (as our sentence can now belong to one of many, rather than one of
-two classes), we will show that CNNs can deliver good performance on
-this task. We will first begin by defining our data.
 
 
 
@@ -297,40 +117,10 @@ binary classification we looked at previously. Models with multiple
 classes may suffer in terms of predictions as
 there are more different classes to differentiate between.
 
-In a binary classification model, assuming we had a balanced dataset, we
-would expect our model to have an accuracy of 50% if it were just to
-perform random guesses, whereas a multi-class
-model with five different classes would only have
-a baseline accuracy of 20%. This means that just because a multiclass
-model has an accuracy much lower than 100%, this does not mean the model
-itself is inherently bad at making predictions. This is particularly
-true when it comes to training models that predict from hundreds of
-different classes. In these cases, a model with just 50% accuracy would
-be considered to be performing very well.
-
-Now that we have defined our multi-class classification problem, we need
-to load our data in order to train a model.
-
 
 
 Creating iterators to load the data
 -----------------------------------
-
-In our LSTM model in the previous chapter, we
-simply used a `.csv` file containing all the data we used to
-train our model. We then manually converted this data into input tensors
-and fed them one by one into our network in order to train it. While
-this methodology is perfectly acceptable, it is not the most efficient
-one.
-
-In our CNN model, we will instead look at creating data iterators from
-our data. These iterator objects allow us to easily generate small
-batches of data from our input data, thus allowing us to train our model
-using mini batches, rather than feeding our input data one by one into
-the network. This means that the gradients within our network are
-calculated across a whole batch of data and that parameter adjustments
-happen after each batch rather than after each individual row of data is
-passed through the network.
 
 For our data, we will take our dataset from the TorchText package. This
 has the advantage of not only containing a number of datasets for model
@@ -737,15 +527,6 @@ defined, we are ready to start training the model.
 Training the CNN
 ----------------
 
-Before we define our training process, we need to
-calculate a performance metric to illustrate how our model\'s
-performance (hopefully!) increases over time. In our binary
-classification tasks, accuracy was a simple metric we used to measure
-performance. For our multi-classification task, we will again use
-accuracy, but the procedure to calculate it is slightly more complex as
-we must now work out which of the six classes our model predicted and
-which of the six classes was the correct one.
-
 First, we define a function called `multi_accuracy` to
 calculate this:
 
@@ -758,14 +539,6 @@ def multi_accuracy(preds, y):
 ```
 
 
-Here, for our predictions, our model returns the indices with the
-highest value for each prediction using the `torch.max`
-function for all of them. For each of these predictions, if this
-predicted index is the same as the index of our label, it is treated as
-a correct prediction. We then count all these correct predictions and
-divide them by the total number of predictions to get a measure of
-multi-class accuracy. We can use this function within our training loop
-to measure accuracy at each epoch.
 
 Next, we define our training function. We initially set our loss and
 accuracy for the epoch to be `0` and we call
@@ -1019,8 +792,3 @@ information about words in a sentence from the context of its
 neighboring words. Now that we have mastered both RNNs and CNNs, we can
 begin to expand on these techniques in order to construct even more
 advanced models.
-
-In the next lab, we will learn how to build models that utilize
-elements of both convolutional and recurrent neural networks and use
-them on sequences to perform even more advanced functions, such as text
-translation. These are known as sequence-to-sequence networks.
