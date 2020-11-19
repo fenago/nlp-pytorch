@@ -913,63 +913,10 @@ This results in the following output:
 ![](./images/63.PNG)
 
 
-We have now built an LSTM model to perform sentiment analysis from the
-ground up. Although our model is far from perfect,
-we have demonstrated how we can take some sentiment labeled reviews and
-train a model to be able to make predictions on new reviews. Next, we
-will show how we can host our model on the Heroku cloud platform so that
-other people can make predictions using your model
-
-
-Deploying the application on Heroku
-===================================
-
-
-We have now trained our model on our local machine
-and we can use this to make predictions. However, this isn\'t
-necessarily any good if you want other people to
-be able to use your model to make predictions. If we host our model on a
-cloud-based platform, such as Heroku, and create a basic API, other
-people will be able to make calls to the API to make predictions using
-our model.
-
-
-
-Introducing Heroku
+Flask Application
 ------------------
 
-**Heroku** is a cloud-based platform where you can
-host your own basic programs. While the free tier of Heroku has a
-maximum upload size of 500 MB and limited processing power, this should
-be sufficient for us to host our model and create a basic API in order
-to make predictions using our model.
-
-The first step is to create a free account on Heroku and install the
-Heroku app. Then, in the command line, type the following command:
-
-```
-heroku login
-```
-
-
-Log in using your account details. Then, create a new `heroku`
-project by typing the following command:
-
-```
-heroku create sentiment-analysis-flask-api
-```
-
-
-Note that all the project names must be unique, so you will need to pick
-a project name that isn\'t `sentiment-analysis-flask-api`.
-
-Our first step is building a basic API using
-Flask.
-
-
-
-Creating an API using Flask -- file structure
----------------------------------------------
+#### Creating an API using Flask -- file structure
 
 Creating an API is fairly simple using Flask as
 Flask contains a default template required to make
@@ -1003,9 +950,7 @@ pip install nltk pandas numpy torch flask gunicorn
 ```
 
 
-We then create a list of requirements that our API will use. Note that
-when we upload this to Heroku, Heroku will automatically download and
-install all the packages within this list. We can do this by typing the
+We then create a list of requirements that our API will use. We can do this by typing the
 following:
 
 ```
@@ -1022,11 +967,7 @@ https://download.pytorch.org/whl/cpu/torch-1.3.1%2Bcpu-cp37-cp37m-linux_x86_64.w
 
 
 This is a link to the wheel file of the version of PyTorch that only
-contains the CPU implementation. The full version of PyTorch that
-includes full GPU support is over 500 MB in size, so it will not run on
-the free Heroku cluster. Using this more compact version of PyTorch
-means that you will still be able to run your model using PyTorch on
-Heroku. Finally, we create three more files within our folder, as well
+contains the CPU implementation. Finally, we create three more files within our folder, as well
 as a final directory for our models:
 
 ```
@@ -1040,7 +981,6 @@ mkdir models
 Now, we have created all the files we will need
 for our Flash API and we are ready to start making
 adjustments to our file.
-
 
 
 Creating an API using Flask -- API file
@@ -1158,363 +1098,9 @@ curl -X GET http://0.0.0.0:8080/predict -H "Content-Type: application/json" -d '
 ```
 
 
-If everything is working correctly, you should receive a prediction from
-the API. Now that we have our API making predictions locally, it is time
-to host it on Heroku so that we can make predictions in the cloud.
-
-
-
-Creating an API using Flask -- hosting on Heroku
-------------------------------------------------
-
-We first need to commit our files to Heroku in a
-similar way to how we would commit files using
-GitHub. We define our working `flaskAPI` directory as a
-`git` folder by simply running the following command:
-
-```
-git init
-```
-
-
-Within this folder, we add the following code to the
-`.gitignore` file, which will stop us from adding unnecessary
-files to the Heroku repo:
-
-```
-vir_env
-__pycache__/
-.DS_Store
-```
-
-
-Finally, we add our first `commit` function and push it to our
-`heroku` project:
-
-```
-git add . -A 
-git commit -m 'commit message here'
-git push heroku master
-```
-
-
-This may take some time to compile as not only does the system have to
-copy all the files from your local directory to Heroku, but Heroku will
-automatically build your defined environment, installing all the
-required packages and running your API.
-
-Now, if everything has worked correctly, your API will automatically run
-on the Heroku cloud. In order to make predictions, you can simply make a
-request to the API using your project name instead of
-`sentiment-analysis-flask-api`:
-
-```
-curl -X GET https://sentiment-analysis-flask-api.herokuapp.com/predict -H "Content-Type: application/json" -d '{"input":"the film was good"}'
-```
-
-
 Your application will now return a prediction from the model.
 Congratulations, you have now learned how to train an LSTM model from
-scratch, upload it to the cloud, and make predictions using it! Going
-forward, this tutorial will hopefully serve as a basis for you to train
-your own LSTM models and deploy them to the cloud yourself.
-
-
-Deploying the application on Heroku
-===================================
-
-
-We have now trained our model on our local machine
-and we can use this to make predictions. However, this isn\'t
-necessarily any good if you want other people to
-be able to use your model to make predictions. If we host our model on a
-cloud-based platform, such as Heroku, and create a basic API, other
-people will be able to make calls to the API to make predictions using
-our model.
-
-
-
-Introducing Heroku
-------------------
-
-**Heroku** is a cloud-based platform where you can
-host your own basic programs. While the free tier of Heroku has a
-maximum upload size of 500 MB and limited processing power, this should
-be sufficient for us to host our model and create a basic API in order
-to make predictions using our model.
-
-The first step is to create a free account on Heroku and install the
-Heroku app. Then, in the command line, type the following command:
-
-```
-heroku login
-```
-
-
-Log in using your account details. Then, create a new `heroku`
-project by typing the following command:
-
-```
-heroku create sentiment-analysis-flask-api
-```
-
-
-Note that all the project names must be unique, so you will need to pick
-a project name that isn\'t `sentiment-analysis-flask-api`.
-
-Our first step is building a basic API using
-Flask.
-
-
-
-Creating an API using Flask -- file structure
----------------------------------------------
-
-Creating an API is fairly simple using Flask as
-Flask contains a default template required to make
-an API:
-
-First, in the command line, create a new folder
-for your flask API and navigate to it:
-
-```
-mkdir flaskAPI
-cd flaskAPI
-```
-
-
-Then, create a virtual environment within the folder. This will be the
-Python environment that your API will use:
-
-```
-python3 -m venv vir_env
-```
-
-
-Within your environment, install all the packages that you will need
-using `pip`. This includes all the packages that you use
-within your model program, such as NLTK, `pandas`, NumPy, and
-PyTorch, as well as the packages you will need to run the API, such as
-Flask and Gunicorn:
-
-```
-pip install nltk pandas numpy torch flask gunicorn
-```
-
-
-We then create a list of requirements that our API will use. Note that
-when we upload this to Heroku, Heroku will automatically download and
-install all the packages within this list. We can do this by typing the
-following:
-
-```
-pip freeze > requirements.txt
-```
-
-
-One adjustment we need to make is to replace the `torch` line
-within the `requirements.txt` file with the following:
-
-```
-https://download.pytorch.org/whl/cpu/torch-1.3.1%2Bcpu-cp37-cp37m-linux_x86_64.whl
-```
-
-
-This is a link to the wheel file of the version of PyTorch that only
-contains the CPU implementation. The full version of PyTorch that
-includes full GPU support is over 500 MB in size, so it will not run on
-the free Heroku cluster. Using this more compact version of PyTorch
-means that you will still be able to run your model using PyTorch on
-Heroku. Finally, we create three more files within our folder, as well
-as a final directory for our models:
-
-```
-touch app.py
-touch Procfile
-touch wsgi.py
-mkdir models
-```
-
-
-Now, we have created all the files we will need
-for our Flash API and we are ready to start making
-adjustments to our file.
-
-
-
-Creating an API using Flask -- API file
----------------------------------------
-
-Within our `app.py` file, we can begin
-building our API:
-
-1.  We first carry out all of our imports and
-    create a `predict` route. This allows us to call our API
-    with the `predict` argument in order to run a
-    `predict()` method within our API:
-    ```
-    import flask
-    from flask import Flask, jsonify, request
-    import json
-    import pandas as pd
-    from string import punctuation
-    import numpy as np
-    import torch
-    from nltk.tokenize import word_tokenize
-    from torch.utils.data import TensorDataset, DataLoader
-    from torch import nn
-    from torch import optim
-    app = Flask(__name__)
-    @app.route('/predict', methods=['GET'])
-    ```
-    
-
-2.  Next, we define our `predict()` method within our
-    `app.py` file. This is largely a rehash of our model file,
-    so to avoid repetition of code, it is advised that you look at the
-    completed `app.py` file within the GitHub repository
-    linked in the *Technical requirements* section of this chapter. You
-    will see that there are a few additional
-    lines. Firstly, within our `preprocess_review()` function,
-    we will see the following lines:
-
-    ```
-    with open('models/word_to_int_dict.json') as handle:
-    word_to_int_dict = json.load(handle)
-    ```
-    
-
-    This takes the `word_to_int` dictionary we computed within
-    our main model notebook and loads it into our
-    model. This is so that our word indexing is consistent with our
-    trained model. We then use this dictionary to convert our input text
-    into an encoded sequence. Be sure to take the
-    `word_to_int_dict.json` file from the original notebook
-    output and place it within the `models` directory.
-
-3.  Similarly, we must also load the weights from our trained model. We
-    first define our `SentimentLSTM` class and the load our
-    weights using `torch.load`. We will use the
-    `.pkl` file from our original notebook, so be sure to
-    place this in the `models` directory as well:
-    ```
-    model = SentimentLSTM(5401, 50, 100, 1, 2)
-    model.load_state_dict(torch.load("models/model_nlp.pkl"))
-    ```
-    
-
-4.  We must also define the input and outputs of our API. We want our
-    model to take the input from our API and pass this to our
-    `preprocess_review()` function. We do this using
-    `request.get_json()`:
-    ```
-    request_json = request.get_json()
-    i = request_json['input']
-    words = np.array([preprocess_review(review=i)])
-    ```
-    
-
-5.  To define our output, we return a JSON response consisting of the
-    output from our model and a response code,
-    `200`, which is what is returned by our predict function:
-    ```
-    output = model(x)[0].item()
-    response = json.dumps({'response': output})
-        return response, 200
-    ```
-    
-
-6.  With the main body of our app complete, there
-    are just two more additional things we must add in order to make our
-    API run. We must first add the following to our `wsgi.py`
-    file:
-    ```
-    from app import app as application
-    if __name__ == "__main__":
-        application.run()
-    ```
-    
-
-7.  Finally, add the following to our Procfile:
-    ```
-    web: gunicorn app:app --preload
-    ```
-    
-
-That\'s all that\'s required for the app to run. We can test that our
-API runs by first starting the API locally using the following command:
-
-```
-gunicorn --bind 0.0.0.0:8080 wsgi:application -w 1
-```
-
-
-Once the API is running locally, we can make a request to the API by
-passing it a sentence to predict the outcome:
-
-```
-curl -X GET http://0.0.0.0:8080/predict -H "Content-Type: application/json" -d '{"input":"the film was good"}'
-```
-
-
-If everything is working correctly, you should receive a prediction from
-the API. Now that we have our API making predictions locally, it is time
-to host it on Heroku so that we can make predictions in the cloud.
-
-
-
-Creating an API using Flask -- hosting on Heroku
-------------------------------------------------
-
-We first need to commit our files to Heroku in a
-similar way to how we would commit files using
-GitHub. We define our working `flaskAPI` directory as a
-`git` folder by simply running the following command:
-
-```
-git init
-```
-
-
-Within this folder, we add the following code to the
-`.gitignore` file, which will stop us from adding unnecessary
-files to the Heroku repo:
-
-```
-vir_env
-__pycache__/
-.DS_Store
-```
-
-
-Finally, we add our first `commit` function and push it to our
-`heroku` project:
-
-```
-git add . -A 
-git commit -m 'commit message here'
-git push heroku master
-```
-
-
-This may take some time to compile as not only does the system have to
-copy all the files from your local directory to Heroku, but Heroku will
-automatically build your defined environment, installing all the
-required packages and running your API.
-
-Now, if everything has worked correctly, your API will automatically run
-on the Heroku cloud. In order to make predictions, you can simply make a
-request to the API using your project name instead of
-`sentiment-analysis-flask-api`:
-
-```
-curl -X GET https://sentiment-analysis-flask-api.herokuapp.com/predict -H "Content-Type: application/json" -d '{"input":"the film was good"}'
-```
-
-
-Your application will now return a prediction from the model.
-Congratulations, you have now learned how to train an LSTM model from
-scratch, upload it to the cloud, and make predictions using it! Going
+scratch and make predictions using it! Going
 forward, this tutorial will hopefully serve as a basis for you to train
 your own LSTM models and deploy them to the cloud yourself.
 
@@ -1523,7 +1109,7 @@ your own LSTM models and deploy them to the cloud yourself.
 
 In this lab, we discussed the fundamentals of RNNs and one of their
 main variations, LSTM. We then demonstrated how you can build your own
-RNN from scratch and deploy it on the cloud-based platform Heroku. While
+RNN from scratch. While
 RNNs are often used for deep learning on NLP tasks, they are by no means
 the only neural network architecture suitable for this task.
 
