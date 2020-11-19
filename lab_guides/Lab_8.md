@@ -5,33 +5,6 @@
 =====================================================================
 
 
-If you have ever watched any futuristic sci-fi movies, chances are you
-will have seen a human talk to a robot. Machine-based intelligence has
-been a long-standing feature in works of fiction; however, thanks to
-recent advances in NLP and deep learning, conversations with a computer
-are no longer a fantasy. While we may be many years away from true
-intelligence, where computers are able to understand the meaning of
-language in the same way that humans do, machines are at least capable
-of holding a basic conversation and giving a rudimentary impression of
-intelligence.
-
-In the previous chapter, we looked at how to construct
-sequence-to-sequence models to translate sentences from one language
-into another. A conversational chatbot that is capable of basic
-interactions works in much the same way. When we talk to a chatbot, our
-sentence becomes the input to the model. The output is whatever the
-chatbot chooses to reply with. Therefore, rather than training our
-chatbot to learn how to interpret our input sentence, we are teaching it
-how to respond.
-
-We will expand on our sequence-to-sequence models from the previous
-chapter, adding something called **attention** to our models. This
-improvement to the sequence-to-sequence models means that our model
-learns where in the input sentence to look to obtain the information it
-needs, rather than using the whole input sentence decision. This
-improvement allows us to create much more efficient sequence-to-sequence
-models with state-of-the-art performance.
-
 In this lab, we will look at the following topics:
 
 -   The theory of attention within neural networks
@@ -53,17 +26,6 @@ basic graphical illustration of this is as follows:
 
 ![](./images/B12365_08_1.jpg)
 
-
-However, decoding over the entirety of the hidden state is not
-necessarily the most efficient way of using this task. This is because
-the hidden state represents the entirety of the input sentence; however,
-in some tasks (such as predicting the next word in a sentence), we do
-not need to consider the entirety of the input sentence, just the parts
-that are relevant to the prediction we are trying to make. We can show
-that by using attention within our sequence-to-sequence neural network.
-We can teach our model to only look at the relevant parts of the input
-in order to make its prediction, resulting in a much more efficient and
-accurate model.
 
 Consider the following example:
 
@@ -107,45 +69,17 @@ implement within our networks are
 very similar, but with subtle key differences. We
 will start by looking at local attention.
 
-In **local attention**, our model only looks at a
-few hidden states from the encoder. For example, if we are performing a
-sentence translation task and we are calculating
-the second word in our translation, the model may wish to only look at
-the hidden states from the encoder related to the
-second word in the input sentence. This would mean that our model needs
-to look at the second hidden state from our
-encoder (*h*[2]{.subscript}) but maybe also the hidden state before it
-(*h*[1]{.subscript}).
 
 In the following diagram, we can see this in practice:
 
-
 ![](./images/B12365_08_2.jpg)
 
-
-We first start by calculating the aligned position, *p*[t]{.subscript},
-from our final hidden state, *h*[n]{.subscript}. This tells
-us which hidden states we need to be looking at to
-make our prediction. We then calculate our local
-weights and apply them to our hidden states in
-order to determine our context vector. These weights may tell us to pay
-more attention to the most relevant hidden state
-(*h*[2]{.subscript}) but less attention to the preceding hidden state
-(*h*[1]{.subscript}).
-
-We then take our context vector and pass it forward to our decoder in
-order to make its prediction. In our non-attention based
-sequence-to-sequence model, we would have only passed our final hidden
-state, *h*[n]{.subscript}, forward, but we see here that instead, we
-only consider the relevant hidden states that our model deems necessary
-to make its prediction.
 
 The **global attention** model works in a very
 similar way. However, instead of only looking at a few of the hidden
 states, we want to look at all of our model\'s hidden states---hence the
 name global. We can see a graphical illustration of a global attention
 layer here:
-
 
 ![](./images/B12365_08_3.jpg)
 
@@ -166,18 +100,7 @@ through hidden states that are relevant to our prediction:
 ![](./images/B12365_08_4.jpg)
 
 
-We can see in the preceding diagram that by
-learning which hidden states to pay attention to,
-our model controls which states are used in the
-decoding step to determine our predicted output.
-Once we decide which hidden states to pay attention to, we can combine
-them using a number of different methods---either by concatenating or
-taking the weighted dot product.
-
-
-Building a chatbot using sequence-to-sequence neural networks with attention
-============================================================================
-
+#### Building a chatbot using sequence-to-sequence neural networks with attention
 
 The easiest way to illustrate exactly how to
 implement attention within our neural network is
@@ -188,7 +111,6 @@ attention framework applied.
 As with all of our other NLP models, our first
 step is to obtain and process a dataset to use to
 train our model.
-
 
 
 Acquiring our dataset
@@ -230,7 +152,6 @@ the response that we would expect from our model.
 
 The first step in building our model is to read this data in and perform
 all the necessary preprocessing steps.
-
 
 
 Processing our dataset
@@ -334,18 +255,6 @@ required:
             self.addWord(word)
     ```
     
-
-    One thing we can do to speed up the training of our model is reduce
-    the size of our vocabulary. This means that any embedding layers
-    will be much smaller and the total number of learned parameters
-    within our model can be fewer. An easy way to do this
-    is to remove any low-frequency words from our
-    vocabulary. Any words occurring just once or twice in our dataset
-    are unlikely to have huge predictive power, and so removing them
-    from our corpus and replacing them with blank tokens in our final
-    model could reduce the time taken for our model to train and reduce
-    overfitting without having much of a negative impact on our model\'s
-    predictions.
 
 4.  To remove low-frequency words from our vocabulary, we can implement
     a `trim` function. The function first loops through the
@@ -815,7 +724,7 @@ following steps:
     something like this:
 
     
-    ![](./images/B12365_08_13.jpg)
+![](./images/B12365_08_13.jpg)
     
 
 
@@ -1474,22 +1383,8 @@ hyperparameters and calling our training functions:
     with no errors, you should see the following:
 
     
-    ![](./images/B12365_08_14.jpg)
+![](./images/B12365_08_14.jpg)
     
-
-
-    Now that we have created instances of both our encoder and decoders,
-    we are ready to begin training them.
-
-    We start by initializing some training hyperparameters. In the same
-    way as our model hyperparameters, these can be adjusted to influence
-    training time and how our model learns. Clip controls the gradient
-    clipping and teacher forcing controls how often we use teacher
-    forcing within our model. Notice how we use a teacher forcing ratio
-    of 1 so that we always use teacher forcing. Lowering the teaching
-    forcing ratio would mean our model takes much longer to converge;
-    however, it might help our model generate correct sentences by
-    itself better in the long run.
 
 6.  We also need to define the learning rates of our models and our
     decoder learning ratio. You will find that your model performs
@@ -1594,7 +1489,7 @@ and start using our chatbot.
 
 ### Evaluating the model
 
-### Now that we have successfully created and trained our model, it is time to evaluate its performance. We will do so by taking the following steps:
+Now that we have successfully created and trained our model, it is time to evaluate its performance. We will do so by taking the following steps:
 
 1.  To begin the evaluation, we first switch our
     model into evaluation mode. As with all other PyTorch models, this
@@ -1657,24 +1552,6 @@ In many cases, your chatbot\'s responses may be nonsensical:
 
 
 ![](./images/B12365_08_21.jpg)
-
-
-It is clear that we have created a chatbot capable of simple back and
-forth conversations. However, we still have a long way to go before our
-chatbot is able
- to pass the Turing test and be able to convince us that
-we are actually talking to a human being. However, considering the
-relatively small corpus of data we have trained our model on, the use
-of attention in our sequence-to-sequence model has
-shown reasonably good results, demonstrating just how versatile these
-architectures can be.
-
-While the best chatbots are trained on vast corpuses of billions of data
-points, our model has proven reasonably effective with a relatively
-small one. However, basic attention networks are no longer
-state-of-the-art and in our next chapter, we will discuss some of the
-more recent developments for NLP learning that have
-resulted in even more realistic chatbots.
 
 
 #### Summary

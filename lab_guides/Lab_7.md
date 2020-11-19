@@ -111,7 +111,7 @@ sentence:
 ![](./images/B12365_07_06.jpg)
 
 
-We use our final hidden state, *h*[n]{.subscript}, as our context
+We use our final hidden state, *h*[n], as our context
 vector, which we will then decode using a trained decoder. It
 is also worth observing that in the context of our
 sequence-to-sequence models, we append \"start\" and \"end\" tokens to
@@ -375,7 +375,7 @@ vocabulary that we can use to tokenize our data:
     This gives us the following output:
 
     
-    ![](./images/B12365_07_12.jpg)
+![](./images/B12365_07_12.jpg)
     
 
 
@@ -398,7 +398,7 @@ vocabulary that we can use to tokenize our data:
     This returns the following output:
 
     
-    ![](./images/B12365_07_13.jpg)
+![](./images/B12365_07_13.jpg)
     
 
 
@@ -563,19 +563,14 @@ def forward(self, input, h, cell):
 
 Again, similar to our encoder, we use a two-layer LSTM layer within our
 decoder. We take our final hidden state from our encoders and use these
-to generate the first word in our sequence, Y[1]{.subscript}. We then
+to generate the first word in our sequence, Y[1]. We then
 update our hidden state and use this and
-Y[1]{.subscript} to generate our next word, Y[2]{.subscript}, repeating
+Y[1] to generate our next word, Y[2], repeating
 this process until our model generates an end token. Our decoder looks
 something like this:
 
 
 ![](./images/B12365_07_16.jpg)
-
-
-Here, we can see that defining the encoders and decoders individually is
-not particularly complicated. However, when we combine these steps into
-one larger sequence-to-sequence model, things begin to get interesting:
 
 
 
@@ -1021,6 +1016,6 @@ state-of-the-art. In the last few years, combining sequence-to-sequence
 models with attention models has been done to achieve state-of-the-art
 performance.
 
-In the next chapter, we will discuss how attention networks can be used
+In the next lab, we will discuss how attention networks can be used
 in the context of sequence-to-sequence learning and show how we can use
 both techniques to build a chat bot.

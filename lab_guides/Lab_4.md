@@ -87,41 +87,16 @@ This returns the following output:
 ![](./images/B12365_04_02.jpg)
 
 
-This shows that the inputs have all been transformed into identical
-lowercase representations. There are a few examples where capitalization
-may actually provide additional semantic information. For example, *May*
-(the month) and *may* (meaning *might*) are semantically different and
-*May* (the month) will always be capitalized. However, instances like
-this are very rare and it is much more efficient to convert everything
-into lowercase than trying to account for these rare examples.
-
-It is worth noting that capitalization may be
-useful in some tasks such as part of speech tagging, where a capital
-letter may indicate the word\'s role in the sentence, and named entity
-recognition, where a capital letter may indicate that a word is a proper
-noun rather than the non-proper noun alternative; for example, *Turkey*
-(the country) and *turkey* (the bird).
-
-
 
 Removing punctuation
 --------------------
 
-Sometimes, depending on the type of model being constructed, we may wish
-to remove punctuation from our input text. This is
-particularly useful in models where we are aggregating word counts, such
-as in a bag-of-words representation. The presence of a full stop or a
-comma within the sentence doesn\'t add any useful information about the
-semantic content of the sentence. However, more complicated models that
-take into account the position of punctuation within the sentence may
-actually use the position of the punctuation to infer a different
-meaning. A classic example is as follows:
 
 *The panda eats shoots and leaves*
 
 *The panda eats, shoots, and leaves*
 
-Here, the addition of a comma transforms the sentence describing a
+The addition of a comma transforms the sentence describing a
 panda\'s eating habits into a sentence describing an armed robbery of a
 restaurant by a panda! Nevertheless, it is still important to be able to
 remove punctuation from sentences for the sake of consistency. We can do
@@ -244,63 +219,8 @@ purpose. In instances like this, it may be preferable to drop any long
 numbers from our input text.
 
 
-Stemming and lemmatization
-==========================
-
-
-In language, **inflection** is how different grammatical categories such
-as tense, mood, or gender can be expressed by modifying a common root
-word. This often involves changing the prefix or
-suffix of a word but can also involve modifying
-the entire word. For example, we can make
-modifications to a verb to change its tense:
-
-*Run -\> Runs (Add \"s\" suffix to make it present tense)*
-
-*Run -\> Ran (Modify middle letter to \"a\" to make it past tense)*
-
-But in some cases, the whole word changes:
-
-*To be -\> Is (Present tense)*
-
-*To be -\> Was (Past tense)*
-
-*To be -\> Will be (Future tense -- addition of modal)*
-
-There can be lexical variations on nouns too:
-
-*Cat -\> Cats (Plural)*
-
-*Cat -\> Cat\'s (Possessive)*
-
-*Cat -\> Cats\' (Plural possessive)*
-
-All these words relate back to the root word cat. We can calculate the
-root of all the words in the sentence to reduce the whole sentence to
-its lexical roots:
-
-*\"His cats\' fur are different colors\" -\> \"He cat fur be different
-color\"*
-
-Stemming and lemmatization is the process by which we arrive at these
-root words. **Stemming** is an algorithmic process in which the ends of
-words are cut off to arrive at a common root, whereas lemmatization uses
-a true vocabulary and structural analysis of the word itself to arrive
-at the true roots, or **lemmas**, of the word. We will cover both of
-these methodologies in detail in the following
-sections.
-
-
-
 Stemming
 --------
-
-**Stemming** is the algorithmic process by which
-we trim the ends off words in order to arrive at their lexical roots, or
-**stems**. To do this, we can use different **stemmers** that each
-follow a particular algorithm in order to return
-the stem of a word. In English, one of the most common stemmers is the
-Porter Stemmer.
 
 The **Porter Stemmer** is an algorithm with a
 large number of logical rules that can be used to return the stem of a
@@ -348,19 +268,6 @@ This returns the following output:
 ![](./images/47.PNG)
 
 
-Here, we can see how different words are stemmed using the Porter
-Stemmer. Some words, such as `stemming` and
-`timing`, reduce to their expected stems of `stem`
-and `time`. However, some words, such as `saw`,
-don\'t reduce to their logical stem (`see`). This illustrates
-the limitations of the Porter Stemmer. Since stemming applies a series
-of logical rules to the word, it is very difficult to define a set of
-rules that will correctly stem all words. This is especially true in the
-cases of words in English where the word changes completely, depending
-on the tense (is/was/be). This is because there are no generic rules
-that can be applied to these words to transform them all into the same
-root stem.
-
 We can examine some of the rules the Porter
 Stemmer applies in more detail to understand exactly how the
 transformation into the stem occurs. While the actual Porter algorithm
@@ -386,21 +293,6 @@ the use of lemmatization.
 Lemmatization
 -------------
 
-**Lemmatization** differs from stemming in that it reduces words to
-their **lemma** instead of their stem. While the stem of a word is
-processed and reduced to a string, a word\'s lemma is its
-true lexical root. So, while the stem of the word
-`ran` will just be *ran*, its lemma is the true lexical root
-of the word, which would be `run`.
-
-The lemmatization process uses both inbuilt pre-computed lemmas and
-associated words, as well as the context of the word within the sentence
-to determine the correct lemma for a given word. In this
-example, we will look at using the **WordNet**
-**Lemmatizer** within NLTK. WordNet is a large database of English words
-and their lexical relationships to one another. It contains one of the
-most robust and comprehensive mappings of the English language,
-specifically with regard to words\' relationships to their lemmas.
 
 We will first create an instance of our lemmatizer and call it on a
 selection of words:
@@ -538,71 +430,7 @@ lemmatize_with_pos(sentence)
 
 This results in the following output:
 
-
 ![](./images/53.PNG)
-
-
-Here, we can see that, in general, lemmas generally provide a better
-representation of a word\'s true root compared to stems, with some
-notable exceptions. When we might decide to use
-stemming and lemmatization depends on the requirements of the task at
-hand, some of which we will explore now.
-
-
-Uses of stemming and lemmatization
-==================================
-
-
-Stemming and lemmatization are both a form of NLP
-that can be used to extract information from text. This
-is known as **text mining**. Text mining tasks
-come in a variety of categories, including text
-clustering, categorization, summarizing documents, and sentiment
-analysis. Stemming and lemmatization can be used in conjunction with
-deep learning to solve some of these tasks, as we will see later in this
-book.
-
-By performing preprocessing using stemming and lemmatization, coupled
-with the removal of stop words, we can better reduce our sentences to
-understand their core meaning. By removing words that do not
-significantly contribute to the meaning of the sentence
-and by reducing words to their roots or lemmas, we
-can efficiently analyze sentences within our deep learning frameworks.
-If we are able to reduce a 10-word sentence to
-five words consisting of multiple core lemmas rather than multiple
-variations of similar words, this means much less data that we need to
-feed through our neural networks. If we use bag-of-words
-representations, our corpus will be significantly smaller as multiple
-words all reduce down to the same lemmas, whereas if we calculate
-embedding representations, the dimensionality required to capture the
-true representations of our words will be smaller for a reduced corpus
-of words.
-
-
-
-Differences in lemmatization and stemming
------------------------------------------
-
-Now that we have seen both lemmatization and stemming in action, the
-question still remains as to under which
-circumstances we should use both of these techniques. We saw that both
-techniques attempt to reduce each word to its root. In stemming, this
-may just be a reduced form of the target room,
-whereas in lemmatization, it reduces to a true English language word
-root.
-
-Because lemmatization requires cross-referencing the target word within
-the WordNet corpus, as well as performing part-of-speech analysis to
-determine the form of the lemma, this may take a significant amount of
-processing time if a large number of words have to be lemmatized. This
-is in contrast to stemming, which uses a detailed but relatively fast
-algorithm to stem words. Ultimately, as with many problems in computing,
-it is a question of trading off speed versus detail. When choosing which
-of these methods to incorporate in our deep learning pipeline, the
-trade-off may be between speed and accuracy. If time is of the essence,
-then stemming may be the way to go. On the other hand, if you need your
-model to be as detailed and as accurate as possible, then lemmatization
-will likely result in the superior model.
 
 
 #### Summary
@@ -613,6 +441,6 @@ and how they can be implemented. Now that we have covered all of the
 fundamentals of deep learning and NLP preprocessing, we are ready to
 start training our own deep learning models from scratch.
 
-In the next chapter, we will explore the fundamentals of NLP and
+In the next lab, we will explore the fundamentals of NLP and
 demonstrate how to build the most widely used models within the field of
 deep NLP: recurrent neural networks.

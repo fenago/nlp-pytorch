@@ -1020,7 +1020,7 @@ neighboring words. Now that we have mastered both RNNs and CNNs, we can
 begin to expand on these techniques in order to construct even more
 advanced models.
 
-In the next chapter, we will learn how to build models that utilize
+In the next lab, we will learn how to build models that utilize
 elements of both convolutional and recurrent neural networks and use
 them on sequences to perform even more advanced functions, such as text
 translation. These are known as sequence-to-sequence networks.

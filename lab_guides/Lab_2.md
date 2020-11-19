@@ -13,37 +13,11 @@ ability to perform tensor operations, and finally demonstrate how to
 build a simple neural network. In summary, this chapter will cover the
 following topics:
 
--   Installing PyTorch
 -   Comparing PyTorch to other deep learning frameworks
 -   NLP functionality of PyTorch
 
 
-
-Installing and using PyTorch 1.x
-================================
-
-
-Like most Python packages, PyTorch is very simple to install. There are
-two main ways of doing so. The first is to simply
-install it using `pip` in the command
-line. Simply type the following command:
-
-```
-pip install torch torchvision
-```
-
-
-While this installation method is quick, it is recommended to install
-using Anaconda instead, as this includes all the required dependencies
-and binaries for PyTorch to run. Furthermore, Anaconda will be required
-later to enable training models on a GPU using CUDA. PyTorch can be
-installed through Anaconda by entering the following in the command
-line:
-
-```
-conda install torch torchvision -c pytorch
-```
-
+#### Using PyTorch 1.x
 
 To check that PyTorch is working correctly, we can open a Jupyter
 Notebook and run a few simple commands:
@@ -159,34 +133,14 @@ acceleration through the use of a **graphics processing unit**
 (**GPU**). Deep learning is a computational task that is easily
 parallelizable, meaning that the calculations can be broken down into
 smaller tasks and calculated across many smaller
-processors. This means that instead of needing to
-execute the task on a single CPU, it is more efficient to perform the
-calculation on a GPU.
+processors.
 
-GPUs were originally created to efficiently render graphics, but since
-deep learning has grown in popularity, GPUs have
-been frequently used for their ability to perform multiple calculations
-simultaneously. While a traditional CPU may consist of around four or
-eight cores, a GPU consists of hundreds of smaller cores. Because
-calculations can be executed across all these cores simultaneously, GPUs
-can rapidly reduce the time taken to perform deep learning tasks.
-
-Consider a single pass within a neural network. We may take a small
-batch of data, pass it through our network to obtain our loss, and then
-backpropagate, adjusting our parameters according to the gradients. If
-we have many batches of data to do this over, on a traditional CPU, we
-must wait until batch 1 has completed before we can compute this for
-batch 2:
+Traditional CPU, we must wait until batch 1 has completed before we can compute this for batch 2:
 
 ![](./images/28.PNG)
 
 
-However, on a GPU, we can perform all these steps simultaneously,
-meaning there is no requirement for batch 1 to
-finish before batch 2 can be started. We can calculate the parameter
-updates for all batches simultaneously and then
-perform all the parameter updates in one go (as the results are
-independent of one another). The parallel approach can vastly speed up
+GPU can perform all these steps simultaneously. The parallel approach can vastly speed up
 the machine learning process:
 
 ![](./images/29.PNG)
@@ -213,7 +167,7 @@ the following steps:
     following into our Python code:
 
     ```
-    cuda = torch.device('cuda') 
+    cuda = torch.device('cpu')  # torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     ```
     
 
@@ -231,7 +185,7 @@ the following steps:
     method:
 
     ```
-    y = torch.tensor([4., 2.]).cuda()
+    y = torch.tensor([4., 2.], device=cuda) # y = torch.tensor([4., 2.]).cuda()
     ```
     
 
@@ -249,16 +203,9 @@ the following steps:
 ![](./images/30.PNG)
 
 
-The changes in speed will not be noticeable at this stage as we are just
-creating a tensor, but when we begin training models at scale later, we
-will see the speed benefits of parallelizing our computations using
-CUDA. By training our models in parallel, we will be able to reduce the
-time this takes by a considerable amount.
-
 
 Comparing PyTorch to other deep learning frameworks
 ===================================================
-
 
 PyTorch is one of the main frameworks used in deep learning today. There
 are other widely used frameworks available too,
@@ -272,46 +219,7 @@ they operate. These include the following:
     layers
 -   Differences in syntax 
 
-Arguably, the main difference between PyTorch and other frameworks is in
-the way that the models themselves are computed. PyTorch uses an
-automatic differentiation method called
-**autograd**, which allows computational graphs to be defined and
-executed dynamically. This is in contrast to other frameworks such as
-TensorFlow, which is a static framework. In these static frameworks,
-computational graphs must be defined and compiled before finally being
-executed. While using pre-compiled models may lead to efficient
-implementations in production, they do not offer the same level of
-flexibility in research and explorational projects.
 
-Frameworks such as PyTorch do not need to pre-compile computational
-graphs before the model can be trained. The dynamic computational graphs
-used by PyTorch mean that graphs are compiled as they are executed,
-which allows graphs to be defined on the go. The dynamic approach to
-model construction is particularly useful in the field of NLP. Let\'s
-consider two sentences that we wish to perform
-sentiment analysis on:
-
-![](./images/31.PNG)
-
-
-
-We can represent each of these sentences as a sequence of individual
-word vectors, which would then form our input to our neural network.
-However, as we can see, each of our inputs is of a
-different size. Within a
-fixed computation graph, these varying input sizes
-could be a problem, but for frameworks like PyTorch, models are able to
-adjust dynamically to account for the variation in input structure. This
-is one reason why PyTorch is often preferred for NLP-related deep
-learning.
-
-Another major difference between PyTorch and other deep learning
-frameworks is syntax. PyTorch is often preferred by developers with
-experience in Python as it is considered to be very Pythonic in nature.
-PyTorch integrates well with other aspects of the Python ecosystem and
-it is very easy to learn if you have prior knowledge of Python. We will
-demonstrate PyTorch syntax now by coding up our own neural network from
-scratch.
 
 
 Building a simple neural network in PyTorch
@@ -409,20 +317,6 @@ Our network now looks something like this:
 ![](./images/B12365_02_12.jpg)
 
 
-Here, we can see that our final layer outputs **10** units. This is
-because we wish to predict whether each image is a digit between 0 and
-9, which is 10 different possible classifications in total. Our output
-is a vector of length **10** and contains predictions for each of the 10
-possible values of the image. When making a final
-classification, we take the digit classification that has the highest
-value as the model\'s final prediction. For example, for a given
-prediction, our model might predict the image is type 1 with a
-probability of 10%, type 2 with a probability of 10%, and type 3 with a
-probability of 80%. We would, therefore, take type 3 as the prediction
-as it was predicted with the highest probability.
-
-
-
 Implementing dropout
 --------------------
 
@@ -433,17 +327,6 @@ order to help regularize the network:
 ```
 self.dropout = nn.Dropout(p=0.2)
 ```
-
-
-Dropout is a way of regularizing our neural networks to prevent
-overfitting. On each training epoch, for each node in a layer that has
-dropout applied, there is a probability (here, defined as *p* = 20%)
-that each node within the layer will not be used in
-training/backpropagation. This means that when training, our network
-becomes robust toward overfitting since each node
-will not be used in every iteration of the training process. This
-prevents our network from becoming too reliant on predictions from
-specific nodes within our network.
 
 
 
@@ -474,10 +357,6 @@ make it non-linear. We also wrap it in our dropout, as defined in our
 `init` method. We repeat this process for all the other layers
 in the network.
 
-For our final prediction layer, we wrap it in a log `softmax`
-layer. We will use this to easily calculate our
-loss function, as we will see next.
-
 
 
 Setting the model parameters
@@ -506,27 +385,6 @@ correct prediction we are:
 
 
 ![](./images/B12365_02_13.jpg)
-
-
-This is then summed over all the correct classes in our dataset to
-compute the total loss. Note that we defined a log
-softmax when building the classifier as this
-already applies a softmax function (restricting the predicted output to
-be between 0 and 1) and takes the log. This means that *log(y)* is
-already calculated, so all we need to do to compute the total loss on
-the network is calculate the negative sum of the outputs.
-
-We will also define our optimizer as an Adam optimizer. An optimizer
-controls the **learning rate** within our model. The learning rate
-of a model defines how big the parameter updates
-are during each epoch of training. The larger the size of the learning
-rate, the larger the size of the parameter updates during gradient
-descent. An optimizer dynamically controls this learning rate so that
-when a model is initialized, the parameter updates are large. However,
-as the model learns and moves closer to the point where loss is
-minimized, the optimizer controls the learning rate, so the parameter
-updates become smaller and the local minimum can be located more
-precisely.
 
 
 
@@ -632,18 +490,8 @@ print(preds[0])
 
 This results in the following output:
 
-
 ![](./images/B12365_02_15.jpg)
 
-
-Here, we can see that our prediction is a vector of length 10, with a
-prediction for each of the possible classes (digits between 0 and 9).
-The one with the highest predicted value is the one our model chooses as
-its prediction. In this case, it is the 10[th]{.superscript} unit of our
-vector, which equates to the digit 9. Note that
-since we used log softmax earlier, our predictions are logs and not raw
-probabilities. To convert these back into probabilities, we can just
-transform them using *x*.
 
 We can now construct a summary DataFrame containing our true test data
 labels, as well as the labels our model predicted:
@@ -696,16 +544,6 @@ This results in the following output:
 ![](./images/B12365_02_17.jpg)
 
 
-Congratulations! Your first neural network was able to correctly
-identify almost 90% of unseen digit images. As we progress, we will see
-that there are more sophisticated models that may
-lead to improved performance. However, for now, we have demonstrated
-that creating a simple deep neural network is very simple using PyTorch.
-This can be coded up in just a few lines and leads to performance above
-and beyond what is possible with basic machine learning models such as
-regression.
-
-
 NLP for PyTorch
 ===============
 
@@ -714,7 +552,6 @@ Now that we have learned how to build neural networks, we will see how
 it is possible to build models for NLP using
 PyTorch. In this example, we will create a basic bag-of-words classifier
 in order to classify the language of a given sentence.
-
 
 
 Setting up the classifier
@@ -764,12 +601,6 @@ English:
 ![](./images/B12365_02_18.jpg)
     
 
-
-    Note that here, we looped through all our training data and test
-    data. If we just created our word index on training data, when it
-    came to evaluating our test set, we would have new words that were
-    not seen in the original training, so we wouldn\'t be able to create
-    a true bag-of-words representation for these words.
 
 3.  Now, we build our classifier in a similar fashion to how we built
     our neural network in the previous section; that is, by building a
@@ -930,7 +761,7 @@ something useful, as follows:
     This results in the following output:
 
     
-    ![](./images/B12365_02_20.jpg)
+![](./images/B12365_02_20.jpg)
     
 
 
@@ -1010,7 +841,3 @@ from other deep learning frameworks and how it can be used to build
 basic neural networks. While these simple examples are just the tip of
 the iceberg, we have illustrated that PyTorch is an immensely powerful
 tool for NLP analysis and learning.
-
-In future chapters, we will demonstrate how the unique properties of
-PyTorch can be utilized to build highly sophisticated models for solving
-very complex machine learning tasks.

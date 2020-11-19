@@ -566,6 +566,6 @@ this in the form of a sequence of one-hot encoded vectors:
 
 In this lab, we introduced the fundamentals of machine learning and
 neural networks, as well as a brief overview of transforming text for
-use within these models. In the next chapter, we will provide a brief
+use within these models. In the next lab, we will provide a brief
 overview of PyTorch and how it can be used to construct some of these
 models.

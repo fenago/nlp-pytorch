@@ -15,16 +15,6 @@ The following topics will be covered in the chapter:
 -   TF-IDF
 
 
-Technical requirements
-======================
-
-
-GLoVe vectors can be downloaded from
-<https://nlp.stanford.edu/projects/glove/> . It is recommended to use
-the `glove.6B.50d.txt` file as it is much smaller than the
-other files and will be much faster to process. NLTK will be required
-for later parts of this chapter.
-
 
 Embeddings for NLP
 ==================
@@ -53,34 +43,11 @@ length *n* (in the following example, *n* = 3) that can take any value:
 ![](./images/B12365_03_2.jpg)
 
 
-These embeddings represent the word\'s vector in *n*-dimensional space
-(where *n* is the length of the embedding vectors), and words with
-similar vectors within this space are considered to be more similar in
-meaning. While these embeddings can be of any size, they are generally
-of much lower dimensionality than the BoW representation. The BOW
-representation requires vectors that are of the length of the entire
-corpus, which, when looking at a whole language, could become very large
-very quickly. Although embeddings are of a high enough dimensionality to
-represent the individual words, they are generally not much larger than
-a few hundred dimensions. Furthermore, the BOW vectors are generally
-very sparse, consisting mostly of zeros, whereas embeddings are rich in
-data and every dimension contributes to the overall representation of
-the word. The lower dimensionality and the fact that they are not sparse
-makes performing deep learning on embeddings much more efficient than
-performing it on BOW representations.
-
-
 
 GLoVe
 -----
 
-We can download a set of pre-calculated word
-embeddings to demonstrate how they work. For this, we will use **Global
-Vectors for Word Representation** (**GLoVe**) embeddings, which can be
-downloaded from here: <https://nlp.stanford.edu/projects/glove/> . These
-embeddings are calculated on a very large corpus
-of NLP data and are trained on a word
-co-occurrence matrix. This is based on the notion that words that appear
+Words that appear
 together are more likely to have similar meaning. For instance, the word
 *sun* is likely to appear more frequently with the word *hot* as opposed
 to the word *cold*, so it is more likely that *sun* and *hot* are
@@ -117,9 +84,8 @@ vectors:
     This results in the following output:
 
     
-    ![](./images/B12365_03_3.jpg)
+![](./images/B12365_03_3.jpg)
     
-
 
     We can see that this returns a 50-dimensional vector embedding for
     the word Python. We will now introduce the
@@ -131,7 +97,7 @@ vectors:
     and B are the two embedding vectors being compared:
 
     
-    ![](./images/Formula_03_001.jpg)
+![](./images/Formula_03_001.jpg)
     
 
 3.  We can calculate this easily in Python using the
@@ -215,28 +181,6 @@ Exploring CBOW
 ==============
 
 
-The **continuous** **bag-of-words (CBOW)** model
-forms part of Word2Vec -- a model created by Google in order to obtain
-vector representations of words. By running these models over a very
-large corpus, we are able to obtain detailed representations of words
-that represent their semantic and contextual similarity to one another.
-The Word2Vec model consists of two main components:
-
--   **CBOW**: This model attempts to predict the
-    target word in a document, given the surrounding words.
--   **Skip-gram**: This is the opposite of CBOW;
-    this model attempts to predict the surrounding words, given the
-    target word.
-
-Since these models perform similar tasks, we will focus on just one for
-now, specifically CBOW. This model aims to predict
-a word (the **target word**), given the other words around it (known as
-the **context** words). One way of accounting for context words could
-beusing the
-word directly before the target word in the sentence to predict the
-target word, whereas more complex models could use several words before
-and after the target word. Consider the following sentence:
-
 *PyTorch is a deep learning framework*
 
 Let\'s say we want to predict the word *deep*, given the context words:
@@ -246,21 +190,6 @@ Let\'s say we want to predict the word *deep*, given the context words:
 We could look at this in a number of ways:
 
 ![](./images/32.PNG)
-
-
-For our CBOW model, we will use a window of length 2, which means for
-our model\'s (*X, y*) input/output pairs, we use *(\[n-2, n-1, n+1, n+2,
-n\])*, where *n* is our target word being predicted.
-
-Using these as our model inputs, we will train a
-model that includes an embedding layer. This embedding layer
-automatically forms an *n*-dimensional representation of the words in
-our corpus. However, to begin with, this layer is initialized with
-random weights. These parameters are what will be learned using our
-model so that after our model has finished training, this embedding
-layer can be used can be used to encode our corpus in an embedded vector
-representation.
-
 
 
 CBOW architecture
@@ -274,38 +203,6 @@ illustration of how this might look:
 
 
 ![](./images/B12365_03_9.jpg)
-
-
-Our input words are first fed through an embedding
-layer, represented as a tensor of size (n,l), where n is the specified
-length of our embeddings and l is the number of words in our corpus.
-This is because every word within the corpus has its own unique tensor
-representation.
-
-Using our combined (summed) embeddings from our four context words, this
-is then fed into a fully connected layer in order to learn the final
-classification of our target word against our embedded representation of
-our context words. Note that our predicted/target word is encoded as a
-vector that\'s the length of our corpus. This is because our model
-effectively predicts the probability of each word in the corpus to be
-the target word, and the final classification is the one with the
-highest probability. We then obtain a loss, backpropagate this through
-our network, and update the parameters on the fully
-connected layer, as well as the embeddings
-themselves.
-
-The reason this methodology works is because our learned embeddings
-represent semantic similarity. Let\'s say we train our model on the
-following:
-
-*X = \[\"is\", \"a\", \"learning\", \"framework\"\]; y = \"deep\"*
-
-What our model is essentially learning is that the combined embedding
-representation of our target words is semantically similar to our target
-word. If we repeat this over a large enough corpus of words, we will
-find that our word embeddings begin to resemble our previously seen
-GLoVe embeddings, where semantically similar words appear to one another
-within the embedding space.
 
 
 
@@ -491,7 +388,7 @@ scratch, thereby demonstrating how our embedding vectors can be learned:
     This results in the following output:
 
     
-    ![](./images/B12365_03_12.jpg)
+![](./images/B12365_03_12.jpg)
     
 
 
@@ -606,16 +503,6 @@ the bi-gram *cat sat*, while the other one contains *dog sat*. These
 bigrams clearly help add much more context to our sentence than just
 using raw word counts.
 
-We are not limited to pairs of words. We can also look at distinct word
-triplets, known as **trigrams**, or indeed any
-distinct number of words. We can use n-grams as
-inputs into our deep learning models instead of just a singular word,
-but when using n-gram models, it is worth noting that your feature space
-can become very large very quickly and may make machine learning very
-slow. If a dictionary contains all the words in the English language, a
-dictionary containing all distinct pairs of words would be several
-orders of magnitude larger!
-
 
 
 N-gram language modeling
@@ -687,13 +574,7 @@ naively assuming that words are independently distributed.
 Tokenization
 ============
 
-
-Next, we will learn about tokenization for NLP, a
-way of pre-processing text for entry into our models. Tokenization
-splits our sentences up into smaller parts. This could involve splitting
-a sentence up into its individual words or splitting a whole document up
-into individual sentences. This is an essential pre-processing step for
-NLP that can be done fairly simply in Python:
+This is an essential pre-processing step for NLP that can be done fairly simply in Python:
 
 1.  We first take a basic sentence and split this
     up into individual words using the **word
@@ -779,7 +660,7 @@ NLP that can be done fairly simply in Python:
     This results in the following output:
 
     
-    ![](./images/B12365_03_22.jpg)
+![](./images/B12365_03_22.jpg)
     
 
 
@@ -809,41 +690,12 @@ time it takes for our models to train.
 
 
 
-Tagging and chunking for parts of speech
-========================================
-
-
-So far, we have covered several approaches for
-representing words and sentences, including
-bag-of-words, embeddings, and n-grams. However, these representations
-fail to capture the structure of any given sentence. Within natural
-language, different words can have different functions within a
-sentence. Consider the following:
-
-*The big dog is sleeping on the bed*
-
-We can \"tag\" the various words of this text, depending on the function
-of each word in the sentence. So, the preceding sentence becomes as
-follows:
-
-*The -\> big -\> dog -\> is -\> sleeping -\> on -\> the -\> bed*
-
-*Determiner -\> Adjective -\> Noun -\> Verb -\> Verb -\> Preposition -\>
-Determiner-\> Noun*
+**Tagging and chunking for parts of speech**
 
 These **parts of speech** include, but are not limited to, the
 following:
 
 ![](./images/44.PNG)
-
-
-These different parts of speech can be used to
-better understand the structure of sentences. For
-example, adjectives often precede nouns in English. We can use these
-parts of speech and their relationships to one another in our models.
-For example, if we are predicting the next word in the sentence and the
-context word is an adjective, we know the probability of the next word
-being a noun is high.
 
 
 
@@ -868,7 +720,6 @@ This results in the following output:
 ![](./images/45.PNG)
 
 
-
 Here, we simply tokenize our text and call the
 `pos_tag()` function to tag each of the words in the sentence.
 This returns a tag for each of the words in the
@@ -887,32 +738,10 @@ This results in the following output:
 ![](./images/B12365_03_26.jpg)
 
 
-Using pre-trained part of speech taggers is beneficial because they
-don\'t just act as a dictionary that looks up the individual words in
-the sentence; they also use the context of the word within the sentence
-to allocate its meaning. Consider the following sentences:
-
-*He drinks the water*
-
-*I will buy us some drinks*
-
-The word *drinks* within these sentences
-represents two different parts of speech. In the
-first sentence, *drinks* refers to the verb; the present tense of the
-verb *to drink.* In the second sentence, *drinks* refers to the noun;
-the plural of a singular *drink*. Our pre-trained tagger is able to
-determine the context of these individual words and perform accurate
-part of speech tagging.
-
 
 
 Chunking
 --------
-
-**Chunking** expands upon our initial parts of
-speech tagging and aims to structure our sentences in small chunks,
-where each of these chunks represent a small part
-of speech.
 
 We may wish to split our text up into
 **entities**, where each entity is a separate object or thing. For
@@ -924,10 +753,10 @@ for **noun phrases** (**NP**), where a noun phrase
 is defined as a **determiner** (**DT**), followed by an **optional
 adjective** (**JJ**), followed by a **noun** (**NN**):
 
+
 ```
 expression = ('NP: {<DT>?<JJ>*<NN>}')
 ```
-
 
 Using the `RegexpParser()` function, we can match occurrences
 of this expression and tag them as noun phrases. We are then able to
@@ -955,30 +784,12 @@ TF-IDF
 ======
 
 
-**TF-IDF** is yet another technique we can learn
-about to better represent natural language. It is often used in text
-mining and information retrieval to match documents based on search
-terms, but can also be used in combination with embeddings to better
-represent sentences in embedding form. Let\'s take the following phrase:
-
-*This is a small giraffe*
-
 Let\'s say we want a single embedding to represent the meaning of this
 sentence. One thing we could do is simply average the individual
 embeddings of each of the five words in this sentence:
 
 
 ![](./images/B12365_03_28.jpg)
-
-
-However, this methodology assigns equal weight to
-all the words in the sentence. Do you think that all the words
-contribute equally to the meaning of the sentence? **This** and **a**
-are very common words in the English language, but **giraffe** is very
-rarely seen. Therefore, we might want to assign more weight to the rarer
-words. This methodology is known as **Term Frequency -- Inverse Document
-Frequency** (**TD-IDF**). We will now demonstrate how we can calculate
-TF-IDF weightings for our documents.
 
 
 
@@ -993,40 +804,17 @@ analyzed:
 
 ![](./images/Formula_03_003.png)
 
-Note that we divide this measure by the total number of words in the
-document as a longer document is more likely to contain any given word.
-If a word appears many times in a document, it will receive a higher
-term frequency. However, this is the opposite of what we wish our TF-IDF
-weighting to do as we want to give a higher weight to occurrences of
-rare words within our document. This is where IDF comes into play.
-
-Document frequency measures the number of documents
-within the entire corpus of documents where the
-word is being analyzed, and inverse document frequency calculates the
-ratio of the total documents to the document frequency:
-
 
 ![](./images/Formula_03_004.jpg)
 
 
 ![](./images/Formula_03_005.jpg)
 
-If we have a corpus of 100 documents and our word appears five times
-across them, we will have an inverse document frequency of 20. This
-means that a higher weight is given to words with lower occurrences
-across all documents. Now, consider a corpus of 100,000 documents. If a
-word appears just once, it will have an IDF of 100,000, whereas a word
-occurring twice would have an IDF of 50,000. These very large and
-volatile IDFs aren\'t ideal for our calculations, so we must first
-normalize them with logs. Note how we add 1 within our calculations to
-prevent division by 0 if we calculate TF-IDF for a word that doesn\'t
-appear in our corpus:
-
 
 ![](./images/Formula_03_006.jpg)
 
-This makes our final TF-IDF equation look as follows:
 
+This makes our final TF-IDF equation look as follows:
 
 ![](./images/Formula_03_007.jpg)
 
@@ -1083,7 +871,7 @@ sentences:
     This results in the following output:
 
     
-    ![](./images/B12365_03_29.jpg)
+![](./images/B12365_03_29.jpg)
     
 
 
@@ -1195,7 +983,7 @@ be applied to embeddings:
     This results in the following output:
 
     
-    ![](./images/B12365_03_31.jpg)
+![](./images/B12365_03_31.jpg)
     
 
 
@@ -1217,7 +1005,7 @@ be applied to embeddings:
     This results in the following output:
 
     
-    ![](./images/B12365_03_32.jpg)
+![](./images/B12365_03_32.jpg)
     
 
 
@@ -1252,6 +1040,6 @@ for easy processing and how to use tagging and chunking to identify
 parts of speech. Finally, we showed how TF-IDF weightings can be used to
 better represent documents in embedding form.
 
-In the next chapter, we will see how to use NLP for text preprocessing,
+In the next lab, we will see how to use NLP for text preprocessing,
 stemming, and lemmatization.
 

@@ -10,37 +10,11 @@ This chapter covers the following topics:
 -   Building RNNs
 -   Working with LSTMs
 -   Building a sentiment analyzer using LSTM
--   Deploying the application on Heroku
-
-
-Technical requirements
-======================
-
-
-Heroku can be installed from [www.heroku.com](http://www.heroku.com/).
-The data was taken from
-<https://archive.ics.uci.edu/ml/datasets/Sentiment+Labelled+Sentences>.
 
 
 Building RNNs
 =============
 
-
-RNNs consist of recurrent layers. While they are
-similar in many ways to the fully connected layers within a standard
-feed forward neural network, these recurrent layers consist of a hidden
-state that is updated at each step of the sequential input. This means
-that for any given sequence, the model is initialized with a hidden
-state, often represented as a one-dimensional vector. The first step of
-our sequence is then fed into our model and the hidden state is updated
-depending on some learned parameters. The second word is then fed into
-the network and the hidden state is updated again depending on some
-other learned parameters. These steps are repeated until the whole
-sequence has been processed and we are left with the final hidden state.
-This computation *loop*, with the hidden state carried over from the
-previous computation and updated, is why we refer to these networks as
-recurrent. This final hidden state is then connected to a further fully
-connected layer and a final classification is predicted.
 
 Our recurrent layer looks something like the following, where *h* is the
 hidden state and *x* is our input at various time steps in our sequence.
@@ -57,37 +31,12 @@ sequence of time steps, which looks like this:
 ![](./images/B12365_05_2.jpg)
 
 
-This layer is for an input that is *n* time steps long. Our hidden state
-is initialized in state *h*[0]{.subscript}, and then uses our first
-input, *x*[1]{.subscript}, to compute the next hidden state,
-*h*[1]{.subscript}. There are two sets of weight matrices that are also
-learned---matrix *U*, which learns how the hidden state changes
-between time steps, and matrix *W*, which learns
-how each input step affects the hidden state.
-
 We also apply a *tanh* activation function to the resulting product,
 keeping the values of the hidden state between -1 and 1. The equation
-for calculating any hidden state, *h*[t]{.subscript}, becomes the
+for calculating any hidden state, *h*[t], becomes the
 following:
 
 ![](./images/Formula_05_001.png)
-
-This is then repeated for each time step within our input sequence, and
-the final output for this layer is our last hidden state,
-*h*[n]{.subscript}. When our network learns, we perform a forward pass
-through the network, as before, to compute our final classification. We
-then calculate a loss against this prediction and backpropagate through
-the network, as before, calculating gradients as we go. This
-backpropagation process occurs through all the steps within the
-recurrent layer, with the parameters between each input step and the
-hidden state being learned.
-
-We will see later that we can actually take the hidden state at each
-time step, rather than using the final hidden state, which is useful for
-sequence-to-sequence translation tasks in NLP. However, for the time
-being, we will just take the hidden layer as output to the rest of the
-network.
-
 
 
 Using RNNs for sentiment analysis
@@ -278,34 +227,11 @@ the bold rectangle):
 ![](./images/B12365_05_7.jpg)
 
 
-The forget gate essentially learns which elements of the sequence to
-forget. The previous hidden state, *h*[t-1]{.subscript}, and the latest
-input step, *x*[1]{.subscript}, are concatenated together and passed
-through a matrix of learned weights on the forget gate and a sigmoid
-function that squashes the values between 0 and 1.
-This resulting matrix, *ft*, is multiplied pointwise by the cell state
-from the previous step, *c*[t-1]{.subscript}. This effectively applies a
-mask to the previous cell state so that only the relevant information
-from the previous cell state is brought forward.
-
 Next, we will look at the **input gate**:
 
 
 ![](./images/B12365_05_8.jpg)
 
-
-The input gate again takes the concatenated previous hidden state,
-*h*[t-1]{.subscript}, and the current sequence input,
-*x*[t]{.subscript}, and passes this through a sigmoid function with
-learned parameters, which outputs another matrix, *i*[t]{.subscript},
-consisting of values between 0 and 1. The concatenated hidden
-state and sequence input also pass through a tanh
-function, which squashes the output between -1 and 1. This is multiplied
-by the *i*[t]{.subscript} matrix. This means that the learned parameters
-required to generate *i*[t]{.subscript} effectively learn which elements
-should be kept from the current time step in our cell state. This is
-then added to the current cell state to get our final cell state, which
-will be carried over to the next time step.
 
 Finally, we have the last element of the LSTM
 cell---the **output gate**:
@@ -314,80 +240,17 @@ cell---the **output gate**:
 ![](./images/B12365_05_9.jpg)
 
 
-The output gate calculates the final output of the LSTM cell---both the
-cell state and the hidden state that is carried over to the next step.
-The cell state, *c*[t]{.subscript}, is unchanged from the previous two
-steps and is a product of the forget gate and the
-input gate. The final hidden state, *h*[t]{.subscript}, is calculated by
-taking the concatenated previous hidden state, *h*[t-1]{.subscript}, and
-the current time step input, *x*[t]{.subscript}, and passing through a
-sigmoid function with some learned parameters to get the output gate
-output, *o*[t]{.subscript}. The final cell state, *c*[t]{.subscript}, is
-passed through a tanh function and multiplied by the output gate output,
-*o*[t]{.subscript}, to calculate the final hidden state,
-*h*[t]{.subscript}. This means that the learned parameters on the output
-gate effectively control which elements of the previous hidden state and
-current output are combined with the final cell state to carry over to
-the next time step as the new hidden state.
-
-In our forward pass, we simply iterate through the model, initializing
-our hidden state and cell state and updating them at each time step
-using the LSTM cells until we are left with a final hidden state, which
-is output to the next layer of our neural network. By backpropagating
-through all the layers of our LSTM, we can calculate the gradients
-relative to the loss of the network and so we know which direction to
-update our parameters through gradient descent. We get several matrices
-or parameters---one for the input gate, one for the output gate, and one
-for the forget gate.
-
-Because we get more parameters than for a simple
-RNN and our computation graph is more complex, the process of
-backpropagating through the network and updating the weights will likely
-take longer than for a simple RNN. However, despite the longer training
-time, we have shown that LSTM offers significant advantages over a
-conventional RNN as the output gate, input gate, and forget gate all
-combine to give the model the ability to determine which elements of the
-input should be used to update the hidden state and which elements of
-the hidden state should be forgotten going forward, which means the
-model is better able to form long-term dependencies and retain
-information from previous sequence steps.
-
-
 
 Bidirectional LSTMs
 -------------------
 
-We previously mentioned that a downside of simple
-RNNs is that they fail to capture the full context of a word within a
-sentence as they are backward-looking only. At each time step of the
-RNN, only the previously seen words are considered and the words
-occurring next within the sentence are not taken into account. While
-basic LSTMs are similarly backward-facing, we can use a modified version
-of LSTM, known as a **bidirectional LSTM**, which considers both the
-words before and after it at each time step within the sequence.
-
 Bidirectional LSTMs process sequences in regular order and reverse order
 simultaneously, maintaining two hidden states.
-We\'ll call the forward hidden state *f*[t]{.subscript} and use
-*r*[t]{.subscript} for the reverse hidden state:
+We\'ll call the forward hidden state *f*[t] and use
+*r*[t] for the reverse hidden state:
 
 ![](./images/55.PNG)
 
-
-Here, we can see that we maintain these two hidden states throughout the
-whole process and use them to calculate a final hidden state,
-*h*[t]{.subscript}. Therefore, if we wish to calculate the final hidden
-state at time step *t*, we use the forward hidden state,
-*f*[t]{.subscript}, which has seen all words up to and including input
-*x*[t]{.subscript}, as well as the reverse hidden state,
-*r*[t]{.subscript}, which has seen all the words after and including
-*x*[t]{.subscript}. Therefore, our final hidden state,
-*h*[t]{.subscript}, comprises hidden states that have seen all the words
-in the sentence, not just the words occurring
-before time step *t*. This means that the context of any given word
-within the whole sentence can be better captured. Bidirectional LSTMs
-have proven to offer improved performance on several NLP tasks over
-conventional unidirectional LSTMs.
 
 
 Building a sentiment analyzer using LSTMs
@@ -1664,5 +1527,5 @@ RNN from scratch and deploy it on the cloud-based platform Heroku. While
 RNNs are often used for deep learning on NLP tasks, they are by no means
 the only neural network architecture suitable for this task.
 
-In the next chapter, we will look at convolutional neural networks and
+In the next lab, we will look at convolutional neural networks and
 show how they can be used for NLP learning tasks.
