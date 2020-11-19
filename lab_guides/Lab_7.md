@@ -5,7 +5,7 @@
 =====================================================================
 
 
-In this chapter, we will cover the following topics:
+In this lab, we will cover the following topics:
 
 -   Theory of sequence-to-sequence models
 -   Building a sequence-to-sequence neural network for text translation
@@ -30,7 +30,6 @@ translation maps word to word:
 
 ![](./images/B12365_07_01.jpg)
 
-Figure 7.1 -- English to Spanish translation
 
 The first word in our input sentence maps nicely to the first word in
 our output sentence. If this were the case for all languages, we could
@@ -41,7 +40,6 @@ sequence-to-sequence modeling, as shown here:
 
 ![](./images/B12365_07_02.jpg)
 
-Figure 7.2 -- English-to-Spanish translation of words
 
 However, we know from our experience with NLP that
 language is not as simple as this! Single words in one language may map
@@ -55,7 +53,6 @@ modeling becomes essential, as seen here:
 
 ![](./images/B12365_07_03.jpg)
 
-Figure 7.3 -- Sequence-to-sequence modeling for translation
 
 To train a sequence-to-sequence model that
 captures the context of the input sentence and translates this into an
@@ -74,7 +71,6 @@ actually look something like this:
 
 ![](./images/B12365_07_04.jpg)
 
-Figure 7.4 -- Full sequence-to-sequence model
 
 By splitting our models into individual encoder
 and decoder elements, we are effectively modularizing our models. This
@@ -88,7 +84,6 @@ translation:
 
 ![](./images/B12365_07_05.jpg)
 
-Figure 7.5 -- Detailed model layout
 
 Next, we will examine the encoder and decoder components of the
 sequence-to-sequence model.
@@ -115,7 +110,6 @@ sentence:
 
 ![](./images/B12365_07_06.jpg)
 
-Figure 7.6 -- Examining the encoder
 
 We use our final hidden state, *h*[n]{.subscript}, as our context
 vector, which we will then decode using a trained decoder. It
@@ -151,7 +145,6 @@ diagram:
 
 ![](./images/B12365_07_07.jpg)
 
-Figure 7.7 -- Examining the decoder
 
 First, our model takes the context vector as the
 final hidden state from our encoder step, *h0*. Our model then aims to
@@ -203,7 +196,6 @@ making it very difficult for our model to learn anything:
 
 ![](./images/B12365_07_08.jpg)
 
-Figure 7.8 -- Using teacher forcing
 
 However, by using **teacher forcing**, we train our model using the
 correct previous target word so that one wrong prediction does not
@@ -218,7 +210,6 @@ will learn much more quickly:
 
 ![](./images/B12365_07_09.jpg)
 
-Figure 7.9 -- Updating for losses
 
 You can consider teacher forcing as a way of
 helping our model learn independently of its previous predictions at
@@ -306,7 +297,6 @@ vocabulary that we can use to tokenize our data:
     
 ![](./images/64.PNG)
 
-    Figure 7.10 -- Reversing the input words
 
     Here, we can see that in order to predict the first output word,
     *y0*, correctly, our first English word from *x0* must travel
@@ -320,7 +310,6 @@ vocabulary that we can use to tokenize our data:
 ![](./images/B12365_07_101.jpg)
     
 
-    Figure 7.11 -- Reversing the input sentence
 
     We can now see that the distance between the true first word in our
     input sentence and the corresponding word in the output sentence is
@@ -389,7 +378,6 @@ vocabulary that we can use to tokenize our data:
     ![](./images/B12365_07_12.jpg)
     
 
-    Figure 7.12 -- Training data examples
 
 6.  Now, we can examine the size of each of our datasets. Here, we can
     see that our training dataset consists of 29,000 examples and that
@@ -413,7 +401,6 @@ vocabulary that we can use to tokenize our data:
     ![](./images/B12365_07_13.jpg)
     
 
-    Figure 7.13 -- Data sample lengths
 
 7.  Now, we can build our vocabularies and check
     their size. Our vocabularies should consist of every unique word
@@ -441,7 +428,6 @@ vocabulary that we can use to tokenize our data:
 ![](./images/B12365_07_14.jpg)
     
 
-    Figure 7.14 -- Vocabulary size of the dataset
 
 8.  Finally, we can create our data iterators from
     our datasets. As we did previously, we specify the usage of a
@@ -518,7 +504,6 @@ like this, with our model outputting two hidden states:
 
 ![](./images/B12365_07_15.jpg)
 
-Figure 7.15 -- LSTM model with an encoder
 
 Now that we have built our encoder, let\'s start building our decoder.
 
@@ -587,7 +572,6 @@ something like this:
 
 ![](./images/B12365_07_16.jpg)
 
-Figure 7.16 -- LSTM model with a decoder
 
 Here, we can see that defining the encoders and decoders individually is
 not particularly complicated. However, when we combine these steps into
@@ -912,7 +896,6 @@ get started:
 
 ![](./images/B12365_07_17.jpg)
 
-Figure 7.17 -- Training the model
 
 Here, we can see that both our training and
 validation loss appear to be falling over time. We can continue to train
@@ -973,7 +956,6 @@ making accurate predictions. Let\'s get started!
 
 ![](./images/B12365_07_18.jpg)
 
-Figure 7.18 -- Translation output part one
 
 In other instances, our model is off by a single word. In this case, our
 model predicts the word `hüten` instead of `mützen`;
@@ -984,7 +966,6 @@ though the words may not be semantically identical:
 
 ![](./images/B12365_07_19.jpg)
 
-Figure 7.19 -- Translation output part two
 
 We can also see examples that seem to have been mistranslated. In the
 following example, the English equivalent of the German sentence that we
@@ -996,7 +977,6 @@ sentence (woman and climbing):
 
 ![](./images/65.PNG)
 
-Figure 7.20 -- Translation output part three
 
 Here, we can see that although our model clearly
 makes a decent attempt at translating English into German, it is far
@@ -1028,11 +1008,9 @@ why the most accurate translation tools are owned by companies with
 access to vast amounts of language data (such as Google).
 
 
-Summary
-=======
+#### Summary
 
-
-In this chapter, we covered how to build sequence-to-sequence models
+In this lab, we covered how to build sequence-to-sequence models
 from scratch. We learned how to code up our encoder and decoder
 components individually and how to integrate them into a single model
 that is able to translate sentences from one language into another.

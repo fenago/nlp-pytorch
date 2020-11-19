@@ -4,7 +4,7 @@
 *Lab 6*: Convolutional Neural Networks for Text Classification
 =======================================================================================
 
-In this chapter, we will explore the basic theory behind CNNs, as well
+In this lab, we will explore the basic theory behind CNNs, as well
 as construct a CNN from scratch that will be used to classify text. We
 will cover the following topics:
 
@@ -41,7 +41,6 @@ or a 1:
 
 ![](./images/B12365_06_01.jpg)
 
-Figure 6.1 -- Vector representation of an image
 
 However, if we think about this in machine learning terms and treat this
 vector as features of our model, does the fact that any single pixel is
@@ -76,7 +75,6 @@ following diagram, we can see an example of convolution in action:
 
 ![](./images/B12365_06_02.jpg)
 
-Figure 6.2 -- Convolution in action
 
 On the left, we have the image that we are
 processing, while at the top, we have the convolution kernel we wish to
@@ -112,7 +110,6 @@ see this in the following diagram:
 
 ![](./images/B12365_06_03.jpg)
 
-Figure 6.3 -- Pooling layers
 
 These pooling layers have been shown to effectively reduce the
 dimensionality of our data, while still retaining much of the essential
@@ -185,7 +182,6 @@ vectors:
 
 ![](./images/B12365_06_04.jpg)
 
-Figure 6.4 -- Word vectors
 
 We then apply a (2 x *n*) convolution over the matrix (where *n* is the
 length of our word vectors; in this instance, *n* = 5). We can convolve
@@ -196,14 +192,12 @@ where there are four possible bi-grams within a five-word sentence:
 
 ![](./images/B12365_06_05.jpg)
 
-Figure 6.5 -- Convolving word vectors into bi-grams
 
 Similarly, we can do this for any number of n-grams; for example, *n*=3:
 
 
 ![](./images/B12365_06_06.jpg)
 
-Figure 6.6 -- Convolving word vectors into n-grams
 
 One of the benefits of convolutional models such
 as this is there is no limit to the number of
@@ -214,7 +208,6 @@ trigrams, we could set our model up like so:
 
 ![](./images/B12365_06_07.jpg)
 
-Figure 6.7 -- Convolving word vectors into bi-grams and trigrams
 
 Although CNNs for NLP have advantages such as those described in the
 preceding sections, they do have their drawbacks.
@@ -286,7 +279,6 @@ as follows:
 
 ![](./images/B12365_06_08.jpg)
 
-Figure 6.8 -- Semantic categories in the TREC dataset
 
 This means that unlike our previous classification
 class, where our model output was a single prediction between
@@ -298,7 +290,6 @@ with the highest prediction:
 
 ![](./images/B12365_06_09.jpg)
 
-Figure 6.9 -- Prediction values
 
 In this way, our model will now be able to perform classification tasks
 over several classes and we are no longer restricted to the 0 or 1
@@ -413,7 +404,6 @@ follows:
 
 ![](./images/B12365_06_10.png)
 
-Figure 6.10 -- Output of the TorchText object
 
 It is possible for us to view individual data
 within this dataset object; we just need to call the
@@ -430,7 +420,6 @@ This returns the following output:
 
 ![](./images/B12365_06_11.jpg)
 
-Figure 6.11 -- Data in the dataset object
 
 The label code is run as follows:
 
@@ -443,7 +432,6 @@ This gives us the following output:
 
 ![](./images/B12365_06_012.png)
 
-Figure 6.12 -- Label of the dataset object
 
 So, we can see that our input data consists of a
 tokenized sentence and that our label consists of the category that we
@@ -460,7 +448,6 @@ This results in the following output:
 
 ![](./images/B12365_06_013.png)
 
-Figure 6.13 -- Sizes of the training and validation sets
 
 This shows that our training to validation ratio is approximately 70% to
 30%. It is worth noting exactly how our input sentence has been
@@ -508,7 +495,6 @@ This results in the following output:
 
 ![](./images/B12365_06_014.jpg)
 
-Figure 6.14 -- Tensor contents
 
 Next, we create our data iterators. We create separate iterators for
 both our training and validation data. We first specify a device so that
@@ -614,7 +600,6 @@ look for a given set of variables is as follows:
 
 ![](./images/B12365_06_015.jpg)
 
-Figure 6.15 -- Convolution layer looking for variables
 
 We can see that our `ModuleList` function adapts to the number
 of filters and the size of the filters we wish to train. Next, within
@@ -714,7 +699,6 @@ This results in the following output:
 
 ![](./images/B12365_06_016.jpg)
 
-Figure 6.16 -- Tensor output after lowering the dropout
 
 Next, we need to define how our model deals with
 instances when our model accounts for unknown tokens that aren\'t
@@ -928,7 +912,6 @@ This results in the following output:
 
 ![](./images/B12365_06_017.jpg)
 
-Figure 6.17 -- Testing the model
 
 Thankfully, we see that this does appear to be the
 case. Both the training and validation loss fall after every epoch and
@@ -957,7 +940,6 @@ you will see the following output:
 
 ![](./images/B12365_06_018.jpg)
 
-Figure 6.18 -- Prediction output
 
 Next, we define a function that will take a sentence as input,
 preprocess it, pass it to our model, and return a prediction:
@@ -1016,7 +998,6 @@ This returns the following prediction:
 
 ![](./images/B12365_06_019.jpg)
 
-Figure 6.19 -- Prediction value
 
 This prediction is correct! Our input question contains
 `How many`, suggesting that the answer to this question is a
@@ -1027,11 +1008,9 @@ have now successfully trained a multi-class CNN that can define the
 category of any given question.
 
 
-Summary
-=======
+#### Summary
 
-
-In this chapter, we have shown how CNNs can be used to learn from NLP
+In this lab, we have shown how CNNs can be used to learn from NLP
 data and how to train one from scratch using PyTorch. While the deep
 learning methodology is very different to the methodology used within
 RNNs, conceptually, CNNs use the motivation behind n-gram language

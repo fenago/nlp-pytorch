@@ -74,7 +74,6 @@ this relationship by looking at the data:
 
 ![](./images/1.PNG)
 
-Figure 1.1 -- Table showing housing data
 
 Here, we have been given the sizes of four houses
 that recently sold, as well as the prices they
@@ -86,7 +85,6 @@ relationship between these two factors:
 
 ![](./images/2.PNG)
 
-Figure 1.2 -- Output of the housing data
 
 Given this historic data, we can use this data to
 estimate a relationship between **size** (X) and
@@ -98,7 +96,6 @@ function:
 
 ![](./images/3.PNG)
 
-Figure 1.3 -- Predicting house prices
 
 Therefore, all supervised learning tasks aim to
 learn some function of the model inputs to predict
@@ -134,7 +131,6 @@ to learn from images:
 
 ![](./images/5.PNG)
 
-Figure 1.4 -- Model training
 
 As we shall explore in more detail later, they can
 also learn from text:
@@ -164,7 +160,6 @@ identify the distinct clusters (countries) that exist within the data:
 
 ![](./images/6.PNG)
 
-Figure 1.5 -- Output of the clustering algorithm
 
 Clustering also has uses within the realm of NLP.
 If we are given a dataset of emails and want to determine how many
@@ -207,7 +202,6 @@ necessarily result in a good model:
 
 ![](./images/10.PNG)
 
-Figure 1.8 -- Sample output of overfitting
 
 We now have a house of size **110 sq m** to
 predict the price of. Using our intuition, as this house is larger than
@@ -252,7 +246,6 @@ not necessarily mean our model is good:
 
 ![](./images/12.PNG)
 
-Figure 1.9 -- Table showing data predicted as spam/non-spam
 
 Here, we can see that although our model predicted
 990 emails as not spam correctly (known as true
@@ -312,7 +305,6 @@ functions**:
 ![](./images/16.PNG)
 
 
-Figure 1.12 -- Activation functions in neural networks
 
 We apply an activation function to each node
 within our fully connected layer. What this means is that each node in
@@ -381,7 +373,6 @@ test sets of data after each forward and backward pass of the dataset
 ![](./images/19.PNG)
 
 
-Figure 1.14 -- Test and training epochs
 
 Here, we can see that as we continue to train the
 network, the training loss gets smaller over time as we move closer to
@@ -437,7 +428,6 @@ functions**:
 
 ![](./images/22.PNG)
 
-Figure 1.12 -- Activation functions in neural networks
 
 We apply an activation function to each node
 within our fully connected layer. What this means is that each node in
@@ -504,7 +494,6 @@ test sets of data after each forward and backward pass of the dataset
 
 ![](./images/25.PNG)
 
-Figure 1.14 -- Test and training epochs
 
 Here, we can see that as we continue to train the
 network, the training loss gets smaller over time as we move closer to
@@ -572,13 +561,10 @@ this in the form of a sequence of one-hot encoded vectors:
 
 ![](./images/27.PNG)
 
-Figure 1.16 -- One-hot encoded vectors
 
-Summary
-=======
+#### Summary
 
-
-In this chapter, we introduced the fundamentals of machine learning and
+In this lab, we introduced the fundamentals of machine learning and
 neural networks, as well as a brief overview of transforming text for
 use within these models. In the next chapter, we will provide a brief
 overview of PyTorch and how it can be used to construct some of these

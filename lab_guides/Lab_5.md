@@ -49,7 +49,6 @@ For each iteration, we update our hidden state at each time step, *x*:
 
 ![](./images/B12365_05_1.jpg)
 
-Figure 5.1 -- Recurrent layer
 
 Alternatively, we can expand this out to the whole
 sequence of time steps, which looks like this:
@@ -57,7 +56,6 @@ sequence of time steps, which looks like this:
 
 ![](./images/B12365_05_2.jpg)
 
-Figure 5.2 -- Sequence of time steps
 
 This layer is for an input that is *n* time steps long. Our hidden state
 is initialized in state *h*[0]{.subscript}, and then uses our first
@@ -112,7 +110,6 @@ This means our complete classification model looks like this:
 
 ![](./images/B12365_05_3.jpg)
 
-Figure 5.3 -- Classification model
 
 Now, we will highlight one of the issues with
 RNNs---exploding and shrinking gradients---and how we can remedy this
@@ -151,7 +148,6 @@ The following graph shows the relationship between the two variables:
 
 ![](./images/B12365_05_4.jpg)
 
-Figure 5.4 -- Comparison of gradient clipping
 
 Another technique we can use to prevent exploding or disappearing
 gradients is to shorten our input sequence length. The effective depth
@@ -272,7 +268,6 @@ significantly more complicated:
 
 ![](./images/B12365_05_6.jpg)
 
-Figure 5.6 -- Inner workings of an LSTM cell
 
 While this looks significantly more daunting than the RNN, we will
 explain each component of the LSTM cell in turn.
@@ -282,7 +277,6 @@ the bold rectangle):
 
 ![](./images/B12365_05_7.jpg)
 
-Figure 5.7 -- The forget gate
 
 The forget gate essentially learns which elements of the sequence to
 forget. The previous hidden state, *h*[t-1]{.subscript}, and the latest
@@ -299,7 +293,6 @@ Next, we will look at the **input gate**:
 
 ![](./images/B12365_05_8.jpg)
 
-Figure 5.8 -- The input gate
 
 The input gate again takes the concatenated previous hidden state,
 *h*[t-1]{.subscript}, and the current sequence input,
@@ -320,7 +313,6 @@ cell---the **output gate**:
 
 ![](./images/B12365_05_9.jpg)
 
-Figure 5.9 -- The output gate
 
 The output gate calculates the final output of the LSTM cell---both the
 cell state and the hidden state that is carried over to the next step.
@@ -381,7 +373,6 @@ We\'ll call the forward hidden state *f*[t]{.subscript} and use
 
 ![](./images/55.PNG)
 
-Figure 5.10 -- The bidirectional LSTM process
 
 Here, we can see that we maintain these two hidden states throughout the
 whole process and use them to calculate a final hidden state,
@@ -427,7 +418,6 @@ This returns the following output:
 
 ![](./images/56.PNG)
 
-Figure 5.11 -- Output of the dataset
 
 We read in our dataset from the file. Our dataset is tab-separated, so
 we split it up with tabs and the new line
@@ -470,7 +460,6 @@ This results in the following output:
 ![](./images/57.PNG)
 
 
-Figure 5.12 -- Output of NTLK tokenization
 
 We return the reviews themselves, as well as a set of all words within
 all the reviews (that is, the vocabulary/corpus), which we will use to
@@ -496,7 +485,6 @@ This gives the following output:
 
 ![](./images/58.PNG)
 
-Figure 5.13 -- Assigning an index to each word
 
 Our neural network will take input of a fixed length; however, if we
 explore our reviews, we will see that our reviews
@@ -519,7 +507,6 @@ This gives the following:
 ![](./images/59.PNG)
 
 
-Figure 5.14 -- Length value
 
 We can see that the longest sentence is `70` words long and
 the average sentence length has a length of `11.78`. To
@@ -566,7 +553,6 @@ Our padded sentence looks like this:
 
 ![](./images/B12365_05_15.jpg)
 
-Figure 5.15 -- Padding the sentences
 
 We must make one further adjustment to allow the use of empty tokens
 within our model. Currently, our vocabulary
@@ -596,7 +582,6 @@ Our encoded sentence is represented as follows:
 
 ![](./images/60.PNG)
 
-Figure 5.16 -- Encoding the sentence
 
 Now that we have all our input sequences encoded as numerical vectors,
 we are ready to begin designing our model architecture.
@@ -616,7 +601,7 @@ purposes, we will train our own embedding layer. Our input sequences are
 fed through the input layer and come out as sequences of vectors.
 
 These vector sequences are then fed into our
-**LSTM layer**. As explained in detail earlier in this chapter, the LSTM
+**LSTM layer**. As explained in detail earlier in this lab, the LSTM
 layer learns sequentially from our sequence of embeddings and outputs a
 single vector output representing the final hidden state of the LSTM
 layer. This final hidden state is finally passed
@@ -628,7 +613,6 @@ looks something like this:
 
 ![](./images/B12365_05_17.jpg)
 
-Figure 5.17 -- Model architecture
 
 We will now demonstrate how to code this model
 from scratch using PyTorch. We create a class called
@@ -865,7 +849,7 @@ predicted output from the model and the correct labels. We then perform
 a backward pass of this loss through our network to calculate the
 gradients at each stage. Next, we use the `grad_clip_norm()`
 function to clip our gradients as this will stop our gradients from
-exploding, as mentioned earlier in this chapter. We defined
+exploding, as mentioned earlier in this lab. We defined
 `clip = 5`, meaning the maximum gradient at any given node is
 `5`. Finally, we update our weights using the gradients
 calculated on our backward pass by calling `optimizer.step()`.
@@ -906,7 +890,6 @@ something like this:
 
 ![](./images/B12365_05_18.jpg)
 
-Figure 5.18 -- Training the model
 
 Finally, we can save our model for future use:
 
@@ -969,7 +952,6 @@ Our performance on our test set of data is as follows:
 
 ![](./images/61.PNG)
 
-Figure 5.19 -- Output values
 
 We then compare our model predictions with our true labels to get
 `correct_tensor`, which is a vector that evaluates whether
@@ -1055,7 +1037,6 @@ This results in the following output:
 
 ![](./images/62.PNG)
 
-Figure 5.20 -- Prediction string on a positive value
 
 We also try using `predict()` on the negative value:
 
@@ -1068,7 +1049,6 @@ This results in the following output:
 
 ![](./images/63.PNG)
 
-Figure 5.21 -- Prediction string on a negative value
 
 We have now built an LSTM model to perform sentiment analysis from the
 ground up. Although our model is far from perfect,
@@ -1676,11 +1656,9 @@ forward, this tutorial will hopefully serve as a basis for you to train
 your own LSTM models and deploy them to the cloud yourself.
 
 
-Summary
-=======
+#### Summary
 
-
-In this chapter, we discussed the fundamentals of RNNs and one of their
+In this lab, we discussed the fundamentals of RNNs and one of their
 main variations, LSTM. We then demonstrated how you can build your own
 RNN from scratch and deploy it on the cloud-based platform Heroku. While
 RNNs are often used for deep learning on NLP tasks, they are by no means

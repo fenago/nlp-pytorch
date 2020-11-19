@@ -32,7 +32,7 @@ needs, rather than using the whole input sentence decision. This
 improvement allows us to create much more efficient sequence-to-sequence
 models with state-of-the-art performance.
 
-In this chapter, we will look at the following topics:
+In this lab, we will look at the following topics:
 
 -   The theory of attention within neural networks
 -   Implementing attention within a neural network to construct a
@@ -53,7 +53,6 @@ basic graphical illustration of this is as follows:
 
 ![](./images/B12365_08_1.jpg)
 
-Figure 8.1 -- Graphical representation of sequence-to-sequence models
 
 However, decoding over the entirety of the hidden state is not
 necessarily the most efficient way of using this task. This is because
@@ -123,7 +122,6 @@ In the following diagram, we can see this in practice:
 
 ![](./images/B12365_08_2.jpg)
 
-Figure 8.2 -- Local attention model
 
 We first start by calculating the aligned position, *p*[t]{.subscript},
 from our final hidden state, *h*[n]{.subscript}. This tells
@@ -151,7 +149,6 @@ layer here:
 
 ![](./images/B12365_08_3.jpg)
 
-Figure 8.3 -- Global attention model
 
 We can see in the preceding diagram that although
 this appears very similar to our local attention
@@ -168,7 +165,6 @@ through hidden states that are relevant to our prediction:
 
 ![](./images/B12365_08_4.jpg)
 
-Figure 8.4 -- Combined model
 
 We can see in the preceding diagram that by
 learning which hidden states to pay attention to,
@@ -227,7 +223,6 @@ transform a script of *n* lines into *n-1* pairs of input/output:
 
 ![](./images/B12365_08_05.jpg)
 
-Figure 8.5 -- Table of input and output
 
 We can use these input/output pairs to train our
 network, where the input is a proxy for human input and the output is
@@ -262,7 +257,6 @@ This prints the following result:
 
 ![](./images/B12365_08_06.jpg)
 
-Figure 8.6 -- Examining the dataset
 
 You will first notice that our lines are as expected, as the second half
 of the first line becomes the first half of the
@@ -494,7 +488,6 @@ following steps:
 ![](./images/B12365_08_07.jpg)
     
 
-    Figure 8.7 -- Value of sentences in the dataset
 
 6.  We can print a selection of our processed input/output pairs in
     order to verify that our functions have all worked correctly:
@@ -511,7 +504,6 @@ following steps:
 
 ![](./images/B12365_08_08.jpg)
 
-Figure 8.8 -- Processed input/output pairs
 
 It appears that we have successfully split our dataset into input and
 output pairs upon which we can train our network.
@@ -556,7 +548,6 @@ We will use the following steps to remove the words:
 ![](./images/B12365_08_09.jpg)
     
 
-    Figure 8.9 -- Percentage of words to be kept
 
 2.  Within this same function, we loop through all the words in the
     input and output sentences. If for a given pair either the input or
@@ -594,7 +585,6 @@ We will use the following steps to remove the words:
 
 ![](./images/B12365_08_10.png)
 
-Figure 8.10 -- Final value after building our dataset
 
 Now that we have our finalized dataset, we need to
 build some functions that transform our dataset into batches of tensors
@@ -737,7 +727,6 @@ size of the batch that we wish to train on:
 
 ![](./images/B12365_08_11.jpg)
 
-Figure 8.11 -- Input tensor
 
 We can also validate the corresponding output data and mask. Notice how
 the `False` values in the mask overlap with the padding tokens
@@ -746,7 +735,6 @@ the `False` values in the mask overlap with the padding tokens
 
 ![](./images/B12365_08_12.jpg)
 
-Figure 8.12 -- The target and mask tensors
 
 Now that we have obtained, cleaned, and
 transformed our data, we are ready to begin training the attention-based
@@ -830,7 +818,6 @@ following steps:
     ![](./images/B12365_08_13.jpg)
     
 
-    Figure 8.13 -- Encoder layout
 
     We maintain two hidden states, as well as outputs at each step,
     within our input sentence.
@@ -1490,7 +1477,6 @@ hyperparameters and calling our training functions:
     ![](./images/B12365_08_14.jpg)
     
 
-    Figure 8.14 -- Successful output
 
     Now that we have created instances of both our encoder and decoders,
     we are ready to begin training them.
@@ -1590,7 +1576,6 @@ hyperparameters and calling our training functions:
 
 ![](./images/B12365_08_15.jpg)
 
-Figure 8.15 -- Training the model
 
 Your model is now training! Depending on a number
 of factors, such as how many epochs you have set your model to train for
@@ -1603,7 +1588,6 @@ learned something useful:
 
 ![](./images/B12365_08_16.jpg)
 
-Figure 8.16 -- Average loss after 4,000 iterations
 
 Now that our model has been trained, we can begin the evaluation process
 and start using our chatbot.
@@ -1644,7 +1628,6 @@ and start using our chatbot.
 
 ![](./images/B12365_08_17.jpg)
 
-Figure 8.17 -- UI element for entering text
 
 Entering your text here and pressing *Enter* will
 send your input to the chatbot. Using our trained model, our chatbot
@@ -1653,7 +1636,6 @@ will create a response and print it to the console:
 
 ![](./images/B12365_08_18.jpg)
 
-Figure 8.18 -- Output for the chatbot
 
 You can repeat this process as many times as you like to have a
 \"conversation\" with the chatbot. At a simple conversational level, the
@@ -1662,7 +1644,6 @@ chatbot can produce surprisingly good results:
 
 ![](./images/B12365_08_19.jpg)
 
-Figure 8.19 -- Output for the chatbot
 
 However, once the conversation gets more complex,
 it will become obvious that the chatbot isn\'t capable of the same level
@@ -1671,14 +1652,12 @@ of conversation as a human:
 
 ![](./images/B12365_08_20.jpg)
 
-Figure 8.20 -- Limitations of the chatbot
 
 In many cases, your chatbot\'s responses may be nonsensical:
 
 
 ![](./images/B12365_08_21.jpg)
 
-Figure 8.21 -- Wrong output
 
 It is clear that we have created a chatbot capable of simple back and
 forth conversations. However, we still have a long way to go before our
@@ -1698,11 +1677,9 @@ more recent developments for NLP learning that have
 resulted in even more realistic chatbots.
 
 
-Summary
-=======
+#### Summary
 
-
-In this chapter, we applied all the knowledge we learned from our
+In this lab, we applied all the knowledge we learned from our
 recurrent models and our sequence-to-sequence models and combined them
 with an attention mechanism to construct a fully working chatbot. While
 conversing with our chatbot is unlikely to be indistinguishable from

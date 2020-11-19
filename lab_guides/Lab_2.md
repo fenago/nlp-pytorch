@@ -5,7 +5,7 @@
 ==========================================================================
 
 
-In this chapter, we will show you how to get PyTorch up and running on
+In this lab, we will show you how to get PyTorch up and running on
 your computer, as well as demonstrate some of its key functionalities.
 We will then compare PyTorch to some other deep learning frameworks,
 before exploring some of the NLP functionality of PyTorch, such as its
@@ -61,7 +61,6 @@ Notebook and run a few simple commands:
 
     ``
 
-    Figure 2.1 -- Tensor output
 
     This shows that tensors within PyTorch are saved as their own data
     type (not dissimilar to how arrays are saved within NumPy).
@@ -83,7 +82,6 @@ Notebook and run a few simple commands:
 ![](./images/B12365_02_2.jpg)
     
 
-    Figure 2.2 -- Tensor multiplication output
 
 3.  We can also select individual elements from a tensor, as follows:
 
@@ -98,7 +96,6 @@ Notebook and run a few simple commands:
 
 ![](./images/B12365_02_3.jpg)
 
-Figure 2.3 -- Tensor selection output
 
 However, note that unlike a NumPy array, selecting an
 individual element from a tensor object
@@ -116,7 +113,6 @@ This results in the following output:
 
 ![](./images/B12365_02_4.jpg)
 
-Figure 2.4 -- Output of the .item() function
 
 
 
@@ -136,7 +132,6 @@ within PyTorch:
 
 ![](./images/B12365_02_5.jpg)
 
-Figure 2.5 -- Tensor matrix
 
 You can check the size of any tensor by typing the
 following:
@@ -151,7 +146,6 @@ This results in the following output:
 
 ![](./images/B12365_02_6.jpg)
 
-Figure 2.6 -- Tensor shape output
 
 This shows that this is a 3x2 tensor (order 2).
 
@@ -186,7 +180,6 @@ batch 2:
 
 ![](./images/28.PNG)
 
-Figure 2.7 -- One pass in a neural network
 
 However, on a GPU, we can perform all these steps simultaneously,
 meaning there is no requirement for batch 1 to
@@ -198,7 +191,6 @@ the machine learning process:
 
 ![](./images/29.PNG)
 
-Figure 2.8 -- Parallel approach to perform passes
 
 **Compute Unified Device Architecture** (**CUDA**) is the
 technology specific to Nvidia GPUs that enables
@@ -256,7 +248,6 @@ the following steps:
 
 ![](./images/30.PNG)
 
-Figure 2.9 -- Tensor multiplication output using CUDA
 
 The changes in speed will not be noticeable at this stage as we are just
 creating a tensor, but when we begin training models at scale later, we
@@ -303,7 +294,6 @@ sentiment analysis on:
 ![](./images/31.PNG)
 
 
-Figure 2.10 -- Model construction in PyTorch
 
 We can represent each of these sentences as a sequence of individual
 word vectors, which would then form our input to our neural network.
@@ -338,7 +328,6 @@ example from the MNIST dataset, consisting of a hand-drawn digit 1:
 
 ![](./images/B12365_02_11.jpg)
 
-Figure 2.11 -- Sample image from the MNIST dataset
 
 These images are 28x28 in size: 784 pixels in total. Our dataset in
 `train.csv` consists of 1,000 of these images, with each
@@ -419,7 +408,6 @@ Our network now looks something like this:
 
 ![](./images/B12365_02_12.jpg)
 
-Figure 2.12 -- Our neural network
 
 Here, we can see that our final layer outputs **10** units. This is
 because we wish to predict whether each image is a digit between 0 and
@@ -519,7 +507,6 @@ correct prediction we are:
 
 ![](./images/B12365_02_13.jpg)
 
-Figure 2.13 -- Representation of loss for our network
 
 This is then summed over all the correct classes in our dataset to
 compute the total loss. Note that we defined a log
@@ -604,7 +591,6 @@ output will look something like this:
 
 ![](./images/B12365_02_14.jpg)
 
-Figure 2.14 -- Training epochs
 
 
 
@@ -649,7 +635,6 @@ This results in the following output:
 
 ![](./images/B12365_02_15.jpg)
 
-Figure 2.15 -- Prediction outputs
 
 Here, we can see that our prediction is a vector of length 10, with a
 prediction for each of the possible classes (digits between 0 and 9).
@@ -679,7 +664,6 @@ This results in the following output:
 
 ![](./images/B12365_02_16.jpg)
 
-Figure 2.16 -- Prediction table
 
 Note how the `torch.max()` function automatically selects the
 prediction with the highest value. We can see here that, based
@@ -711,7 +695,6 @@ This results in the following output:
 
 ![](./images/B12365_02_17.jpg)
 
-Figure 2.17 -- Accuracy score
 
 Congratulations! Your first neural network was able to correctly
 identify almost 90% of unseen digit images. As we progress, we will see
@@ -781,7 +764,6 @@ English:
 ![](./images/B12365_02_18.jpg)
     
 
-    Figure 2.18 -- Setting up the classifier
 
     Note that here, we looped through all our training data and test
     data. If we just created our word index on training data, when it
@@ -907,7 +889,6 @@ This results in the following output:
 
 ![](./images/B12365_02_19.jpg)
 
-Figure 2.19 -- Training loss
 
 Here, we can see that our loss is decreasing over
 time as our model learns. Although our training set in this example is
@@ -952,7 +933,6 @@ something useful, as follows:
     ![](./images/B12365_02_20.jpg)
     
 
-    Figure 2.20 -- Predicted output
 
     Here, we can see that for both our predictions, our model predicts
     the correct answer, but why is this? What exactly has our model
@@ -992,7 +972,6 @@ something useful, as follows:
 
 ![](./images/B12365_02_21.jpg)
 
-Figure 2.21 -- Predicted output for the updated function
 
 Here, we can see that for the word
 `estoy`, this parameter is positive for the Spanish prediction
@@ -1023,11 +1002,9 @@ This results in the following output:
 
 
 
-Summary
-=======
+#### Summary
 
-
-In this chapter, we introduced PyTorch and some of its key features.
+In this lab, we introduced PyTorch and some of its key features.
 Hopefully, you now have a better understanding of how PyTorch differs
 from other deep learning frameworks and how it can be used to build
 basic neural networks. While these simple examples are just the tip of

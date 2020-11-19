@@ -5,7 +5,7 @@
 =========================================================
 
 
-In this chapter, we will cover the following topics:
+In this lab, we will cover the following topics:
 
 -   Text preprocessing
 -   Stemming
@@ -16,8 +16,7 @@ In this chapter, we will cover the following topics:
 Technical requirements
 ======================
 
-
-For the text preprocessing in this chapter, we will mostly use inbuilt
+For the text preprocessing in this lab, we will mostly use inbuilt
 Python functions, but we will also use the external
 `BeautifulSoup` package. For stemming and lemmatization, we
 will use the NLTK Python package.
@@ -51,7 +50,6 @@ This returns the following output:
 
 ![](./images/B12365_04_01.jpg)
 
-Figure 4.1 -- Removing HTML
 
 The preceding screenshot shows that the HTML has been successfully
 removed. This could be useful in any situations where HTML code may be
@@ -88,7 +86,6 @@ This returns the following output:
 
 ![](./images/B12365_04_02.jpg)
 
-Figure 4.2 -- Converting input into lowercase
 
 This shows that the inputs have all been transformed into identical
 lowercase representations. There are a few examples where capitalization
@@ -145,7 +142,6 @@ This returns the following output:
 
 ![](./images/B12365_04_03.jpg)
 
-Figure 4.3 -- Removing punctuation from input
 
 This shows that the punctuation has been removed from the input
 sentence.
@@ -171,7 +167,6 @@ This returns the following output:
 
 ![](./images/B12365_04_04.jpg)
 
-Figure 4.4 -- Removing and replacing punctuation
 
 It is also worth considering specific circumstances where punctuation
 may be essential for the representation of a
@@ -221,7 +216,6 @@ This returns the following output:
 
 ![](./images/B12365_04_05.jpg)
 
-Figure 4.5 -- Replacing numbers with text
 
 This shows that we have successfully converted our digits into text.
 
@@ -243,7 +237,6 @@ This returns the following output:
 
 ![](./images/B12365_04_06.jpg)
 
-Figure 4.6 -- Converting a phone number into text
 
 Clearly, the input in the preceding example is a
 phone number, so the full text representation is not necessarily fit for
@@ -337,7 +330,6 @@ using NLTK before moving on and discussing the algorithm in more detail:
 ![](./images/B12365_04_07.jpg)
     
 
-    Figure 4.7 -- Returning the stems of words
 
 3.  We can also apply stemming to an entire
     sentence, first by tokenizing the sentence and then by stemming each
@@ -355,7 +347,6 @@ This returns the following output:
 
 ![](./images/47.PNG)
 
-Figure 4.8 -- Applying stemming to a sentence
 
 Here, we can see how different words are stemmed using the Porter
 Stemmer. Some words, such as `stemming` and
@@ -379,7 +370,6 @@ ease of understanding:
 
 ![](./images/B12365_04_09.jpg)
 
-Figure 4.9 -- Rules of the Porter Stemmer algorithm
 
 While it is not essential to understand every rule within the Porter
 Stemmer, it is key that we understand its limitations. While the Porter
@@ -428,7 +418,6 @@ This results in the following output:
 
 ![](./images/48.PNG)
 
-Figure 4.10 -- Lemmatization output
 
 Here, we can already begin to see the advantages of using lemmatization
 over stemming. Since the WordNet Lemmatizer is built on a database of
@@ -449,7 +438,6 @@ This results in the following output:
 ![](./images/49.PNG)
 
 
-Figure 4.11 -- Lemmatization output for made-up words
 
 Here, we can see that, in this instance, our stemmer is able to
 generalize better to previously unseen words. Therefore, using a
@@ -471,7 +459,6 @@ This results in the following output:
 
 ![](./images/50.PNG)
 
-Figure 4.12 -- Running lemmatization on verbs
 
 This is because our lemmatizer relies on the context of words to be able
 to return the lemmas. Recall from our POS analysis that we can easily
@@ -490,7 +477,6 @@ This results in the following output:
 
 ![](./images/51.PNG)
 
-Figure 4.13 -- Implementing POS in the function
 
 This means that in order to return the correct
 lemmatization of any given sentence, we must first perform POS tagging
@@ -512,7 +498,6 @@ This results in the following output:
 
 ![](./images/B12365_04_14.jpg)
 
-Figure 4.14 -- Output of POS tagging on a sentence
 
 Note how this returns the NLTK POS tags for each of the words in the
 sentence. Our WordNet lemmatizer requires a slightly different input for
@@ -534,7 +519,6 @@ This results in the following output:
 
 ![](./images/52.PNG)
 
-Figure 4.15 -- Mapping NTLK POS tags to WordNet POS tags
 
 Finally, we combine these functions into one final function that will
 perform lemmatization on the whole sentence:
@@ -557,7 +541,6 @@ This results in the following output:
 
 ![](./images/53.PNG)
 
-Figure 4.16 -- Output of the finalized lemmatization function
 
 Here, we can see that, in general, lemmas generally provide a better
 representation of a word\'s true root compared to stems, with some
@@ -622,11 +605,9 @@ model to be as detailed and as accurate as possible, then lemmatization
 will likely result in the superior model.
 
 
-Summary
-=======
+#### Summary
 
-
-In this chapter, we have covered both stemming and lemmatization in
+In this lab, we have covered both stemming and lemmatization in
 detail by exploring the functionality of both methods, their use cases,
 and how they can be implemented. Now that we have covered all of the
 fundamentals of deep learning and NLP preprocessing, we are ready to

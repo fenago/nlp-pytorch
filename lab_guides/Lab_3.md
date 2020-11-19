@@ -45,7 +45,6 @@ can easily represent words as one-hot encoded vectors:
 
 ![](./images/B12365_03_1.jpg)
 
-Figure 3.1 -- One-hot encoded vectors
 
 On the other hand, embeddings are vectors of
 length *n* (in the following example, *n* = 3) that can take any value:
@@ -53,7 +52,6 @@ length *n* (in the following example, *n* = 3) that can take any value:
 
 ![](./images/B12365_03_2.jpg)
 
-Figure 3.2 -- Vectors with n=3
 
 These embeddings represent the word\'s vector in *n*-dimensional space
 (where *n* is the length of the embedding vectors), and words with
@@ -122,7 +120,6 @@ vectors:
     ![](./images/B12365_03_3.jpg)
     
 
-    Figure 3.3 -- Vector output
 
     We can see that this returns a 50-dimensional vector embedding for
     the word Python. We will now introduce the
@@ -153,7 +150,6 @@ vectors:
 ![](./images/B12365_03_4.jpg)
     
 
-    Figure 3.4 -- Cosine similarity output for cat and dog
 
 4.  However, `cat` and `piano` are quite dissimilar
     as they are two seemingly unrelated items:
@@ -168,7 +164,6 @@ vectors:
 
 ![](./images/B12365_03_5.jpg)
 
-Figure 3.5 -- Cosine similarity output for cat and piano
 
 
 
@@ -189,7 +184,6 @@ graphically illustrate this as follows:
 
 ![](./images/B12365_03_6.jpg)
 
-Figure 3.6 -- Graphical representation of the example
 
 Note that in this example, we illustrate this graphically in two
 dimensions. In the case of our embeddings, this is happening in a
@@ -207,7 +201,6 @@ This results in the following output:
 
 ![](./images/B12365_03_7.jpg)
 
-Figure 3.7 -- Output for the GLoVe vector
 
 While GLoVe embeddings are very useful pre-calculated embeddings, it is
 actually possible for us to calculate our own
@@ -254,7 +247,6 @@ We could look at this in a number of ways:
 
 ![](./images/32.PNG)
 
-Figure 3.8 -- Table of context and representations
 
 For our CBOW model, we will use a window of length 2, which means for
 our model\'s (*X, y*) input/output pairs, we use *(\[n-2, n-1, n+1, n+2,
@@ -283,7 +275,6 @@ illustration of how this might look:
 
 ![](./images/B12365_03_9.jpg)
 
-Figure 3.9 -- CBOW architecture
 
 Our input words are first fed through an embedding
 layer, represented as a tensor of size (n,l), where n is the specified
@@ -380,7 +371,6 @@ scratch, thereby demonstrating how our embedding vectors can be learned:
 
 ![](./images/33.PNG)
 
-    Figure 3.10 -- Encoding the data
 
 5.  We then define the length of our embeddings.
     While this can technically be any number you wish, there are some
@@ -470,7 +460,6 @@ scratch, thereby demonstrating how our embedding vectors can be learned:
 ![](./images/34.PNG)
     
 
-    Figure 3.11 -- Tensor value
 
 10. Now, we train our network. We loop through 100 epochs and for each
     pass, we loop through all our context words, that is, target word
@@ -505,7 +494,6 @@ scratch, thereby demonstrating how our embedding vectors can be learned:
     ![](./images/B12365_03_12.jpg)
     
 
-    Figure 3.12 -- Training our network
 
     Now that our model has been trained, we can make predictions. We
     define a couple of functions to allow us to do so.
@@ -543,7 +531,6 @@ scratch, thereby demonstrating how our embedding vectors can be learned:
 ![](./images/35.PNG)
     
 
-    Figure 3.13 -- Predicted values
 
 12. Now that we have a trained model, we are able to use the
     `get_word_embedding()` function in
@@ -562,7 +549,6 @@ scratch, thereby demonstrating how our embedding vectors can be learned:
 
 ![](./images/B12365_03_14.jpg)
 
-Figure 3.14 -- Tensor value after editing the model
 
 Here, we have demonstrated how to train a CBOW model for creating word
 embeddings. In reality, to create reliable embeddings for a corpus, we
@@ -607,7 +593,6 @@ is known as using **bi-grams**:
 ![](./images/36.PNG)
 
 
-Figure 3.15 -- Tabular representation of bi-grams
 
 We can represent this as follows:
 
@@ -656,7 +641,6 @@ within the document:
 
 ![](./images/37.PNG)
 
-Figure 3.16 -- Tabular representation of a unigram
 
 We could then draw words randomly from this distribution in order to
 generate new sentences:
@@ -689,7 +673,6 @@ probabilities:
 
 ![](./images/39.PNG)
 
-Figure 3.17 -- Tabular representation of the probabilities
 
 With this, we could calculate the probability of Python occurring, given
 the probability of the previous word *is* occurring is only 20%, whereas
@@ -729,7 +712,6 @@ NLP that can be done fairly simply in Python:
 ![](./images/40.PNG)
 
 
-    Figure 3.18 -- Splitting the sentence
 
 2.  Note how a period (`.`) is considered
     a token as it is a part of natural language.
@@ -748,7 +730,6 @@ NLP that can be done fairly simply in Python:
 ![](./images/41.PNG)
     
 
-    Figure 3.19 -- Removing the punctuation
 
 3.  We can also tokenize documents into individual
     sentences using the **sentence**
@@ -766,7 +747,6 @@ NLP that can be done fairly simply in Python:
 ![](./images/42.PNG)
     
 
-    Figure 3.20 -- Splitting multiple sentences into single sentences
 
 4.  Alternatively, we can combine the two to split into individual
     sentences of words:
@@ -782,7 +762,6 @@ NLP that can be done fairly simply in Python:
 ![](./images/B12365_03_21.jpg)
     
 
-    Figure 3.21 -- Splitting multiple sentences into words
 
 5.  One other optional step in the process of
     tokenization, which is the removal of stopwords. Stopwords are very
@@ -803,7 +782,6 @@ NLP that can be done fairly simply in Python:
     ![](./images/B12365_03_22.jpg)
     
 
-    Figure 3.22 -- Displaying stopwords
 
 6.  We can easily remove these stopwords from our
     words using basic list comprehension:
@@ -820,7 +798,6 @@ NLP that can be done fairly simply in Python:
 ![](./images/43.PNG)
 
 
-Figure 3.23 -- Removing stopwords
 
 While some NLP tasks (such as predicting the next word in the sentence)
 require stopwords, others (such as judging the sentiment of a film
@@ -859,7 +836,6 @@ following:
 
 ![](./images/44.PNG)
 
-Figure 3.24 -- Parts of speech
 
 These different parts of speech can be used to
 better understand the structure of sentences. For
@@ -892,7 +868,6 @@ This results in the following output:
 ![](./images/45.PNG)
 
 
-Figure 3.25 -- Classifying parts of speech
 
 Here, we simply tokenize our text and call the
 `pos_tag()` function to tag each of the words in the sentence.
@@ -911,7 +886,6 @@ This results in the following output:
 
 ![](./images/B12365_03_26.jpg)
 
-Figure 3.26 -- Explanation of VBG
 
 Using pre-trained part of speech taggers is beneficial because they
 don\'t just act as a dictionary that looks up the individual words in
@@ -975,7 +949,6 @@ This results in the following output:
 
 ![](./images/46.PNG)
 
-Figure 3.27 -- Tree representation
 
 
 TF-IDF
@@ -997,7 +970,6 @@ embeddings of each of the five words in this sentence:
 
 ![](./images/B12365_03_28.jpg)
 
-Figure 3.28 -- Word embeddings
 
 However, this methodology assigns equal weight to
 all the words in the sentence. Do you think that all the words
@@ -1114,7 +1086,6 @@ sentences:
     ![](./images/B12365_03_29.jpg)
     
 
-    Figure 3.29 -- TF-IDF score
 
 3.  Next, we calculate our Document Frequency. In order to do this
     efficiently, we first need to pre-compute a Document Frequency
@@ -1176,7 +1147,6 @@ sentences:
 
 ![](./images/B12365_03_30.jpg)
 
-Figure 3.30 -- TF-IDF score for ago and indistinct
 
 Here, we can see that although the words
 `ago` and `indistinct` appear only once in the given
@@ -1228,7 +1198,6 @@ be applied to embeddings:
     ![](./images/B12365_03_31.jpg)
     
 
-    Figure 3.31 -- Mean embedding
 
 3.  We repeat this process to calculate our TF-IDF weighted document
     vector, but this time, we multiply our vectors
@@ -1251,7 +1220,6 @@ be applied to embeddings:
     ![](./images/B12365_03_32.jpg)
     
 
-    Figure 3.32 -- TF-IDF embedding
 
 4.  We can then compare the TF-IDF weighted embedding with our average
     embedding to see how similar they are. We can
@@ -1266,7 +1234,6 @@ be applied to embeddings:
 
 ![](./images/B12365_03_33.png)
 
-Figure 3.33 -- Cosine similarity between TF-IDF and average embedding
 
 Here, we can see that our two different representations are very
 similar. Therefore, while using TF-IDF may not dramatically change our
@@ -1274,11 +1241,9 @@ representation of a given sentence or document, it may weigh it in favor
 of words of interest, thus providing a more useful representation.
 
 
-Summary
-=======
+#### Summary
 
-
-In this chapter, we have taken a deeper dive into word embeddings and
+In this lab, we have taken a deeper dive into word embeddings and
 their applications. We have demonstrated how they can be trained using a
 continuous bag-of-words model and how we can incorporate n-gram language
 modeling to better understand the relationship between words in a
